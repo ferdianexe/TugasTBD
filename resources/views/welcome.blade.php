@@ -69,6 +69,7 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ url('/logout') }}">Logout</a>
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,7 +82,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Yaaaaa Nanti kita buat ini jadi Perpustakaan TEBEDE ya ♥
                 </div>
 
                 <div class="links">

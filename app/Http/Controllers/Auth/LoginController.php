@@ -36,4 +36,11 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function username()
+    {
+        $logintype = request()->input('username');
+        request()->merge(['username',$logintype]);
+        return 'username';
+    }
 }
