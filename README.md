@@ -40,7 +40,7 @@ $ npm update
 ```
 
 **Step 4.1**: if this your first time clone you must set the database , username and drivers database in .env
-by default there's given .env.example copy that file and rename it to .env then change 'DB_DATABASE' , 'DB_USERNAME','DB_PASSWORD','DB_CONNECTION'
+by default there's given .env.example copy that file and rename it to .env then change `DB_DATABASE` , `DB_USERNAME`,`DB_PASSWORD`,`DB_CONNECTION`
 
 
 **Step 4.2**: then run the migration first, it will make all the databases that needed for you project run once only after you cloning this
