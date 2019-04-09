@@ -17,114 +17,59 @@ class AlterTable extends Migration
           //TODO : Add Constraint in new Migration 
           DB::statement(
             'ALTER TABLE kumpulankatadanbuku 
-                ADD CONSTRAINT fkIdBuku FOREIGN KEY (idBuku) REFERENCES kumpulanbuku(idBuku),
-                ADD CONSTRAINT fkKataBuku FOREIGN KEY (kata) REFERENCES KumpulanKata(kata)
+                ADD CONSTRAINT fkBukuKumpulanBuku FOREIGN KEY (idBuku) REFERENCES kumpulanbuku(idBuku),
+                ADD CONSTRAINT fkKataBukuKumpulanBuku FOREIGN KEY (kata) REFERENCES KumpulanKata(kata)
             '
           );
-        //   //TODO : constraint fkBukuKumpulanBuku idBuku  -> Buku.idBuku
-        //   //TODO : constraint fkKataBukuKumpulanBuku kata  -> KumpulanKata.kata
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanBuku
-        //         (
-        //           nama varchar(50),
-        //           idBuku int,
-        //           tebalBuku int,
-        //           tahunTerbit int,
-        //           hargaBuku decimal(15,2),
-        //           idPenerbit int,
-        //           idPengarang int,
-        //           primary key(idBuku)
-        //         )
-        //       '
-        //   );
-        //   //TODO : constraint fkBukuKePenerbit idPenerbit  -> Penerbit.idPenerbit
-        //   //TODO : constraint fkBukukePengarang idPengarang  -> Pengarang.idPengarang
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanPenerbit
-        //         (
-        //           namaPenerbit varchar(50),
-        //           idPenerbit int,
-        //           primary key(idPenerbit)
-        //         )
-        //       '
-        //   );
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanPengarang
-        //       (
-        //         namaPengarang varchar(50),
-        //         idPengarang int,
-        //         primary key(idPengarang)
-        //       )
-        //     '
-        //   );
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanKategori
-        //       (
-        //         Kategori varchar(50),
-        //         idKategori int,
-        //         primary key(idKategori)
-        //       )
-        //     '
-        //   );
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanBukudanKumpulanKategori
-        //       (
-        //         idBuku int,
-        //         idKategori int
-        //       )
-        //     '
-        //   );
-        //   //TODO : constraint fkBukuKeKategori idBuku  -> Buku.idBuku
-        //   //TODO : constraint fkKategorikeKategori idKategori  -> Kategori.idKategori
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanEksemplar
-        //       (
-        //         kodeEksemplar int,
-        //         idBuku int,
-        //         statusPeminjaman tinyint,
-        //         primary key(kodeEksemplar)
-        //       )
-        //     '
-        //   );
-        //   //TODO : constraint fkBukuKeEksemplar idBuku  -> Buku.idBuku
-        //   DB::statement(
-        //     'CREATE TABLE AturanDenda
-        //       (
-        //         nominalDenda decimal(15,2),
-        //         hariKe int,
-        //         primary key(hariKe)
-        //       )
-        //     '
-        //   );
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanPemesanan
-        //       (
-        //         idPemesanan int,
-        //         antrianKe int,
-        //         idBuku int,
-        //         idUser int,
-        //         primary key(idPemesanan)
-        //       )
-        //     '
-        //   );
-        //   //TODO : constraint fkBukuKePemesanan idBuku  -> Buku.idBuku
-        //   //TODO : constraint fkUserKeEksemplar idUser  -> User.idUser
-        //   DB::statement(
-        //     'CREATE TABLE KumpulanPeminjaman
-        //       (
-        //         idPeminjaman int,
-        //         idUser int,
-        //         tglJatuhTempo date,
-        //         kodeEksemplar int,
-        //         totalDenda decimal(15,2),
-        //         fkDenda int,
-        //         primary key(idPeminjaman)
-        //       )
-        //     '
-        //   );
-        //   //TODO : constraint fkEksemplarKePeminjaman idBuku  -> KumpulanEksemplar.kodeEksemplar
-        //   //TODO : constraint fkUserKePeminjaman idUser  -> Users.idUser
-        //   //TODO : constraint fkDendaPeminjaman fkDenda  -> Denda.hariKe
+          //TODO : constraint fkBukuKumpulanBuku idBuku  -> Buku.idBuku
+          //TODO : constraint fkKataBukuKumpulanBuku kata  -> KumpulanKata.kata
+
+          DB::statement(
+            'ALTER TABLE KumpulanBuku 
+                ADD CONSTRAINT fkBukuKePenerbit FOREIGN KEY (idPenerbit) REFERENCES KumpulanPenerbit(idPenerbit),
+                ADD CONSTRAINT fkBukukePengarang FOREIGN KEY (idPengarang) REFERENCES KumpulanPengarang(idPengarang)
+            '
+          );
+          //TODO : constraint fkBukuKePenerbit idPenerbit  -> Penerbit.idPenerbit
+          //TODO : constraint fkBukukePengarang idPengarang  -> Pengarang.idPengarang
+        
+          DB::statement(
+            'ALTER TABLE KumpulanBukudanKumpulanKategori 
+                ADD CONSTRAINT fkBukuKeKategori FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku),
+                ADD CONSTRAINT fkKategorikeKategori FOREIGN KEY (idKategori) REFERENCES KumpulanKategori(idKategori)
+            '
+          );
+          //TODO : constraint fkBukuKeKategori idBuku  -> Buku.idBuku
+          //TODO : constraint fkKategorikeKategori idKategori  -> Kategori.idKategori
+
+          DB::statement(
+            'ALTER TABLE KumpulanEksemplar
+                ADD CONSTRAINT fkBukuKeEksemplar FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku)
+            '
+          );
+          //TODO : constraint fkBukuKeEksemplar idBuku  -> Buku.idBuku
+        
+          DB::statement(
+            'ALTER TABLE KumpulanPemesanan
+                -- constraint fkUsers foreign key (fkUsers) references Users(idUser),
+	            -- constraint fkEksemplar foreign key (fkEksemplar) references Eksemplar(kodeEks)
+                ADD CONSTRAINT fkBukuKePemesanan FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku),
+                ADD CONSTRAINT fkUserKeEksemplar FOREIGN KEY (idUser) REFERENCES users(id)
+            '
+          );
+          //TODO : constraint fkBukuKePemesanan idBuku  -> Buku.idBuku
+          //TODO : constraint fkUserKeEksemplar idUser  -> User.idUser
+
+          DB::statement(
+            'ALTER TABLE KumpulanPeminjaman
+                ADD CONSTRAINT fkEksemplarKePeminjaman FOREIGN KEY (kodeEksemplar) REFERENCES KumpulanEksemplar(kodeEksemplar),
+                ADD CONSTRAINT fkUserKePeminjaman FOREIGN KEY (idUser) REFERENCES users(id),
+                ADD CONSTRAINT fkDendaPeminjaman FOREIGN KEY (fkDenda) REFERENCES AturanDenda(hariKe)
+            '
+          );
+          //TODO : constraint fkEksemplarKePeminjaman idBuku  -> KumpulanEksemplar.kodeEksemplar
+          //TODO : constraint fkUserKePeminjaman idUser  -> Users.idUser
+          //TODO : constraint fkDendaPeminjaman fkDenda  -> Denda.hariKe
     }
 
     /**
