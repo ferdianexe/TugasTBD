@@ -22,7 +22,7 @@ class CreateAllTable extends Migration
           primary key(kata)
         )'
     );
-    //TODO : Add Constraint in new Migration 
+
     DB::statement(
       'CREATE TABLE KumpulanKatadanBuku
         (
@@ -30,8 +30,7 @@ class CreateAllTable extends Migration
           idBuku int
         )'
     );
-    //TODO : constraint fkBukuKumpulanBuku idBuku  -> Buku.idBuku
-    //TODO : constraint fkKataBukuKumpulanBuku kata  -> KumpulanKata.kata
+    
     DB::statement(
       'CREATE TABLE KumpulanBuku
           (
@@ -46,8 +45,7 @@ class CreateAllTable extends Migration
           )
         '
     );
-    //TODO : constraint fkBukuKePenerbit idPenerbit  -> Penerbit.idPenerbit
-    //TODO : constraint fkBukukePengarang idPengarang  -> Pengarang.idPengarang
+    
     DB::statement(
       'CREATE TABLE KumpulanPenerbit
           (
@@ -57,6 +55,7 @@ class CreateAllTable extends Migration
           )
         '
     );
+
     DB::statement(
       'CREATE TABLE KumpulanPengarang
         (
@@ -66,6 +65,7 @@ class CreateAllTable extends Migration
         )
       '
     );
+
     DB::statement(
       'CREATE TABLE KumpulanKategori
         (
@@ -75,6 +75,7 @@ class CreateAllTable extends Migration
         )
       '
     );
+
     DB::statement(
       'CREATE TABLE KumpulanBukudanKumpulanKategori
         (
@@ -83,8 +84,7 @@ class CreateAllTable extends Migration
         )
       '
     );
-    //TODO : constraint fkBukuKeKategori idBuku  -> Buku.idBuku
-    //TODO : constraint fkKategorikeKategori idKategori  -> Kategori.idKategori
+    
     DB::statement(
       'CREATE TABLE KumpulanEksemplar
         (
@@ -95,7 +95,7 @@ class CreateAllTable extends Migration
         )
       '
     );
-    //TODO : constraint fkBukuKeEksemplar idBuku  -> Buku.idBuku
+    
     DB::statement(
       'CREATE TABLE AturanDenda
         (
@@ -105,6 +105,7 @@ class CreateAllTable extends Migration
         )
       '
     );
+
     DB::statement(
       'CREATE TABLE KumpulanPemesanan
         (
@@ -116,8 +117,7 @@ class CreateAllTable extends Migration
         )
       '
     );
-    //TODO : constraint fkBukuKePemesanan idBuku  -> Buku.idBuku
-    //TODO : constraint fkUserKeEksemplar idUser  -> User.idUser
+    
     DB::statement(
       'CREATE TABLE KumpulanPeminjaman
         (
@@ -131,9 +131,7 @@ class CreateAllTable extends Migration
         )
       '
     );
-    //TODO : constraint fkEksemplarKePeminjaman idBuku  -> KumpulanEksemplar.kodeEksemplar
-    //TODO : constraint fkUserKePeminjaman idUser  -> Users.idUser
-    //TODO : constraint fkDendaPeminjaman fkDenda  -> Denda.hariKe
+    
   }
 
   /**

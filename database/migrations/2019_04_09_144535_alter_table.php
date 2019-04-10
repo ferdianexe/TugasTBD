@@ -43,8 +43,6 @@ class AlterTable extends Migration
           
           DB::statement(
             'ALTER TABLE KumpulanPemesanan
-                -- constraint fkUsers foreign key (fkUsers) references Users(idUser),
-	            -- constraint fkEksemplar foreign key (fkEksemplar) references Eksemplar(kodeEks)
                 ADD CONSTRAINT fkBukuKePemesanan FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku),
                 ADD CONSTRAINT fkUserKeEksemplar FOREIGN KEY (idUser) REFERENCES users(id)
             '
@@ -69,43 +67,43 @@ class AlterTable extends Migration
     {
         DB::statement(
             'ALTER TABLE kumpulankatadanbuku 
-                DROP INDEX fkBukuKumpulanBuku,
-                DROP INDEX fkKataBukuKumpulanBuku
+                DROP FOREIGN KEY fkBukuKumpulanBuku,
+                DROP FOREIGN KEY fkKataBukuKumpulanBuku
             '
           );
          
           DB::statement(
             'ALTER TABLE KumpulanBuku 
-                DROP INDEX fkBukuKePenerbit,
-                DROP INDEX fkBukukePengarang
+                DROP FOREIGN KEY fkBukuKePenerbit,
+                DROP FOREIGN KEY fkBukukePengarang
             '
           );
         
           DB::statement(
             'ALTER TABLE KumpulanBukudanKumpulanKategori 
-                DROP INDEX fkBukuKeKategori,
-                DROP INDEX fkKategorikeKategori
+                DROP FOREIGN KEY fkBukuKeKategori,
+                DROP FOREIGN KEY fkKategorikeKategori
             '
           );
           
           DB::statement(
             'ALTER TABLE KumpulanEksemplar
-                DROP INDEX fkBukuKeEksemplar
+                DROP FOREIGN KEY fkBukuKeEksemplar
             '
           );
           
           DB::statement(
             'ALTER TABLE KumpulanPemesanan
-                DROP INDEX fkBukuKePemesanan,
-                DROP INDEX fkUserKeEksemplar
+                DROP FOREIGN KEY fkBukuKePemesanan,
+                DROP FOREIGN KEY fkUserKeEksemplar
             '
           );
           
           DB::statement(
             'ALTER TABLE KumpulanPeminjaman
-                DROP INDEX fkEksemplarKePeminjaman,
-                DROP INDEX fkUserKePeminjaman,
-                DROP INDEX fkDendaPeminjaman
+                DROP FOREIGN KEY fkEksemplarKePeminjaman,
+                DROP FOREIGN KEY fkUserKePeminjaman,
+                DROP FOREIGN KEY fkDendaPeminjaman
             '
           );
     }
