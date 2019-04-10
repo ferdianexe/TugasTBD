@@ -14,24 +14,19 @@ class AlterTable extends Migration
      */
     public function up()
     {
-          //TODO : Add Constraint in new Migration 
           DB::statement(
             'ALTER TABLE kumpulankatadanbuku 
                 ADD CONSTRAINT fkBukuKumpulanBuku FOREIGN KEY (idBuku) REFERENCES kumpulanbuku(idBuku),
                 ADD CONSTRAINT fkKataBukuKumpulanBuku FOREIGN KEY (kata) REFERENCES KumpulanKata(kata)
             '
           );
-          //TODO : constraint fkBukuKumpulanBuku idBuku  -> Buku.idBuku
-          //TODO : constraint fkKataBukuKumpulanBuku kata  -> KumpulanKata.kata
-
+         
           DB::statement(
             'ALTER TABLE KumpulanBuku 
                 ADD CONSTRAINT fkBukuKePenerbit FOREIGN KEY (idPenerbit) REFERENCES KumpulanPenerbit(idPenerbit),
                 ADD CONSTRAINT fkBukukePengarang FOREIGN KEY (idPengarang) REFERENCES KumpulanPengarang(idPengarang)
             '
           );
-          //TODO : constraint fkBukuKePenerbit idPenerbit  -> Penerbit.idPenerbit
-          //TODO : constraint fkBukukePengarang idPengarang  -> Pengarang.idPengarang
         
           DB::statement(
             'ALTER TABLE KumpulanBukudanKumpulanKategori 
@@ -39,16 +34,13 @@ class AlterTable extends Migration
                 ADD CONSTRAINT fkKategorikeKategori FOREIGN KEY (idKategori) REFERENCES KumpulanKategori(idKategori)
             '
           );
-          //TODO : constraint fkBukuKeKategori idBuku  -> Buku.idBuku
-          //TODO : constraint fkKategorikeKategori idKategori  -> Kategori.idKategori
-
+          
           DB::statement(
             'ALTER TABLE KumpulanEksemplar
                 ADD CONSTRAINT fkBukuKeEksemplar FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku)
             '
           );
-          //TODO : constraint fkBukuKeEksemplar idBuku  -> Buku.idBuku
-        
+          
           DB::statement(
             'ALTER TABLE KumpulanPemesanan
                 -- constraint fkUsers foreign key (fkUsers) references Users(idUser),
@@ -57,9 +49,7 @@ class AlterTable extends Migration
                 ADD CONSTRAINT fkUserKeEksemplar FOREIGN KEY (idUser) REFERENCES users(id)
             '
           );
-          //TODO : constraint fkBukuKePemesanan idBuku  -> Buku.idBuku
-          //TODO : constraint fkUserKeEksemplar idUser  -> User.idUser
-
+          
           DB::statement(
             'ALTER TABLE KumpulanPeminjaman
                 ADD CONSTRAINT fkEksemplarKePeminjaman FOREIGN KEY (kodeEksemplar) REFERENCES KumpulanEksemplar(kodeEksemplar),
@@ -67,10 +57,8 @@ class AlterTable extends Migration
                 ADD CONSTRAINT fkDendaPeminjaman FOREIGN KEY (fkDenda) REFERENCES AturanDenda(hariKe)
             '
           );
-          //TODO : constraint fkEksemplarKePeminjaman idBuku  -> KumpulanEksemplar.kodeEksemplar
-          //TODO : constraint fkUserKePeminjaman idUser  -> Users.idUser
-          //TODO : constraint fkDendaPeminjaman fkDenda  -> Denda.hariKe
-    }
+          
+        }
 
     /**
      * Reverse the migrations.
@@ -79,16 +67,46 @@ class AlterTable extends Migration
      */
     public function down()
     {
-        DB::statement('DROP TABLE KumpulanKata');
-        DB::statement('DROP TABLE KumpulanKatadanBuku');
-        DB::statement('DROP TABLE KumpulanBuku');
-        DB::statement('DROP TABLE KumpulanPenerbit');
-        DB::statement('DROP TABLE KumpulanPengarang');
-        DB::statement('DROP TABLE KumpulanKategori');
-        DB::statement('DROP TABLE KumpulanBukudanKumpulanKategori');
-        DB::statement('DROP TABLE KumpulanEksemplar');
-        DB::statement('DROP TABLE AturanDenda');
-        DB::statement('DROP TABLE KumpulanPemesanan');
-        DB::statement('DROP TABLE KumpulanPeminjaman');
+        DB::statement(
+            'ALTER TABLE kumpulankatadanbuku 
+                DROP INDEX fkBukuKumpulanBuku,
+                DROP INDEX fkKataBukuKumpulanBuku
+            '
+          );
+         
+          DB::statement(
+            'ALTER TABLE KumpulanBuku 
+                DROP INDEX fkBukuKePenerbit,
+                DROP INDEX fkBukukePengarang
+            '
+          );
+        
+          DB::statement(
+            'ALTER TABLE KumpulanBukudanKumpulanKategori 
+                DROP INDEX fkBukuKeKategori,
+                DROP INDEX fkKategorikeKategori
+            '
+          );
+          
+          DB::statement(
+            'ALTER TABLE KumpulanEksemplar
+                DROP INDEX fkBukuKeEksemplar
+            '
+          );
+          
+          DB::statement(
+            'ALTER TABLE KumpulanPemesanan
+                DROP INDEX fkBukuKePemesanan,
+                DROP INDEX fkUserKeEksemplar
+            '
+          );
+          
+          DB::statement(
+            'ALTER TABLE KumpulanPeminjaman
+                DROP INDEX fkEksemplarKePeminjaman,
+                DROP INDEX fkUserKePeminjaman,
+                DROP INDEX fkDendaPeminjaman
+            '
+          );
     }
 }
