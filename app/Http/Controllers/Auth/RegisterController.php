@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class RegisterController extends Controller
 {
@@ -61,13 +64,33 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    // protected function create(Request $request)
+    // {
+    //     $nama = $request->input('name');
+    //     $statusAktif = 1;
+    //     $tglLahir = "1998-01-13";
+    //     $tglGabung =  date("Y/m/d");
+    //     $alamat = $request->input('alamat');
+    //     $username = $request->input('username');
+    //     $email = $request->input('email');
+    //     $password = Hash::make($request->input('password'));
+    //     $sql = "CALL RegisterUser ($nama,'1',$tglLahir,$tglGabung,$alamat,$username,$email,$password,$tglGabung,NULL)";
+    //     $result = DB::connection()->getPdo()->exec($sql);
+    //     return $result;
+    // }
+
+    protected function createUser(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'username' =>$data['username'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $nama = $request->input('name');
+        $statusAktif = 1;
+        $tglLahir = "1998-01-13";
+        $tglGabung =  date("Y/m/d");
+        $alamat = $request->input('alamat');
+        $username = $request->input('username');
+        $email = $request->input('email');
+        $password = Hash::make($request->input('password'));
+        $sql = "CALL RegisterUser ('$nama','1','$tglLahir','$tglGabung','$alamat','$username','$email','$password','$tglGabung',NULL)";
+        $result = DB::connection()->getPdo()->exec($sql);
+        return view('auth.login');
     }
 }
