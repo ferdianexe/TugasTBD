@@ -68,6 +68,7 @@
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
+                        {{Auth::getUser()->name}}({{Auth::getUser()->username}})
                         <a href="{{ url('/home') }}">Home</a>
                         <a href="{{ url('/logout') }}">Logout</a>
                     @else
@@ -78,13 +79,12 @@
                         @endif
                     @endauth
                 </div>
-            @endif
-
+            @endif            
             <div class="content">
                 <div class="title m-b-md">
-                    Yaaaaa Nanti kita buat ini jadi Perpustakaan TEBEDE ya ♥
+                    Yaaaaa Nanti kita buat ini jadi Perpustakaan TEBEDE ya ♥ 
                 </div>
-
+                {{Auth::getUser()}}
                 <div class="links">
                     <a href="https://laravel.com/docs">Docs</a>
                     <a href="https://laracasts.com">Laracasts</a>
