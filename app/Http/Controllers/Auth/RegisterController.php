@@ -60,37 +60,31 @@ class RegisterController extends Controller
 
     /**
      * Create a new user instance after a valid registration.
-     *
+     * Tidak diperlukan untuk projek ini
      * @param  array  $data
      * @return \App\User
      */
-    // protected function create(Request $request)
-    // {
-    //     $nama = $request->input('name');
-    //     $statusAktif = 1;
-    //     $tglLahir = "1998-01-13";
-    //     $tglGabung =  date("Y/m/d");
-    //     $alamat = $request->input('alamat');
-    //     $username = $request->input('username');
-    //     $email = $request->input('email');
-    //     $password = Hash::make($request->input('password'));
-    //     $sql = "CALL RegisterUser ($nama,'1',$tglLahir,$tglGabung,$alamat,$username,$email,$password,$tglGabung,NULL)";
-    //     $result = DB::connection()->getPdo()->exec($sql);
-    //     return $result;
-    // }
+    protected function create(array $data)
+    {
+        return false;
+    }
 
     protected function createUser(Request $request)
     {
         $nama = $request->input('name');
         $statusAktif = 1;
-        $tglLahir = "1998-01-13";
+        $tglLahir = $request->input('birthday');
         $tglGabung =  date("Y/m/d");
-        $alamat = $request->input('alamat');
+        $alamat = $request->input('address');
         $username = $request->input('username');
         $email = $request->input('email');
         $password = Hash::make($request->input('password'));
         $sql = "CALL RegisterUser ('$nama','1','$tglLahir','$tglGabung','$alamat','$username','$email','$password','$tglGabung',NULL)";
         $result = DB::connection()->getPdo()->exec($sql);
-        return view('auth.login');
+        if ($result == 1) {
+            return view('auth.login');
+        } else {
+            return view('auth.register');
+        }
     }
 }
