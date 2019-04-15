@@ -19,3 +19,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
+Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
