@@ -8,8 +8,12 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
         <!-- Styles -->
+        <link href="{{ asset('css/tbd.css') }}" rel="stylesheet">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
         <style>
             html, body {
                 background-color: #fff;
@@ -61,9 +65,11 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+            
         </style>
     </head>
     <body>
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
@@ -79,22 +85,105 @@
                         @endif
                     @endauth
                 </div>
-            @endif            
-            <div class="content">
-                <div class="title m-b-md">
-                    Yaaaaa Nanti kita buat ini jadi Perpustakaan TEBEDE ya ♥ 
+            @endif       
+            
+            <br>
+            <div class="content" style= "width:100%">
+                <div class = "halfBackground">
+                    <br>
+                    <div class="container h-100">
+                        <div class="d-flex justify-content-center h-100">
+                            <div class="searchbar">
+                                <input class="search_input" type="text" name="" placeholder="Search...">
+                                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <br>
+
+                    <div class="row container-fluid">
+                        <div class="row align-items-center justify-content-center" style= "width:100%;">
+                                <div class="col-sm-4">
+                                    <div class="form-group ">
+                                        <select id="inputState " class="form-control">
+                                            <option selected>Brand</option>
+                                            <option>BMW</option>
+                                            <option>Audi</option>
+                                            <option>Maruti</option>
+                                            <option>Tesla</option>
+                                        </select>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <br>
                 </div>
-                {{Auth::getUser()}}
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                <br>
+    
+                <div class="container">
+                    <h2>Kumpulan Buku Buku Baru</h2>
+
+                    <div class="card-columns">
+                        <div class="card bg-primary">
+                            <div class="card-body text-center">
+                                <p class="card-text">Some text inside the first card</p>
+                            </div>
+                        </div>
+                        <div class="card bg-warning">
+                            <div class="card-body text-center">
+                                <p class="card-text">Some text inside the second card</p>
+                            </div>
+                        </div>
+                        <div class="card bg-success">
+                            <div class="card-body text-center">
+                                <p class="card-text">Some text inside the third card</p>
+                            </div>
+                        </div>
+                        <div class="card bg-danger">
+                            <div class="card-body text-center">
+                                <p class="card-text">Some text inside the fourth card</p>
+                            </div>
+                        </div>  
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <p class="card-text">Some text inside the fifth card</p>
+                            </div>
+                        </div>
+                        <div class="card bg-info">
+                            <div class="card-body text-center">
+                                <p class="card-text">Some text inside the sixth card</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary active">Tampilkan Lebih Banyak</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type="button" class="btn btn-primary active">Pinjamanku</button>
+                    </div>
+                    <div class="col-sm-3"></div>
+                </div>
+
+                <br>
+
+                <div class="jumbotron" class="haflBackground">
+                    <div class="container for-about">
+                        <h1>Info</h1>
+                    </div>
+                </div>
+
+                <div class = "halfBackground">
+                    <!-- <img class = "halfBackground"> -->
                 </div>
             </div>
         </div>
     </body>
+    
 </html>
