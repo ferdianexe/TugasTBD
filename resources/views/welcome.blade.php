@@ -13,6 +13,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/tbd.css') }}" rel="stylesheet">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <!-- https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css -->
 
         <style>
             html, body {
@@ -91,14 +92,19 @@
             <div class="content" style= "width:100%">
                 <div class = "halfBackground">
                     <br>
-                    <div class="container h-100">
-                        <div class="d-flex justify-content-center h-100">
-                            <div class="searchbar">
-                                <input class="search_input" type="text" name="search" placeholder="Search...">
-                                <a href="{{ route('searchBook') }}" class="search_icon"><i class="fas fa-search"></i></a>
+                    <form method="GET" action="{{ route('searchBook') }}">
+                        <div class="container h-100">
+                            <div class="d-flex justify-content-center h-100">
+                                <div class="searchbar">
+                                    <input class="search_input" type="text" name="search" placeholder="Search...">
+                                    <!-- <a href="{{ route('searchBook') }}" class="search_icon"><i class="fas fa-search"></i></a> -->
+                                    <button type="submit" class="btn btn-default">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                     
                     <br>
 
