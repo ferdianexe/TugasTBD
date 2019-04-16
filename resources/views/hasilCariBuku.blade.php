@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    {{$test}}
+    {{$search}}
+    {{$filter}}
 </body>
 </html>
