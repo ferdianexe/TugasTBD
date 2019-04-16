@@ -1,4 +1,3 @@
-{{$test}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    {{!! $test !!}}
-    Testing
+    {{$test}}
 </body>
 </html>

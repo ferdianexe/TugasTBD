@@ -9,11 +9,8 @@ use App\Http\Controllers\Controller;
 class SearchBookController extends Controller
 {
     public function testParsingData(Request $request){
-        // $test = $request->get('search');
-        $test = "WOW";
-
+        $test = $request->get('search');
         return view('hasilCariBuku', compact('test'));
-        // return view('hasilCariBuku', array('test'=>$test));
     }
 
     /**
