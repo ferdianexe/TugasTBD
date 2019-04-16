@@ -105,27 +105,31 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
                     
-                    <br>
+                    
+                        <br>
 
-                    <div class="row container-fluid">
-                        <div class="row align-items-center justify-content-center" style= "width:100%;">
-                                <div class="col-sm-4">
-                                    <div class="form-group ">
-                                        <select id="inputState " class="form-control">
-                                            <option selected>Brand</option>
-                                            <option>BMW</option>
-                                            <option>Audi</option>
-                                            <option>Maruti</option>
-                                            <option>Tesla</option>
-                                        </select>
+                        <div class="row container-fluid">
+                            <div class="row align-items-center justify-content-center" style= "width:100%;">
+                                    <div class="col-sm-4">
+                                        <div class="form-group ">
+                                            <select id="inputState " class="form-control" name="filter">
+                                                <option class="hint" selected value="0" disabled="disabled">(Genre)</option>
+                                                <option value="1">Technology</option>
+                                                <option value="2">Economy</option>
+                                                <option value="3">Art</option>
+                                                <option value="4">Math</option>
+                                                <option value="5">Science</option>
+                                                <option value="6">Nature</option>
+                                                <option value="7">Physcology</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+                            </div>
                         </div>
+                        <br>
                     </div>
-                    <br>
-                </div>
+                </form>
                 <br>
     
                 <div class="container">
