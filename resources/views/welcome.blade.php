@@ -99,7 +99,8 @@
                                     <input class="search_input" type="text" name="search" placeholder="Search...">
                                     <!-- <a href="{{ route('searchBook') }}" class="search_icon"><i class="fas fa-search"></i></a> -->
                                     <button type="submit" class="btn btn-default">
-                                        <span class="glyphicon glyphicon-search"></span>
+                                        <!-- <span class="glyphicon glyphicon-search"></span> -->
+                                        <i class="fas fa-search"></i>
                                     </button>
                                 </div>
                             </div>
