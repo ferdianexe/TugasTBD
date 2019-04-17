@@ -20,7 +20,7 @@
 
     .searchbar:hover > .search_input{
     padding: 0 10px;
-    width: 450px;
+    width: 70%;
     caret-color:red;
     transition: width 0.4s linear;
     }
@@ -50,3 +50,23 @@
         background-image: url("../images/imageHome.jpg");
         margin-top: 30px;
     }
+
+    div.background {
+        /* background: url(klematis.jpg) repeat; */
+        background-color: antiquewhite;
+        border: 2px solid black;
+      }
+      
+      div.transbox {
+        margin: 30px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.6;
+        filter: alpha(opacity=60); /* For IE8 and earlier */
+      }
+      
+      div.transbox p {
+        margin: 5%;
+        font-weight: bold;
+        color: #000000;
+      }
