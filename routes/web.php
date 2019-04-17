@@ -11,7 +11,11 @@
 |
 */
 Route::get('/', function () {
-    return view('welcome');
+    $isAdmin = FALSE;
+    if(Auth::user()->hakStatus==1){
+      $isAdmin = TRUE;  
+    }
+    return view('welcome',compact('isAdmin'));
 })->middleware('auth');
 
 Auth::routes();
@@ -19,7 +23,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-
+Route::get('/wtf',function(){
+    return view ('welcome');
+})->name("searchBook");
 Route::get('/TampilanDataPeminjaman', function(){
     return view('TampilanDataPeminjaman');
 })->middleware('auth')->name("pinjamanBuku");
