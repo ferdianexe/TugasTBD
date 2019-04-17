@@ -22,4 +22,4 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/TampilanDataPeminjaman', function(){
     return view('TampilanDataPeminjaman');
-})->middleware('auth');
+})->middleware('auth')->name("pinjamanBuku");
