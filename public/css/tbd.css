@@ -25,10 +25,10 @@
     transition: width 0.4s linear;
     }
 
-  .searchbar:hover > .search_icon{
-  background: white;
-  color: #e74c3c;
-  }
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
 
     .search_icon{
     height: 40px;
