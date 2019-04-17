@@ -4,34 +4,41 @@
 <div class="content" style= "width:100%">
     <div class = "halfBackground">
         <br>
-        <div class="container h-100">
-            <div class="d-flex justify-content-center h-100">
-                <div class="searchbar">
-                    <input class="search_input" type="text" name="" placeholder="Search...">
-                    <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        <form method="GET" action="{{ route('searchBook') }}">
+            <div class="container h-100">
+                <div class="d-flex justify-content-center h-100">
+                    <div class="searchbar">
+                        <input class="search_input" type="text" name="search" placeholder="Search...">
+                        <button type="submit" class="btn btn-default">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <br>
 
-        <div class="row container-fluid">
-            <div class="row align-items-center justify-content-center" style= "width:100%;">
-                    <div class="col-sm-4">
-                        <div class="form-group ">
-                            <select id="inputState " class="form-control">
-                                <option selected>Brand</option>
-                                <option>BMW</option>
-                                <option>Audi</option>
-                                <option>Maruti</option>
-                                <option>Tesla</option>
-                            </select>
+            <br>
+
+            <div class="row container-fluid">
+                <div class="row align-items-center justify-content-center" style= "width:100%;">
+                        <div class="col-sm-4">
+                            <div class="form-group ">
+                                <select id="inputState " class="form-control" name="filter">
+                                    <option class="hint" selected value="0" disabled="disabled">(Genre)</option>
+                                    <option value="1">Technology</option>
+                                    <option value="2">Economy</option>
+                                    <option value="3">Art</option>
+                                    <option value="4">Math</option>
+                                    <option value="5">Science</option>
+                                    <option value="6">Nature</option>
+                                    <option value="7">Physcology</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
+                </div>
             </div>
-        </div>
-        <br>
+        </form>
     </div>
+    
     <br>
 
     <div class="container">
