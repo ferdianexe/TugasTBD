@@ -26,7 +26,6 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/TampilanDataPeminjaman', function(){
     return view('TampilanDataPeminjaman');
 })->middleware('auth')->name("pinjamanBuku");
-
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
 Route::get('/tambahbuku', function(){
     return view('tambahBuku');
