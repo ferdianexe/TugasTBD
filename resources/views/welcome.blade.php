@@ -86,10 +86,10 @@
           <button type="button" class="btn btn-primary active">Tampilkan Lebih Banyak</button>
         </div>
         <div class="col-sm-2">
-          <button type="button" class="btn btn-primary active">Tambah Buku</button>
+          <a type="button" href="{{ route('tambahBuku') }}" class="btn btn-primary active">Tambah Buku</a>
         </div>
         <div class="col-sm-3">
-          <button type="button" class="btn btn-primary active">Tambah Eksemplar</button>
+          <a type="button" href="{{ route('tambahEksemplar') }}" class="btn btn-primary active">Tambah Eksemplar</a>
         </div>
         <div class="col-sm-2">
           <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>

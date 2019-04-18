@@ -23,11 +23,14 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('/wtf',function(){
-    return view ('welcome');
-})->name("searchBook");
 Route::get('/TampilanDataPeminjaman', function(){
     return view('TampilanDataPeminjaman');
 })->middleware('auth')->name("pinjamanBuku");
 
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
+Route::get('/tambahbuku', function(){
+    return view('tambahBuku');
+})->middleware('auth')->name("tambahBuku");
+Route::get('/tambaheksemplar', function(){
+    return view('tambahEksemplar');
+})->middleware('auth')->name("tambahEksemplar");
