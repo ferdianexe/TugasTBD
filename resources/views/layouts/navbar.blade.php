@@ -27,7 +27,10 @@
                 <a href="{{ url('/')}}">Beranda</a>
             </div>
             <div class="top-middle">
-            <a><h4>Pinjamanku</h4></a>
+            <h4>{{ Request::is('tambaheksemplar') ? 'Tambah Eksemplar' : '' }}
+                {{ Request::is('tambahbuku') ? 'Tambah Buku' : '' }}
+                {{ Request::is('TampilanDataPeminjaman') ? 'Pinjamanku' : '' }}
+            </h4>
             </div>
             <div class="top-right links">
                 @auth

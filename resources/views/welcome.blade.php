@@ -81,14 +81,29 @@
     <br>
 
     <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3">
-            <button type="button" class="btn btn-primary active">Tampilkan Lebih Banyak</button>
+      @if($isAdmin)
+        <div class="col-sm-4">
+          <button type="button" class="btn btn-primary active">Tampilkan Lebih Banyak</button>
+        </div>
+        <div class="col-sm-2">
+          <a type="button" href="{{ route('tambahBuku') }}" class="btn btn-primary active">Tambah Buku</a>
         </div>
         <div class="col-sm-3">
-            <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>
+          <a type="button" href="{{ route('tambahEksemplar') }}" class="btn btn-primary active">Tambah Eksemplar</a>
+        </div>
+        <div class="col-sm-2">
+          <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>
+        </div>
+      @else
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+          <button type="button" class="btn btn-primary active">Tampilkan Lebih Banyak</button>
+        </div>
+        <div class="col-sm-3">
+          <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>
         </div>
         <div class="col-sm-3"></div>
+      @endif
     </div>
 
     <br>
