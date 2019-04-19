@@ -10,7 +10,33 @@
   <br>
 
   <div class="container">
-      <h5>Buku-Buku yang Dipinjam</h5>
+    <div class="row">
+      @if($isAdmin)
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2">
+          <a type="button" href="#" class="btn btn-primary active">Semua</a>
+        </div>
+        <div class="col-sm-2">
+          <a type="button" href="#" class="btn btn-primary active">On Rent</a>
+        </div>
+        <div class="col-sm-2">
+        <a type="button" href="{{ route('pemesananBuku') }}" class="btn btn-primary active">Request</a>
+        </div>
+        <div class="col-sm-3">
+          <a type="button" href="#"class="btn btn-primary active">Overdue</a>
+        </div>
+        <div class="col-sm-2">
+          <a type="button" href="{{route('seluruhanggota')}}"class="btn btn-primary active">Daftar Anggota</a>
+        </div>
+      @endif
+    </div>
+      <h5>
+        @if($isAdmin)
+          Laporan
+        @else
+          Buku-Buku yang Dipinjam
+        @endif
+      </h5>
 
       <div class="container">
         <table class="table table-condensed">
@@ -23,6 +49,9 @@
             <th>Tanggal Peminjaman</th>
             <th>Tanggal Pengembalian</th>
             <th>Denda</th>
+            @if($isAdmin)
+            <th>User</th>
+            @endif
           </tr>
           </thead>
           <tbody>
@@ -33,6 +62,8 @@
             <td>Sedang dipinjam</td>
             <td>12-12-19</td>
             <td>22-12-19</td>
+            <td> 0 </td>
+            <td> Ujang </td>
           </tr>
           <!-- <tr>
               

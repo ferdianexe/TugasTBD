@@ -24,8 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/TampilanDataPeminjaman', function(){
-    return view('TampilanDataPeminjaman');
+    $isAdmin = FALSE;
+    if(Auth::user()->hakStatus==1){
+      $isAdmin = TRUE;  
+    }
+    return view('TampilanDataPeminjaman',compact('isAdmin'));
 })->middleware('auth')->name("pinjamanBuku");
+
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
 Route::get('/tambahbuku', function(){
     return view('tambahBuku');
@@ -33,3 +38,9 @@ Route::get('/tambahbuku', function(){
 Route::get('/tambaheksemplar', function(){
     return view('tambahEksemplar');
 })->middleware('auth')->name("tambahEksemplar");
+Route::get('/pemesanan', function(){
+    return view('TampilanDataPemesanan');
+})->middleware('auth')->name("pemesananBuku");
+Route::get('/anggota', function(){
+    return view('TampilanAnggota');
+})->middleware('auth')->name("seluruhanggota");

@@ -29,7 +29,13 @@
             <div class="top-middle">
             <h4>{{ Request::is('tambaheksemplar') ? 'Tambah Eksemplar' : '' }}
                 {{ Request::is('tambahbuku') ? 'Tambah Buku' : '' }}
-                {{ Request::is('TampilanDataPeminjaman') ? 'Pinjamanku' : '' }}
+                @if (Request::is('TampilanDataPeminjaman'))
+                    @if($isAdmin)
+                        Laporan
+                    @else
+                        Pinjamanku
+                    @endif
+                @endif
             </h4>
             </div>
             <div class="top-right links">

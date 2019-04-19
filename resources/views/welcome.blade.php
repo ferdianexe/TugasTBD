@@ -92,7 +92,7 @@
           <a type="button" href="{{ route('tambahEksemplar') }}" class="btn btn-primary active">Tambah Eksemplar</a>
         </div>
         <div class="col-sm-2">
-          <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>
+          <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Laporan</a>
         </div>
       @else
         <div class="col-sm-3"></div>
