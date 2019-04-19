@@ -161,14 +161,6 @@
     function proses(e) {
       e.preventDefault();
       document.getElementById('myModal').className = "modal show";
-      // if(document.getElementById('deleteYes'))
-      // {
-      //   // "blablablaa";
-      // }
-      // else if(document.getElementById('deleteNo'))
-      // {
-      //   document.getElementById('myModal').className = "modal hide";
-      // }
     }
     function hapus(){
       document.getElementById('tambahEksemplar').submit();
@@ -185,14 +177,6 @@
     function proses2(e) {
       e.preventDefault();
       document.getElementById('myModalTambahEksemplar').className = "modal show";
-      // if(document.getElementById('deleteYes'))
-      // {
-      //   // "blablablaa";
-      // }
-      // else if(document.getElementById('deleteNo'))
-      // {
-      //   document.getElementById('myModal').className = "modal hide";
-      // }
     }
 
     function tambah(){
