@@ -143,3 +143,14 @@ h5 {
 .info{
     font-size: 12px;
 }
+.tulisanKekiri{
+    text-align: left;
+}
+
+.show{
+    display:block!important;
+}
+
+.hide{
+    display: none!important;
+}
