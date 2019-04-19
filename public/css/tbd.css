@@ -146,3 +146,11 @@ h5 {
 .tulisanKekiri{
     text-align: left;
 }
+
+.show{
+    display:block!important;
+}
+
+.hide{
+    display: none!important;
+}
