@@ -25,9 +25,9 @@
   <div class="form-group row">
     <div class="col-sm-2">
     </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Judul Buku</label>
+    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Judul</label>
     <div class="col-sm-8">
-      <label class="col-sm-8 col-form-label tulisanKekiri" placeholder="Masukkan Judul Buku">Judulnya</label>
+      <label class="col-sm-8 col-form-label tulisanKekiri" placeholder="Masukkan Judul Buku">{{$buku[0]->nama}}</label>
     </div>
     <div class="col-sm-2">
     </div>
@@ -49,18 +49,16 @@
     <div class="col-sm-2"></div>
       <!-- <label class="col-sm-8 col-form-label tulisanKekiri">1,2,3,4</label> -->
       <table class="col-sm-4">
+      @foreach ($kumpulanBukudanEksemplar as $index=>$eksemplar)
         <tr>
-            <td>1</td>
+          <td>{{$eksemplar->kodeEksemplar}}</td>
+          @if($eksemplar->statusPeminjaman == 0)
             <td>Status : Dipinjam</td>
+            @else
+            <td>Status : Tersedia</td>
+            @endif
         </tr>
-        <tr>
-            <td>2</td>
-            <td>Status : Dipinjam</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Status : Dipinjam</td>
-        </tr>
+      @endforeach
       </table>
     
     <div class="col-sm-2">
@@ -71,7 +69,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Harga Buku</label>
     <div class="col-sm-8">
-      <label class="col-sm-8 col-form-label tulisanKekiri">Rp 10.000,-</label>
+      <label class="col-sm-8 col-form-label tulisanKekiri">Rp {{$buku[0]->hargaBuku}},-</label>
     </div>
     <div class="col-sm-2">
     </div>
@@ -81,7 +79,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Tebal Buku</label>
     <div class="col-sm-8">
-      <label class="col-sm-8 col-form-label tulisanKekiri">130 hlm</label>
+      <label class="col-sm-8 col-form-label tulisanKekiri">{{$buku[0]->tebalBuku}} hlm</label>
     </div>
     <div class="col-sm-2">
     </div>
@@ -91,7 +89,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Tahun Terbit</label>
     <div class="col-sm-8">
-      <label class="col-sm-8 col-form-label tulisanKekiri">1998</label>
+      <label class="col-sm-8 col-form-label tulisanKekiri">{{$buku[0]->tahunTerbit}}</label>
     </div>
     <div class="col-sm-2">
     </div>
@@ -101,7 +99,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nama Penerbit</label>
     <div class="col-sm-8">
-      <label class="col-sm-8 col-form-label tulisanKekiri">Gramedia</label>
+      <label class="col-sm-8 col-form-label tulisanKekiri">{{$buku[0]->namaPenerbit}}</label>
     </div>
     <div class="col-sm-2">
     </div>
@@ -111,7 +109,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nama Pengarang</label>
     <div class="col-sm-8">
-      <label class="col-sm-8 col-form-label tulisanKekiri">Michael Stevin</label>
+      <label class="col-sm-8 col-form-label tulisanKekiri">{{$buku[0]->namaPengarang}}</label>
     </div>
     <div class="col-sm-2">
     </div>
@@ -126,14 +124,6 @@
   </div>
   <br><br>
 </form>
-
-  <script>
-    // function kembali(e){
-    //   e.preventDefault();
-    //   window.location.href="/hasilCariBuku";
-    //   document.getElementById('detailBuku').submit();
-    // }
-  </script>
   </div>
 </div>
 @endsection

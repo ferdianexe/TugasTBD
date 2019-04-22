@@ -10,13 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    $isAdmin = FALSE;
-    if(Auth::user()->hakStatus==1){
-      $isAdmin = TRUE;  
-    }
-    return view('welcome',compact('isAdmin'));
-})->middleware('auth');
+Route::get('/', 'HalamanDepanController@index')->middleware('auth');
 
 Auth::routes();
 
@@ -38,6 +32,4 @@ Route::get('/pemesanan', function(){
 Route::get('/anggota', function(){
     return view('TampilanAnggota');
 })->middleware('auth')->name("seluruhanggota");
-Route::get('/TampilanDetailBuku', function(){
-    return view('TampilanDetailBuku');
-})->middleware('auth')->name("TampilanDetailBuku");
+Route::get('/TampilanDetailBuku/{id}','BukuDanEksemplarController@index' )->middleware('auth')->name("TampilanDetailBuku");
