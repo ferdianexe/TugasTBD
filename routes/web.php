@@ -23,13 +23,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('/TampilanDataPeminjaman', function(){
-    $isAdmin = FALSE;
-    if(Auth::user()->hakStatus==1){
-      $isAdmin = TRUE;  
-    }
-    return view('TampilanDataPeminjaman',compact('isAdmin'));
-})->middleware('auth')->name("pinjamanBuku");
+Route::get('/TampilanDataPeminjaman', 'DataPeminjamanController@index')->middleware('auth')->name("pinjamanBuku");
 
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
 Route::get('/tambahbuku', function(){

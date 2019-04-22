@@ -55,16 +55,20 @@
           </tr>
           </thead>
           <tbody>
+          @foreach ($kumpulanPeminjaman as $index=>$peminjaman)
           <tr>
-            <td>1</td>
-            <td>Judul</td>
-            <td>1</td>
+            <td>{{$index+1}} </td>
+            <td>{{$peminjaman['nama']}}</td>
+            <td>{{$peminjaman['kodeEksemplar']}}</td>
             <td>Sedang dipinjam</td>
-            <td>12-12-19</td>
-            <td>22-12-19</td>
-            <td> 0 </td>
-            <td> Ujang </td>
+            <td>{{$peminjaman['tanggalMeminjam']}}</td>
+            <td>{{$peminjaman['tglJatuhTempo']}}</td>
+            <td>{{$peminjaman['totalDenda']}} </td>
+            @if($isAdmin)
+            <td>{{$peminjaman['namaUser']}}</td>
+            @endif
           </tr>
+          @endforeach
           <!-- <tr>
               
           </tr> -->
