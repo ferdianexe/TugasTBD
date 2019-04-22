@@ -2,13 +2,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-// use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 class SearchBookController extends Controller
 {
     public function testParsingData(Request $request){
         $search = $request->get('search');
         $filter = $request->get('filter');
-        return view('hasilCariBuku', compact('search','filter'));
+        $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudul()");
+        return view('hasilCariBuku', compact('search','filter','kumpulanBuku'));
     }
     /**
      * Show the application dashboard.
