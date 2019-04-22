@@ -1,0 +1,9 @@
+.imageBackground{
+    background-image: url("../images/home.jpg");
+    height:750px;
+}
+.centeredAtAll{
+        top: 40%;
+        margin-top: -50px;
+        margin-left: -100px;
+}
