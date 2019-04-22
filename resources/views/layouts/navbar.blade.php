@@ -29,6 +29,7 @@
             <div class="top-middle">
             <h4>{{ Request::is('tambaheksemplar') ? 'Tambah Eksemplar' : '' }}
                 {{ Request::is('tambahbuku') ? 'Tambah Buku' : '' }}
+                {{ Request::is('TampilanDetailBuku') ? 'Detail Buku' : '' }}
                 @if (Request::is('TampilanDataPeminjaman'))
                     @if($isAdmin)
                         Laporan
