@@ -33,3 +33,6 @@ Route::get('/anggota', function(){
     return view('TampilanAnggota');
 })->middleware('auth')->name("seluruhanggota");
 Route::get('/TampilanDetailBuku/{id}','BukuDanEksemplarController@index' )->middleware('auth')->name("TampilanDetailBuku");
+Route::get('/tambahkategori', "KategoriController@showAllCategory")->middleware('auth')->name("tambahKategori");
+Route::get('/tambahpenerbit', "PenerbitController@showAllPenerbit")->middleware('auth')->name("tambahPenerbit");
+Route::get('/tambahpengarang', "PengarangController@showAllPengarang")->middleware('auth')->name("tambahPengarang");

@@ -122,10 +122,25 @@
                     </div>
                 </div>
                 <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
+                    <div class="col-md-3">
+                        <a href="{{ route('tambahPengarang') }}" class="btn btn-primary">
+                           Tambah Pengarang
+                        </a>
+                    </div>
+                    <div class="col-md-3">
                         <button type="submit" class="btn btn-primary">
                            Tambah Buku
                         </button>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ route('tambahKategori') }}" class="btn btn-primary">
+                           Tambah Kategori
+                        </a>
+                    </div>
+                    <div class="col-md-3">
+                        <a href="{{ route('tambahPenerbit') }}" class="btn btn-primary">
+                           Tambah Penerbit
+                        </a>
                     </div>
                 </div>
             </form>
