@@ -23,7 +23,6 @@ class AlterTable extends Migration
          
           DB::statement(
             'ALTER TABLE KumpulanBuku 
-                CHANGE `idBuku` `idBuku` int NOT NULL AUTO_INCREMENT,
                 ADD CONSTRAINT fkBukuKePenerbit FOREIGN KEY (idPenerbit) REFERENCES KumpulanPenerbit(idPenerbit),
                 ADD CONSTRAINT fkBukukePengarang FOREIGN KEY (idPengarang) REFERENCES KumpulanPengarang(idPengarang)
             '
@@ -38,14 +37,12 @@ class AlterTable extends Migration
           
           DB::statement(
             'ALTER TABLE KumpulanEksemplar
-                CHANGE `kodeEksemplar` `kodeEksemplar` int NOT NULL AUTO_INCREMENT,
                 ADD CONSTRAINT fkBukuKeEksemplar FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku)
             '
           );
           
           DB::statement(
             'ALTER TABLE KumpulanPemesanan
-                CHANGE `idPemesanan` `idPemesanan` int NOT NULL AUTO_INCREMENT,
                 ADD CONSTRAINT fkBukuKePemesanan FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku),
                 ADD CONSTRAINT fkUserKeEksemplar FOREIGN KEY (idUser) REFERENCES users(id)
             '
@@ -53,7 +50,6 @@ class AlterTable extends Migration
           
           DB::statement(
             'ALTER TABLE KumpulanPeminjaman
-                CHANGE `idPeminjaman` `idPeminjaman` int NOT NULL AUTO_INCREMENT,
                 ADD CONSTRAINT fkEksemplarKePeminjaman FOREIGN KEY (kodeEksemplar) REFERENCES KumpulanEksemplar(kodeEksemplar),
                 ADD CONSTRAINT fkUserKePeminjaman FOREIGN KEY (idUser) REFERENCES users(id),
                 ADD CONSTRAINT fkDendaPeminjaman FOREIGN KEY (fkDenda) REFERENCES AturanDenda(hariKe)
@@ -78,7 +74,6 @@ class AlterTable extends Migration
          
           DB::statement(
             'ALTER TABLE KumpulanBuku 
-                CHANGE `idBuku` `idBuku` int NULL,
                 DROP FOREIGN KEY fkBukuKePenerbit,
                 DROP FOREIGN KEY fkBukukePengarang
             '
@@ -93,14 +88,12 @@ class AlterTable extends Migration
           
           DB::statement(
             'ALTER TABLE KumpulanEksemplar
-                CHANGE `kodeEksemplar` `kodeEksemplar` int NULL,
                 DROP FOREIGN KEY fkBukuKeEksemplar
             '
           );
           
           DB::statement(
             'ALTER TABLE KumpulanPemesanan
-                CHANGE `idPemesanan` `idPemesanan` int NULL,
                 DROP FOREIGN KEY fkBukuKePemesanan,
                 DROP FOREIGN KEY fkUserKeEksemplar
             '
@@ -108,7 +101,6 @@ class AlterTable extends Migration
           
           DB::statement(
             'ALTER TABLE KumpulanPeminjaman
-                CHANGE `idPeminjaman` `idPeminjaman` int NULL,
                 DROP FOREIGN KEY fkEksemplarKePeminjaman,
                 DROP FOREIGN KEY fkUserKePeminjaman,
                 DROP FOREIGN KEY fkDendaPeminjaman

@@ -35,7 +35,7 @@ class CreateAllTable extends Migration
       'CREATE TABLE KumpulanBuku
           (
             nama varchar(50),
-            idBuku int,
+            idBuku int NOT NULL AUTO_INCREMENT,
             tebalBuku int,
             tahunTerbit int,
             hargaBuku decimal(15,2),
@@ -50,7 +50,7 @@ class CreateAllTable extends Migration
       'CREATE TABLE KumpulanPenerbit
           (
             namaPenerbit varchar(50),
-            idPenerbit int,
+            idPenerbit int NOT NULL AUTO_INCREMENT,
             primary key(idPenerbit)
           )
         '
@@ -60,7 +60,7 @@ class CreateAllTable extends Migration
       'CREATE TABLE KumpulanPengarang
         (
           namaPengarang varchar(50),
-          idPengarang int,
+          idPengarang int NOT NULL AUTO_INCREMENT,
           primary key(idPengarang)
         )
       '
@@ -70,7 +70,7 @@ class CreateAllTable extends Migration
       'CREATE TABLE KumpulanKategori
         (
           Kategori varchar(50),
-          idKategori int,
+          idKategori int NOT NULL AUTO_INCREMENT,
           primary key(idKategori)
         )
       '
@@ -88,7 +88,7 @@ class CreateAllTable extends Migration
     DB::statement(
       'CREATE TABLE KumpulanEksemplar
         (
-          kodeEksemplar int,
+          kodeEksemplar int NOT NULL AUTO_INCREMENT,
           idBuku int,
           statusPeminjaman tinyint,
           primary key(kodeEksemplar)
@@ -100,7 +100,7 @@ class CreateAllTable extends Migration
       'CREATE TABLE AturanDenda
         (
           nominalDenda decimal(15,2),
-          hariKe int,
+          hariKe int NOT NULL AUTO_INCREMENT,
           primary key(hariKe)
         )
       '
@@ -109,7 +109,7 @@ class CreateAllTable extends Migration
     DB::statement(
       'CREATE TABLE KumpulanPemesanan
         (
-          idPemesanan int,
+          idPemesanan int NOT NULL AUTO_INCREMENT,
           antrianKe int,
           idBuku int,
           idUser int,
@@ -121,7 +121,7 @@ class CreateAllTable extends Migration
     DB::statement(
       'CREATE TABLE KumpulanPeminjaman
         (
-          idPeminjaman int,
+          idPeminjaman int NOT NULL AUTO_INCREMENT,
           idUser int,
           tglJatuhTempo date,
           kodeEksemplar int,
