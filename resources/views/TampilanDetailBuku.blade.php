@@ -101,6 +101,16 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nama Penerbit</label>
     <div class="col-sm-8">
+      <label class="col-sm-8 col-form-label tulisanKekiri">Gramedia</label>
+    </div>
+    <div class="col-sm-2">
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-2">
+    </div>
+    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nama Pengarang</label>
+    <div class="col-sm-8">
       <label class="col-sm-8 col-form-label tulisanKekiri">Michael Stevin</label>
     </div>
     <div class="col-sm-2">
