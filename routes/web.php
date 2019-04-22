@@ -38,4 +38,4 @@ Route::get('/pemesanan', function(){
 Route::get('/anggota', function(){
     return view('TampilanAnggota');
 })->middleware('auth')->name("seluruhanggota");
-Router::get('/TampilanDetailBuku/{id}', "BukuDanEksemplar@index")->middleware('auth')->name("TampilanDetailBuku");
+Route::get('/TampilanDetailBuku/{id}', "BukuDanEksemplar@index")->middleware('auth')->name("TampilanDetailBuku");
