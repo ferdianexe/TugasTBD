@@ -16,7 +16,7 @@
         <table class="table table-condensed">
           <thead>
           <tr>
-            <th>    </th>
+            <th>Id</th>
             <th>Nama Anggota</th>
             <th>Status</th>
             <th>Terakhir Meminjam</th>
@@ -33,6 +33,17 @@
             <td>Tidak Pernah</td>
             <td>Ya</td>
           </tr>
+          @foreach($result as $res)
+            <td>{{$res['id']}}</td>
+            <td>{{$res['name']}}</td>
+            @if($res['statusAktif']==1){
+              <td>Aktif</td>
+            }
+            @else{
+              <td>Tidak Aktif</td>
+            }
+            @endif
+          @endforeach
           <!-- <tr>
               
           </tr> -->
