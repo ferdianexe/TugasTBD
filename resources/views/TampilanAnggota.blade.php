@@ -25,24 +25,36 @@
           </tr>
           </thead>
           <tbody>
-          <tr>
-            <td>1</td>
-            <td>Cooler Ujang</td>
-            <td>Aktif</td>
-            <td>12-12-19</td>
-            <td>Tidak Pernah</td>
-            <td>Ya</td>
-          </tr>
           @foreach($result as $res)
-            <td>{{$res['id']}}</td>
-            <td>{{$res['name']}}</td>
-            @if($res['statusAktif']==1){
-              <td>Aktif</td>
-            }
-            @else{
-              <td>Tidak Aktif</td>
-            }
-            @endif
+            <tr>
+              <td>{{$res['id']}}</td>
+              <td>{{$res['name']}}</td>
+              @if($res['statusAktif']==1){
+                <td>Aktif</td>
+              }
+              @else{
+                <td>Tidak Aktif</td>
+              }
+              @endif
+
+              @if($res['terakhirMeminjam']==NULL)
+                <td>Tidak Pernah</td>
+              @else
+                <td>{{$res['terakhirMeminjam']}}</td>
+              @endif
+
+              @if($res['terakhirMemesan']==NULL)
+                <td>Tidak Pernah</td>
+              @else
+                <td>{{$res['terakhirMemesan']}}</td>
+              @endif
+
+              @if($res['hasReturned']==0)
+                <td>Tidak</td>
+              @else
+                <td>Ya</td>
+              @endif
+            </tr>
           @endforeach
           <!-- <tr>
               

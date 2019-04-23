@@ -13,11 +13,22 @@ class ShowUser extends Migration
      */
     public function up()
     {
+        DB::statement(
+            'ALTER TABLE kumpulanpeminjaman 
+                ADD hasReturned INT NOT NULL DEFAULT 0 AFTER fkDenda'
+        );
+        DB::statement(
+            'ALTER TABLE users 
+                ADD terakhirMeminjam DATE NULL DEFAULT NULL AFTER hakStatus,
+                ADD terakhirMemesan DATE NULL DEFAULT NULL AFTER terakhirMeminjam,
+                ADD hasReturned INT NOT NULL DEFAULT 0 AFTER terakhirMemesan'
+        );
+
         $sql = "CREATE PROCEDURE ShowUser ()
-       BEGIN
+        BEGIN
 
         SELECT
-            id,name,statusAktif,tglLahir,tglGabung,alamat,email
+            id,name,statusAktif,tglLahir,tglGabung,alamat,email,terakhirMeminjam,terakhirMemesan,hasReturned
         FROM
             users;
 

@@ -26,9 +26,6 @@ Route::get('/tambaheksemplar', function(){
 Route::get('/pemesanan', function(){
     return view('TampilanDataPemesanan');
 })->middleware('auth')->name("pemesananBuku");
-Route::get('/anggota', function(){
-    return view('TampilanAnggota');
-})->middleware('auth')->name("seluruhanggota");
 Route::get('/TampilanDetailBuku/{id}','BukuDanEksemplarController@index' )->middleware('auth')->name("TampilanDetailBuku");
 Route::get('/tambahkategori', "KategoriController@showAllCategory")->middleware('auth')->name("tambahKategori");
 Route::get('/tambahpenerbit', "PenerbitController@showAllPenerbit")->middleware('auth')->name("tambahPenerbit");
@@ -38,3 +35,4 @@ Route::post('/tambahkategori',"KategoriController@insertKategori")->middleware('
 Route::post('/tambahpenerbit',"PenerbitController@insertPenerbit")->middleware('auth')->name("insertPenerbit");
 Route::post('/tambahBuku',"BukuController@tambahBuku")->middleware('auth')->name("tambahbukuform");
 Route::get('/tambahBuku', "BukuController@loadNamaPenerbitdanPengarang")->middleware('auth')->name("tambahBuku");
+Route::get('/anggota', 'ShowUserController@showAllUser')->middleware('auth')->name("seluruhanggota");
