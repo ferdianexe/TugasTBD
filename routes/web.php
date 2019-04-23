@@ -23,9 +23,7 @@ Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('sear
 Route::get('/tambahbuku', function(){
     return view('tambahBuku');
 })->middleware('auth')->name("tambahBuku");
-Route::get('/tambaheksemplar', function(){
-    return view('tambahEksemplar');
-})->middleware('auth')->name("tambahEksemplar");
+Route::get('/tambaheksemplar','BukuDanEksemplarController@showAllBukuForFormAddEksemplar')->middleware('auth')->name("tambahEksemplar");
 Route::get('/pemesanan', function(){
     return view('TampilanDataPemesanan');
 })->middleware('auth')->name("pemesananBuku");
@@ -36,3 +34,4 @@ Route::get('/TampilanDetailBuku/{id}','BukuDanEksemplarController@index' )->midd
 Route::get('/tambahkategori', "KategoriController@showAllCategory")->middleware('auth')->name("tambahKategori");
 Route::get('/tambahpenerbit', "PenerbitController@showAllPenerbit")->middleware('auth')->name("tambahPenerbit");
 Route::get('/tambahpengarang', "PengarangController@showAllPengarang")->middleware('auth')->name("tambahPengarang");
+Route::post('/tambaheksemplar','EksemplarController@tambahEksemplar')->middleware('auth')->name('tambahEksemplarForm');

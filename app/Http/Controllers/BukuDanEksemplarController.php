@@ -22,4 +22,10 @@ class BukuDanEksemplarController extends Controller
 
         return view('TampilanDetailBuku',compact('kumpulanBukudanEksemplar','buku'));
     }
+
+    public function showAllBukuForFormAddEksemplar()
+    {
+        $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudul()");
+        return view('tambahEksemplar',compact('kumpulanBuku'));
+    }
 }

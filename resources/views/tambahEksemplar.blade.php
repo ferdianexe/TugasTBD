@@ -11,7 +11,8 @@
     
   <div class="container">
   <!-- onsubmit="proses(event)" -->
-  <form  method="GET" action="" id="tambahEksemplar">
+  <form  method="POST" action="{{ route('tambahEksemplarForm') }}" id="tambahEksemplar">
+  @csrf
   <div class="form-group row">
     <div class="col-sm-2">
     </div>
@@ -25,21 +26,14 @@
   <div class="form-group row">
     <div class="col-sm-2">
     </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Judul Buku</label>
+    <label for="judul" class="col-sm-2 col-form-label tulisanKekiri">Judul Buku</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="Masukkan Judul Buku">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Kategori</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="Masukkan Kategori Buku">
-    </div>
-    <div class="col-sm-2">
+    <select id="judul" type="text" class="form-control{{ $errors->has('judul') ? ' is-invalid' : '' }}" name="judul" required>
+      <option value="" selected disabled>Judul Buku</option>
+      @foreach ($kumpulanBuku as $buku)
+        <option value="{{$buku->idBuku}}">{{$buku->nama}}</option>
+      @endforeach
+    </select>
     </div>
   </div>
   <div class="form-group row">
@@ -47,51 +41,20 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nomor Eksemplar</label>
     <div class="col-sm-6">
-      <input type="number" class="form-control" min="1">
+      <input type="number" name="noEksemplar" class="form-control" min="1">
     </div>
     <div class="col-sm-2">
     </div>
   </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
+  @if(isset($pesan))
+    <div class="form-group row">
+      <div class="col-sm-2">
+      </div>
+        {{$pesan}}
+      <div class="col-sm-2">
+      </div>
     </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Harga Buku</label>
-    <div class="col-sm-6">
-      <input type="number" class="form-control" min="1">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Tebal Buku</label>
-    <div class="col-sm-6">
-      <input type="number" class="form-control" min="1">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Tahun Terbit</label>
-    <div class="col-sm-6">
-      <input type="number" class="form-control" min="1" placeholder="Masukkan Tahun Terbit Buku">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nama Penerbit</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="Masukkan Nama Penerbit Buku">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
+  @endif
   <br>
   <div class="form-group row">
     <div class="col-sm-2">
@@ -182,7 +145,7 @@
     function tambah(){
       document.getElementById('tambahEksemplar').submit();
       document.getElementById('myModalTambahEksemplar').className = "modal hide";
-      window.location.href="/";
+      // window.location.href="/";
     }
 
     function batalTambah(){
