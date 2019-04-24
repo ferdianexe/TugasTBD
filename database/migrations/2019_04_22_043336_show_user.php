@@ -18,60 +18,90 @@ class ShowUser extends Migration
                 ADD hasReturned INT NOT NULL DEFAULT 0 AFTER fkDenda'
         );
         DB::statement(
-            'ALTER TABLE users 
-                ADD terakhirMeminjam DATE NULL DEFAULT NULL AFTER hakStatus,
-                ADD terakhirMemesan DATE NULL DEFAULT NULL AFTER terakhirMeminjam,
-                ADD hasReturned INT NOT NULL DEFAULT 0 AFTER terakhirMemesan'
+            'ALTER TABLE kumpulanpemesanan 
+                ADD tanggalMemesan DATE NULL DEFAULT NULL AFTER tanggalMemesan'
         );
 
         $sql = "CREATE PROCEDURE ShowUser ()
         BEGIN
-            DECLARE test INT;
-            DECLARE res INT;
-            SET test = 1;
-            SET res = 0;
-
-            CREATE TABLE userDanPinjamanTerakhir(
-                id int,
-                terakhirMemesan date
-            );
-            INSERT INTO userDanPinjamanTerakhir 
-                SELECT DISTINCT id, tanggalMeminjam
-                FROM users
-                Group By id
-                Order By tanggalMeminjam desc
-            ;
-
+            DECLARE tempIdUser INT;
+            DECLARE tempTglMeminjam INT;
+            DECLARE tempTglMemesan INT;
+            DECLARE tempHasReturned INT;
+            DECLARE v_finished int;
+                
                 -- Cursor
-                DECLARE namaCursor CURSOR FOR 
+                DECLARE masukanUserDanTglTerakhir CURSOR FOR 
                 SELECT id From users;
-
+                
                 -- declare NOT FOUND handler
                 DECLARE CONTINUE HANDLER 
                         FOR NOT FOUND SET v_finished = 1;
 
-                OPEN namaCursor;
+                CREATE TABLE userDanPinjamanTerakhir(
+                    idUser int,
+                    terakhirMeminjam date
+                );
+                CREATE TABLE userDanPesananTerakhir(
+                    idUser int,
+                    terakhirMemesan date
+                );
+                CREATE TABLE userDanStatusSudahDikembalikan(
+                    idUser int,
+                    hasReturned int
+                );
+                CREATE TABLE result(
+                    idUser int,
+                    terakhirMeminjam date,
+                    terakhirMemesan date,
+                    hasReturned int
+                );
+
+                OPEN masukanUserDanTglTerakhir;
 
                 -- FETCHING 
-                get_all_id: LOOP
-                    FETCH namaCursor INTO test;
+                get_all: LOOP
+                    FETCH masukanUserDanTglTerakhir 
+                    INTO tempIdUser;
                     
                     IF v_finished = 1 THEN 
-                        LEAVE get_all_id;
+                        LEAVE get_all;
                     END IF;
+                    
+                    SELECT idUser,kodeEksemplar, tanggalMeminjam,statusPeminjaman
+                    FROM (
+                    select top 1 idUser,kodeEksemplar, tanggalMeminjam
+                    from kumpulanPeminjaman
+                    where
+                        idUser = tempIdUser
+                    order by
+                        tanggalMeminjam desc
+                        ) as table1
+                    INNER JOIN kumpulanEksemplar ON table1.kodeEksemplar = kumpulanEksemplar.kodeEksemplar;
 
                     -- SET/masukin nilai yang di fetch tadi ke table temp (utk tambah 1 record baru)
-                    SET res = test; 
-                END LOOP get_all_id;
+                    insert into userDanPinjamanTerakhir
+                        select top 1 idUser, tanggalMeminjam
+                        from kumpulanpeminjaman
+                        where idUser = tempIdUser
+                        order by tanggalMeminjam desc;
+                    
+                    insert into userDanPemesananTerakhir
+                        select top 1 idUser, tanggalMemesan
+                        from kumpulanpeminjaman
+                        where idUser = tempIdUser
+                        order by tanggalMeminjam desc;
+
+                END LOOP get_all;
                 -- END FETCHING
 
-                CLOSE namaCursor;
+                CLOSE masukanUserDanTglTerakhir;
                 -- End Cursor
 
             SELECT
                 test,id,name,statusAktif,tglLahir,tglGabung,alamat,email,terakhirMeminjam,terakhirMemesan,hasReturned
             FROM
-                users;
+                result;
             DROP table userDanPinjamanTerakhir;
        END";
         DB::connection()->getPdo()->exec($sql);
