@@ -12,4 +12,11 @@ class PengarangController extends Controller
     $kumpulanPengarang = DB::select("CALL ShowAllPengarang()");
     return view('tambahPengarang',compact('kumpulanPengarang'));;
   }
+
+  public function insertPengarang(Request $request)
+  {
+    $namaPengarang = $request->input('pengarangbaru');
+    $insert = DB::select("CALL insertPengarang($namaPengarang)");
+    return view('tambahPengarang',compact('insert'));
+  }
 }
