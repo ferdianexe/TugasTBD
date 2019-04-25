@@ -37,3 +37,5 @@ Route::get('/tambahkategori', "KategoriController@showAllCategory")->middleware(
 Route::get('/tambahpenerbit', "PenerbitController@showAllPenerbit")->middleware('auth')->name("tambahPenerbit");
 Route::get('/tambahpengarang', "PengarangController@showAllPengarang")->middleware('auth')->name("tambahPengarang");
 Route::post('/tambahpengarang', "PengarangController@insertPengarang")->middleware('auth')->name("insertPengarang");
+Route::post('/tambahkategori',"KategoriController@insertKategori")->middleware('auth')->name("insertKategori");
+Route::post('/tambahpenerbit',"PenerbitController@insertPenerbit")->middleware('auth')->name("insertPenerbit");

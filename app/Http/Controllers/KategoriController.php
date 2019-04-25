@@ -16,7 +16,7 @@ class KategoriController extends Controller
   public function insertKategori(Request $request)
   {
     $namaKategori = $request->input('kategoriBaru');
-    $insert = DB::select("CALL insertKategori($namaKategori)");
-    return view('tambahKategori', compact('insert'));
+    $insert = DB::select("CALL insertKategori('$namaKategori')");
+    return redirect()->route('tambahKategori');
   }
 }

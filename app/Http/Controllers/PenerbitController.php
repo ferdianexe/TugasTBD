@@ -16,7 +16,7 @@ class PenerbitController extends Controller
     public function insertPenerbit(Request $request)
     {
         $namaPenerbit = $request->input('penerbitbaru');
-        $insert = DB::select("CALL insertPenerbit($namaPenerbit)");
-        return view('tambahPenerbit',compact('insert'));
+        $insert = DB::select("CALL insertPenerbit('$namaPenerbit')");
+        return redirect()->route('tambahPenerbit');
     }
 }

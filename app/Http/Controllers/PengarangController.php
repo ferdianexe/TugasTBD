@@ -16,7 +16,7 @@ class PengarangController extends Controller
   public function insertPengarang(Request $request)
   {
     $namaPengarang = $request->input('pengarangbaru');
-    $insert = DB::select("CALL insertPengarang($namaPengarang)");
-    return view('tambahPengarang',compact('insert'));
+    $insert = DB::select("CALL insertPengarang('$namaPengarang')");
+    return redirect()->route('tambahPengarang');
   }
 }
