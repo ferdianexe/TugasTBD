@@ -51,7 +51,7 @@ class CreateStroredProcedureShowBukudanEksemplar extends Migration
             "DROP PROCEDURE ShowBukudanEksemplar"
           );
         DB::unprepared(
-        "DROP PROCEDURE ShowBukuById"
+            "DROP PROCEDURE ShowBukuById"
         );
         DB::unprepared(
             "ShowAllBukuOnlyIdAndJudul"
