@@ -13,7 +13,7 @@ class TambahBuku extends Migration
      */
     public function up()
     {
-      DB::statement("ALTER TABLE kumpulankatadanbuku ADD kemunculankata INT NOT NULL AFTER idBuku");
+      DB::statement("ALTER TABLE kumpulankatadanbuku ADD kemunculankata INT NOT NULL DEFAULT 0 AFTER idBuku");
       $sql = "CREATE PROCEDURE TambahBuku
       (
         IN judul_param varchar(50),
@@ -60,12 +60,14 @@ class TambahBuku extends Migration
           WHERE NOT EXISTS (SELECT kata FROM kumpulankata WHERE kata=cur_kata ) LIMIT 1;
         END WHILE;
         -- masukan kata kedalam tablenya
-        INSERT INTO kumpulankatadanbuku
+        INSERT INTO kumpulankatadanbuku(kata,idBuku,kemunculanKata)
         SELECT kata,id,count(kata)
         FROM pecahanKata
         GROUP BY kata,id;
         -- bikin temporary table harus didrop di MySQL
         drop table pecahanKata ;
+        -- kalo udah nambahin kata auto update idf
+        CALL Updateidf();
        END
       ";
        DB::connection()->getPdo()->exec($sql);
@@ -74,7 +76,7 @@ class TambahBuku extends Migration
         DECLARE totalbuku_val INT ;
         DECLARE is_finished INT;
         DECLARE cur_kata_val varchar(50) ;
-        DECLARE hasil_kata_val INT ;
+        DECLARE hasil_kata_val FLOAT ;
         DECLARE kata_cursor CURSOR FOR SELECT kata,hasilPerhitungan FROM temp;
         DECLARE CONTINUE HANDLER FOR NOT FOUND SET is_finished =  1;
 
@@ -84,7 +86,7 @@ class TambahBuku extends Migration
         FROM kumpulanBuku;
 
         INSERT INTO temp (totalbuku,totalkemunculan,hasilPerhitungan,kata)
-        SELECT totalbuku_val,COUNT(idBuku),LOG(2,COUNT(idBuku)),kata
+        SELECT totalbuku_val,COUNT(idBuku),LOG(2,((totalbuku_val*1.0)/COUNT(idBuku))),kata
         FROM kumpulankatadanbuku
         GROUP BY kata;
 
@@ -105,6 +107,8 @@ class TambahBuku extends Migration
         END LOOP get_kata;
 
         drop table temp;
+        -- Setiap udah berubah idfnya maka semua bobot akan berubah juga
+        CALL updateBobot();
        END";
         DB::connection()->getPdo()->exec($sql);
     }
