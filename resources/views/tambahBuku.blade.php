@@ -90,8 +90,8 @@
 
                     <div class="col-md-6">
                         <select id="namaPenerbit" type="text" class="form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
-                          <!-- <option value="" selected disabled>Nama Penerbit</option>
-                          <option>Elex Media</option>
+                          <option value="" selected disabled>Nama Penerbit</option>
+                          <!-- <option>Elex Media</option>
                           <option>Yudhistira Gahlia</option>
                           <option>Agromedia</option>
                           <option>Gagas Media</option> -->
