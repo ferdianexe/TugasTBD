@@ -89,12 +89,8 @@
                     <label for="namaPenerbit" class="col-md-4 col-form-label text-md-right">Nama Penerbit</label>
 
                     <div class="col-md-6">
-                        <select id="namaPenerbit" type="text" class="form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
+                        <select id="namaPenerbit" type="text" class="selectpicker form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
                           <option value="" selected disabled>Nama Penerbit</option>
-                          <!-- <option>Elex Media</option>
-                          <option>Yudhistira Gahlia</option>
-                          <option>Agromedia</option>
-                          <option>Gagas Media</option> -->
                           <?php
                             $hasil = DB::select("CALL ShowAllPenerbit()");
                                 foreach($hasil as $row)
@@ -119,12 +115,8 @@
                     <label for="namaPengarang" class="col-md-4 col-form-label text-md-right">Nama Pengarang</label>
 
                     <div class="col-md-6">
-                        <select id="namaPengarang" type="text" class="form-control{{ $errors->has('namaPengarang') ? ' is-invalid' : '' }}" name="namaPengarang" required>
+                        <select id="namaPengarang" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPengarang') ? ' is-invalid' : '' }}" name="namaPengarang" required>
                           <option value="" selected disabled>Nama Pengarang</option>
-                          <!-- <option>Andrea Hinata</option>
-                          <option>Carl Mark</option>
-                          <option>Magnus Carlsen</option>
-                          <option>Kristina</option> -->
                           <?php
                             $hasil = DB::select("CALL ShowAllPengarang()");
                                 foreach($hasil as $row)

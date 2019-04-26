@@ -69,6 +69,44 @@ class TambahBuku extends Migration
        END
       ";
        DB::connection()->getPdo()->exec($sql);
+       $sql = "CREATE PROCEDURE updateidf()
+       BEGIN
+        DECLARE totalbuku_val INT ;
+        DECLARE is_finished INT;
+        DECLARE cur_kata_val varchar(50) ;
+        DECLARE hasil_kata_val INT ;
+        DECLARE kata_cursor CURSOR FOR SELECT kata,hasilPerhitungan FROM temp;
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET is_finished =  1;
+
+        CREATE TABLE temp(totalbuku INT,totalKemunculan INT,hasilPerhitungan float,kata varchar(50));
+
+        SELECT count(idBuku) INTO totalbuku_val
+        FROM kumpulanBuku;
+
+        INSERT INTO temp (totalbuku,totalkemunculan,hasilPerhitungan,kata)
+        SELECT totalbuku_val,COUNT(idBuku),LOG(2,COUNT(idBuku)),kata
+        FROM kumpulankatadanbuku
+        GROUP BY kata;
+
+        SET is_finished = 0 ;
+
+        OPEN kata_cursor;
+
+        get_kata: LOOP 
+        FETCH kata_cursor INTO cur_kata_val,hasil_kata_val;
+          IF is_finished = 1 THEN 
+          LEAVE get_kata;
+          END IF;
+
+          UPDATE kumpulankata
+          SET nilaiKata = hasil_kata_val
+          WHERE kata = cur_kata_val;
+
+        END LOOP get_kata;
+
+        drop table temp;
+       END";
+        DB::connection()->getPdo()->exec($sql);
     }
 
     /**
@@ -79,6 +117,7 @@ class TambahBuku extends Migration
     public function down()
     {
       DB::statement("ALTER TABLE kumpulankatadanbuku DROP kemunculankata");
+      DB::unprepared("DROP PROCEDURE updateidf");
       DB::unprepared(
         "DROP PROCEDURE TambahBuku"
       );
