@@ -21,7 +21,8 @@ class TambahBuku extends Migration
         IN tahun_param INT,
         IN harga_param decimal(15,2),
         IN penerbit_param INT,
-        IN pengarang_param INT
+        IN pengarang_param INT,
+        IN kategori_param varchar(150)
       )
        BEGIN
         DECLARE id_param INT;
@@ -68,6 +69,8 @@ class TambahBuku extends Migration
         drop table pecahanKata ;
         -- kalo udah nambahin kata auto update idf
         CALL Updateidf();
+        -- Tambahkan semua kategori tadi kedalam buku
+        CALL masukanKategoriKeBuku(id_param,kategori_param);
        END
       ";
        DB::connection()->getPdo()->exec($sql);

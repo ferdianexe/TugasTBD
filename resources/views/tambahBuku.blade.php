@@ -13,7 +13,7 @@
                 <div class="card-header">Tambah Buku</div>
 
         <div class="card-body">
-            <form method="POST" action="">
+            <form method="POST" action="{{ route('tambahbukuform') }}">
                 @csrf
 
                 <div class="form-group row">
@@ -89,16 +89,15 @@
                     <label for="namaPenerbit" class="col-md-4 col-form-label text-md-right">Nama Penerbit</label>
 
                     <div class="col-md-6">
-                        <select id="namaPenerbit" type="text" class="selectpicker form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
+                        <select id="namaPenerbit" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
                           <option value="" selected disabled>Nama Penerbit</option>
                           <?php
                             $hasil = DB::select("CALL ShowAllPenerbit()");
                                 foreach($hasil as $row)
                                 {
                                     $term = $row->namaPenerbit;
-
-                                    // update $maximum if this term is more popular than the previous terms
-                                    echo '<option>'.$term.'</option>';
+                                    $id = $row ->idPenerbit;
+                                    echo "<option value='$id' data-tokens='$term'>".$term."</option>";
 
                                 }
                             
@@ -122,9 +121,8 @@
                                 foreach($hasil as $row)
                                 {
                                     $term = $row->namaPengarang;
-
-                                    // update $maximum if this term is more popular than the previous terms
-                                    echo '<option>'.$term.'</option>';
+                                    $id = $row ->idPengarang;
+                                    echo "<option value='$id' data-tokens='$term'>".$term."</option>";
 
                                 }
                             
