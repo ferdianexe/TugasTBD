@@ -15,14 +15,14 @@ class CreateProcedureReadForPengarangPenerbitKategori extends Migration
     {
         $sql = "CREATE PROCEDURE ShowAllPengarang ()
         BEGIN
-            SELECT namaPengarang
+            SELECT idPengarang,namaPengarang
             FROM kumpulanPengarang ;
         END";
         DB::connection()->getPdo()->exec($sql);
 
         $sql = "CREATE PROCEDURE ShowAllPenerbit ()
         BEGIN
-            SELECT namaPenerbit
+            SELECT idPenerbit,namaPenerbit
             FROM kumpulanPenerbit;
         END";
         DB::connection()->getPdo()->exec($sql);

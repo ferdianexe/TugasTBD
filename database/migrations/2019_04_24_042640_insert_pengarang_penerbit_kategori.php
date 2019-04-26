@@ -36,7 +36,7 @@ class InsertPengarangPenerbitKategori extends Migration
             IN nama_kategori varchar(50)
         )
         BEGIN
-            INSERT INTO kumpulankategori (Kategori) VALUES (nama_kategori);
+            INSERT INTO kumpulankategori (Kategori) VALUES (LOWER(nama_kategori));
         END";
         DB::connection()->getPdo()->exec($sql);
     }

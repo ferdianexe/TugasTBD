@@ -39,3 +39,4 @@ Route::get('/tambahpengarang', "PengarangController@showAllPengarang")->middlewa
 Route::post('/tambahpengarang', "PengarangController@insertPengarang")->middleware('auth')->name("insertPengarang");
 Route::post('/tambahkategori',"KategoriController@insertKategori")->middleware('auth')->name("insertKategori");
 Route::post('/tambahpenerbit',"PenerbitController@insertPenerbit")->middleware('auth')->name("insertPenerbit");
+Route::post('/tambahBuku',"BukuController@tambahBuku")->middleware('auth')->name("tambahbukuform");
