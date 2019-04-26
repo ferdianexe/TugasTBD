@@ -34,6 +34,7 @@ class UpdateBobotTiapKataDalamBuku extends Migration
           DECLARE curcat_val varchar(150); -- kategori tiapnya yang sudah dipotong
           DECLARE kategori_val varchar(150); -- kategori simpanan sebagai kalimat yang nanti dipecah
           DECLARE kategoriid_val INT; -- kategori id yang akan di input kedalam table
+          DECLARE status_val INT; -- yang membuat dia dimasukan ke table n to M antara buku dan kategori
           SET start_val = 1 ; -- set dlu jadi 1
           SET kategori_val = kategori_param; -- kategori yang dipecah di set terlebih dahulu
           WHILE start_val != 0 DO -- selama kategori itu masih kumpulan kata kata loop
@@ -50,10 +51,13 @@ class UpdateBobotTiapKataDalamBuku extends Migration
             FROM kumpulankategori
             WHERE kategori = curcat_val
             LIMIT 1; -- cari idkategori berdasarkan kategorinya ambil papling atas saja
-            INSERT INTO kumpulanbukudankumpulankategori(idBuku,idKategori)
-            SELECT id_param,kategoriid_val
-            FROM kumpulanKategori
-            WHERE EXISTS(SELECT * FROM KumpulanKategori WHERE idKategori = kategoriid_val);
+            SELECT count(idKategori) INTO status_val
+            FROM kumpulankategori
+            WHERE kategori = curcat_val;
+            IF status_val != 0 THEN -- tambah kalo dia emang ada (buat existnya manual)
+              INSERT INTO kumpulanbukudankumpulankategori(idBuku,idKategori)
+              SELECT id_param,kategoriid_val;
+            END IF ;
             -- masukan data tersebut jika emang exist
           END WHILE;
           -- keluar loop
