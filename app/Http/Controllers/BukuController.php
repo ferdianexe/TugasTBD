@@ -24,7 +24,6 @@ class BukuController extends Controller
         $namaPengarang = $request->input('namaPengarang');
         DB::select("CALL TambahBuku ('$judul','$tebalBuku','$tahun','$price','$namaPenerbit','$namaPengarang','$category')");
 
-        // $this->loadNamaPenerbitdanPengarang();
         return redirect()->route('tambahBuku');
     }
 
