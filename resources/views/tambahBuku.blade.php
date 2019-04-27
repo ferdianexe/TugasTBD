@@ -91,17 +91,6 @@
                     <div class="col-md-6">
                         <select id="namaPenerbit" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
                           <option value="" selected disabled>Nama Penerbit</option>
-                          <!-- <?php
-                            // $hasil = DB::select("CALL ShowAllPenerbit()");
-                            //     foreach($hasil as $row)
-                            //     {
-                            //         $term = $row->namaPenerbit;
-                            //         $id = $row ->idPenerbit;
-                            //         echo "<option value='$id' data-tokens='$term'>".$term."</option>";
-
-                            //     }
-                            
-                         ?>-->
                           @foreach ($kumpulanPenerbit as $penerbit)
                                 $id = $penerbit->idPenerbit;
                                 $namaP = $penerbit->namaPenerbit;
