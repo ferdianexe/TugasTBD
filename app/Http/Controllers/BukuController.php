@@ -24,6 +24,14 @@ class BukuController extends Controller
         $namaPengarang = $request->input('namaPengarang');
         DB::select("CALL TambahBuku ('$judul','$tebalBuku','$tahun','$price','$namaPenerbit','$namaPengarang','$category')");
 
+        // $this->loadNamaPenerbitdanPengarang();
         return redirect()->route('tambahBuku');
+    }
+
+    function loadNamaPenerbitdanPengarang()
+    {
+        $kumpulanPenerbit = DB::select("CALL ShowAllPenerbit()");
+        $kumpulanPengarang = DB::select("CALL showAllPengarang()");
+        return view('tambahBuku',compact('kumpulanPenerbit','kumpulanPengarang'));;
     }
 }

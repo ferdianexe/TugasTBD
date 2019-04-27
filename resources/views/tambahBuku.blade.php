@@ -91,17 +91,22 @@
                     <div class="col-md-6">
                         <select id="namaPenerbit" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
                           <option value="" selected disabled>Nama Penerbit</option>
-                          <?php
-                            $hasil = DB::select("CALL ShowAllPenerbit()");
-                                foreach($hasil as $row)
-                                {
-                                    $term = $row->namaPenerbit;
-                                    $id = $row ->idPenerbit;
-                                    echo "<option value='$id' data-tokens='$term'>".$term."</option>";
+                          <!-- <?php
+                            // $hasil = DB::select("CALL ShowAllPenerbit()");
+                            //     foreach($hasil as $row)
+                            //     {
+                            //         $term = $row->namaPenerbit;
+                            //         $id = $row ->idPenerbit;
+                            //         echo "<option value='$id' data-tokens='$term'>".$term."</option>";
 
-                                }
+                            //     }
                             
-                         ?>
+                         ?>-->
+                          @foreach ($kumpulanPenerbit as $penerbit)
+                                $id = $penerbit->idPenerbit;
+                                $namaP = $penerbit->namaPenerbit;
+                                <option value='$id' data-tokens='$namaP'>{{$penerbit->namaPenerbit}}</option>
+                          @endforeach
                         </select>
                         @if ($errors->has('namaPenerbit'))
                         <span class="invalid-feedback" role="alert">
@@ -116,17 +121,11 @@
                     <div class="col-md-6">
                         <select id="namaPengarang" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPengarang') ? ' is-invalid' : '' }}" name="namaPengarang" required>
                           <option value="" selected disabled>Nama Pengarang</option>
-                          <?php
-                            $hasil = DB::select("CALL ShowAllPengarang()");
-                                foreach($hasil as $row)
-                                {
-                                    $term = $row->namaPengarang;
-                                    $id = $row ->idPengarang;
-                                    echo "<option value='$id' data-tokens='$term'>".$term."</option>";
-
-                                }
-                            
-                         ?>
+                          @foreach ($kumpulanPengarang as $pengarang)
+                                $id = $pengarang->idPengarang;
+                                $namaP = $pengarang->namaPengarang;
+                                <option value='$id' data-tokens='$namaP'>{{$pengarang->namaPengarang}}</option>
+                          @endforeach
                         </select>
                         @if ($errors->has('namaPengarang'))
                         <span class="invalid-feedback" role="alert">
