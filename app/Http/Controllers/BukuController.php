@@ -26,4 +26,11 @@ class BukuController extends Controller
 
         return redirect()->route('tambahBuku');
     }
+
+    function loadNamaPenerbitdanPengarang()
+    {
+        $kumpulanPenerbit = DB::select("CALL ShowAllPenerbit()");
+        $kumpulanPengarang = DB::select("CALL showAllPengarang()");
+        return view('tambahBuku',compact('kumpulanPenerbit','kumpulanPengarang'));;
+    }
 }
