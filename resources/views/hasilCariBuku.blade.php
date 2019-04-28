@@ -55,9 +55,9 @@
                   </tr>
                   </thead>
                   <tbody>
-                  @foreach ($kumpulanBuku as $buku)
+                  @foreach ($kumpulanBuku as $key=>$buku)
                     <tr>
-                      <td>{{$buku->idBuku}}</td>
+                      <td>{{++$key}}</td>
                       <td><a href="{{ url('TampilanDetailBuku/'.$buku->idBuku)}}">{{$buku->nama}}</a></td>
                     </tr>
                   @endforeach
