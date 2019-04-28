@@ -19,7 +19,7 @@ class ShowUser extends Migration
         );
         DB::statement(
             'ALTER TABLE kumpulanpemesanan 
-                ADD tanggalMemesan DATE NULL DEFAULT NULL AFTER tanggalMemesan'
+                ADD tanggalMemesan DATE NULL DEFAULT NULL AFTER idUser'
         );
 
         $sql = "CREATE PROCEDURE ShowUser ()
@@ -50,13 +50,7 @@ class ShowUser extends Migration
                     idUser int,
                     hasReturned int
                 );
-                CREATE TABLE result(
-                    idUser int,
-                    terakhirMeminjam date,
-                    terakhirMemesan date,
-                    hasReturned int
-                );
-
+                
                 OPEN masukanUserDanTglTerakhir;
 
                 -- FETCHING 
@@ -68,16 +62,17 @@ class ShowUser extends Migration
                         LEAVE get_all;
                     END IF;
                     
-                    SELECT idUser,kodeEksemplar, tanggalMeminjam,statusPeminjaman
-                    FROM (
-                    select top 1 idUser,kodeEksemplar, tanggalMeminjam
-                    from kumpulanPeminjaman
-                    where
-                        idUser = tempIdUser
-                    order by
-                        tanggalMeminjam desc
-                        ) as table1
-                    INNER JOIN kumpulanEksemplar ON table1.kodeEksemplar = kumpulanEksemplar.kodeEksemplar;
+                    -- SELECT idUser,kodeEksemplar, tanggalMeminjam,statusPeminjaman
+                    -- FROM 
+                    -- (
+                    --     select top 1 idUser,kodeEksemplar, tanggalMeminjam
+                    --     from kumpulanPeminjaman
+                    --     where
+                    --         idUser = tempIdUser
+                    --     order by
+                    --         tanggalMeminjam desc
+                    -- ) as table1
+                    -- INNER JOIN kumpulanEksemplar ON table1.kodeEksemplar = kumpulanEksemplar.kodeEksemplar;
 
                     -- SET/masukin nilai yang di fetch tadi ke table temp (utk tambah 1 record baru)
                     insert into userDanPinjamanTerakhir
@@ -88,9 +83,15 @@ class ShowUser extends Migration
                     
                     insert into userDanPemesananTerakhir
                         select top 1 idUser, tanggalMemesan
+                        from kumpulanpemesanan
+                        where idUser = tempIdUser
+                        order by idPemesanan desc;
+
+                    insert into userDanStatusSudahDikembalikan
+                        select top 1 idUser, hasReturned
                         from kumpulanpeminjaman
                         where idUser = tempIdUser
-                        order by tanggalMeminjam desc;
+                        order by tglJatuhTempo desc;
 
                 END LOOP get_all;
                 -- END FETCHING
@@ -98,12 +99,18 @@ class ShowUser extends Migration
                 CLOSE masukanUserDanTglTerakhir;
                 -- End Cursor
 
+            -- info yang akan diberikan
             SELECT
-                test,id,name,statusAktif,tglLahir,tglGabung,alamat,email,terakhirMeminjam,terakhirMemesan,hasReturned
+                id, name, statusAktif, terakhirMeminjam, terakhirMemesan, hasReturned
             FROM
-                result;
+                users
+                inner join userDanPinjamanTerakhir on users.id = userDanPinjamanTerakhir.idUser
+                inner join userDanPemesananTerakhir on users.id = userDanPemesananTerakhir.idUser
+                inner join userDanStatusSudahDikembalikan on users.id = userDanStatusSudahDikembalikan.idUser;
             DROP table userDanPinjamanTerakhir;
-       END";
+            DROP table userDanPemesananTerakhir;
+            DROP table userDanStatusSudahDikembalikan;
+        END";
         DB::connection()->getPdo()->exec($sql);
     }
 
