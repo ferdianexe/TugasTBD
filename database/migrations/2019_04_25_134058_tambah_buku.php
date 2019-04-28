@@ -13,7 +13,7 @@ class TambahBuku extends Migration
      */
     public function up()
     {
-      DB::statement("ALTER TABLE kumpulankatadanbuku ADD kemunculankata INT NOT NULL DEFAULT 0 AFTER idBuku");
+      DB::statement("ALTER TABLE kumpulankatadanbuku ADD kemunculankata INT NOT NULL DEFAULT 1 AFTER idBuku");
       $sql = "CREATE PROCEDURE TambahBuku
       (
         IN judul_param varchar(50),
@@ -89,7 +89,7 @@ class TambahBuku extends Migration
         FROM kumpulanBuku;
 
         INSERT INTO temp (totalbuku,totalkemunculan,hasilPerhitungan,kata)
-        SELECT totalbuku_val,COUNT(idBuku),LOG(2,((totalbuku_val*1.0)/COUNT(idBuku))),kata
+        SELECT totalbuku_val,COUNT(idBuku),(1+LOG(2,((totalbuku_val*1.0)/COUNT(idBuku)))),kata
         FROM kumpulankatadanbuku
         GROUP BY kata;
 

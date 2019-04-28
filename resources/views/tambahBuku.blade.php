@@ -13,7 +13,7 @@
                 <div class="card-header">Tambah Buku</div>
 
         <div class="card-body">
-            <form method="POST" action="{{ route('tambahbukuform') }}">
+            <form method="POST" route="route('tambahbukuform')">
                 @csrf
 
                 <div class="form-group row">
@@ -92,9 +92,7 @@
                         <select id="namaPenerbit" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPenerbit') ? ' is-invalid' : '' }}" name="namaPenerbit" required>
                           <option value="" selected disabled>Nama Penerbit</option>
                           @foreach ($kumpulanPenerbit as $penerbit)
-                                $id = $penerbit->idPenerbit;
-                                $namaP = $penerbit->namaPenerbit;
-                                <option value='$id' data-tokens='$namaP'>{{$penerbit->namaPenerbit}}</option>
+                                <option value='{{$penerbit->idPenerbit}}' data-tokens='{{$penerbit->namaPenerbit}}'>{{$penerbit->namaPenerbit}}</option>
                           @endforeach
                         </select>
                         @if ($errors->has('namaPenerbit'))
@@ -111,9 +109,7 @@
                         <select id="namaPengarang" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaPengarang') ? ' is-invalid' : '' }}" name="namaPengarang" required>
                           <option value="" selected disabled>Nama Pengarang</option>
                           @foreach ($kumpulanPengarang as $pengarang)
-                                $id = $pengarang->idPengarang;
-                                $namaP = $pengarang->namaPengarang;
-                                <option value='$id' data-tokens='$namaP'>{{$pengarang->namaPengarang}}</option>
+                                <option value='{{$pengarang->idPengarang}}' data-tokens='{{$pengarang->namaPengarang}}' >{{$pengarang->namaPengarang}}</option>
                           @endforeach
                         </select>
                         @if ($errors->has('namaPengarang'))

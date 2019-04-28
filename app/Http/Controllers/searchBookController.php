@@ -8,7 +8,7 @@ class SearchBookController extends Controller
     public function testParsingData(Request $request){
         $search = $request->get('search');
         $filter = $request->get('filter');
-        $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudul()");
+        $kumpulanBuku = DB::select("CALL VSMsearch('$search')");
         return view('hasilCariBuku', compact('search','filter','kumpulanBuku'));
     }
     /**

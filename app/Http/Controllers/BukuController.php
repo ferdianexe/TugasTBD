@@ -15,7 +15,7 @@ class BukuController extends Controller
      */
     public function tambahBuku(Request $request)
     {
-        $judul = $request->input('judulBuku') ;
+        $judul = addslashes($request->input('judulBuku')) ;
         $category = $request->input('category');
         $price = $request->input('price');
         $tahun = $request->input('tahunTerbit');
