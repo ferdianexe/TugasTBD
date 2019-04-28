@@ -18,6 +18,7 @@ class ShowUserController extends BaseController
         // $result = DB::connection()->getPdo()->exec($sql);
         // $result = $result->fetchAll(PDO::FETCH_ARRAY);
         $PDO = DB::connection()->getPdo();
+        $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         $QUERY = $PDO->prepare($sql);
         $QUERY->execute();
         $result=$QUERY->fetchAll();

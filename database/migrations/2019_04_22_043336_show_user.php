@@ -42,7 +42,7 @@ class ShowUser extends Migration
                     idUser int,
                     terakhirMeminjam date
                 );
-                CREATE TABLE userDanPesananTerakhir(
+                CREATE TABLE userDanPemesananTerakhir(
                     idUser int,
                     terakhirMemesan date
                 );
@@ -75,29 +75,36 @@ class ShowUser extends Migration
                     -- INNER JOIN kumpulanEksemplar ON table1.kodeEksemplar = kumpulanEksemplar.kodeEksemplar;
 
                     -- SET/masukin nilai yang di fetch tadi ke table temp (utk tambah 1 record baru)
-                    insert into userDanPinjamanTerakhir
-                        select top 1 idUser, tanggalMeminjam
+                    
+                    -- INSERT INTO userDanPinjamanTerakhir ( idUser, terakhirMeminjam )
+                    -- ON DUPLICATE KEY UPDATE ...
+                    -- SELECT ...;
+
+                    insert into userDanPinjamanTerakhir (idUser,terakhirMeminjam)
+                        select idUser, tanggalMeminjam
                         from kumpulanpeminjaman
                         where idUser = tempIdUser
-                        order by tanggalMeminjam desc;
+                        order by tanggalMeminjam desc
+                        LIMIT 1;
                     
-                    insert into userDanPemesananTerakhir
-                        select top 1 idUser, tanggalMemesan
+                    insert into userDanPemesananTerakhir (idUser,terakhirMemesan)
+                        select idUser, tanggalMemesan
                         from kumpulanpemesanan
                         where idUser = tempIdUser
-                        order by idPemesanan desc;
+                        order by idPemesanan desc
+                        LIMIT 1;
 
-                    insert into userDanStatusSudahDikembalikan
-                        select top 1 idUser, hasReturned
+                    insert into userDanStatusSudahDikembalikan (idUser,hasReturned)
+                        select idUser, hasReturned
                         from kumpulanpeminjaman
                         where idUser = tempIdUser
-                        order by tglJatuhTempo desc;
+                        order by tglJatuhTempo desc
+                        LIMIT 1;
 
                 END LOOP get_all;
                 -- END FETCHING
 
-                CLOSE masukanUserDanTglTerakhir;
-                -- End Cursor
+                -- Harusnya matiin kursor disini
 
             -- info yang akan diberikan
             SELECT
@@ -110,6 +117,8 @@ class ShowUser extends Migration
             DROP table userDanPinjamanTerakhir;
             DROP table userDanPemesananTerakhir;
             DROP table userDanStatusSudahDikembalikan;
+            -- End Cursor
+            CLOSE masukanUserDanTglTerakhir;
         END";
         DB::connection()->getPdo()->exec($sql);
     }
@@ -123,6 +132,16 @@ class ShowUser extends Migration
     {
         DB::unprepared(
             "DROP PROCEDURE ShowUser"
-          );
+        );
+
+        DB::unprepared(
+            'ALTER TABLE kumpulanpemesanan 
+                DROP tanggalMemesan'
+        );
+
+        DB::unprepared(
+            'ALTER TABLE kumpulanpeminjaman 
+                DROP hasReturned'
+        );
     }
 }
