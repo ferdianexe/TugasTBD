@@ -20,9 +20,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/TampilanDataPeminjaman', 'DataPeminjamanController@index')->middleware('auth')->name("pinjamanBuku");
 
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
-Route::get('/tambaheksemplar', function(){
-    return view('tambahEksemplar');
-})->middleware('auth')->name("tambahEksemplar");
+Route::get('/tambaheksemplar','EksemplarController@index')->middleware('auth')->name("tambahEksemplar");
 Route::get('/pemesanan', function(){
     return view('TampilanDataPemesanan');
 })->middleware('auth')->name("pemesananBuku");
