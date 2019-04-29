@@ -39,7 +39,7 @@
     <br>
     <div class="container">
         <h2>Kumpulan Buku Buku Baru</h2>
-
+        
         <div class="card-columns">
             @foreach ($kumpulanBuku as $buku)
              <a href="{{ url('TampilanDetailBuku/'.$buku->idBuku)}}" class="card bg-light">

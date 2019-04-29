@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('welcome');
+        $isAdmin = FALSE;
+        if(Auth::user()->hakStatus==1){
+          $isAdmin = TRUE;  
+        }
+        $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudul()");
+        return view('welcome',compact('isAdmin','kumpulanBuku'));
     }
 }
