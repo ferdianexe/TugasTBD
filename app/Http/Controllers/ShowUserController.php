@@ -15,8 +15,6 @@ class ShowUserController extends BaseController
     protected function showAllUser(Request $request)
     {
         $sql = "CALL ShowUser ()";
-        // $result = DB::connection()->getPdo()->exec($sql);
-        // $result = $result->fetchAll(PDO::FETCH_ARRAY);
         $PDO = DB::connection()->getPdo();
         $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         $QUERY = $PDO->prepare($sql);
@@ -24,6 +22,5 @@ class ShowUserController extends BaseController
         $result=$QUERY->fetchAll();
 
         return View('tampilanAnggota', compact('result'));
-        // return $result;
     }
 }

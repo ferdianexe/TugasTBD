@@ -61,24 +61,6 @@ class ShowUser extends Migration
                     IF v_finished = 1 THEN 
                         LEAVE get_all;
                     END IF;
-                    
-                    -- SELECT idUser,kodeEksemplar, tanggalMeminjam,statusPeminjaman
-                    -- FROM 
-                    -- (
-                    --     select top 1 idUser,kodeEksemplar, tanggalMeminjam
-                    --     from kumpulanPeminjaman
-                    --     where
-                    --         idUser = tempIdUser
-                    --     order by
-                    --         tanggalMeminjam desc
-                    -- ) as table1
-                    -- INNER JOIN kumpulanEksemplar ON table1.kodeEksemplar = kumpulanEksemplar.kodeEksemplar;
-
-                    -- SET/masukin nilai yang di fetch tadi ke table temp (utk tambah 1 record baru)
-                    
-                    -- INSERT INTO userDanPinjamanTerakhir ( idUser, terakhirMeminjam )
-                    -- ON DUPLICATE KEY UPDATE ...
-                    -- SELECT ...;
 
                     insert into userDanPinjamanTerakhir (idUser,terakhirMeminjam)
                         select idUser, tanggalMeminjam
