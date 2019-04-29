@@ -36,3 +36,8 @@ Route::post('/tambahpenerbit',"PenerbitController@insertPenerbit")->middleware('
 Route::post('/tambahBuku',"BukuController@tambahBuku")->middleware('auth')->name("tambahbukuform");
 Route::get('/tambahBuku', "BukuController@loadNamaPenerbitdanPengarang")->middleware('auth')->name("tambahBuku");
 Route::get('/anggota', 'ShowUserController@showAllUser')->middleware('auth')->name("seluruhanggota");
+
+Route::get('/showAturanDenda', 'DendaController@showAllAturan')->middleware('auth')->name("showAturanDenda");
+Route::get('/tambahAturanDenda', 'DendaController@tambahAturanDenda')->middleware('auth')->name("tambahAturanDenda");
+Route::get('/updateAturanDenda', 'DendaController@updateAturanDenda')->middleware('auth')->name("updateAturanDenda");
+Route::get('/showDendaKu', 'DendaController@showDendaKu')->middleware('auth')->name("showDendaKu");
