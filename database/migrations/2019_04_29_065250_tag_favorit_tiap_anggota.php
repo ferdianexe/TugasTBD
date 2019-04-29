@@ -32,6 +32,29 @@ class TagFavoritTiapAnggota extends Migration
       WHERE 
         idUser = id_val ;
     END";
+
+    $sql = "CREATE PROCEDURE tambahEksemplar
+    (
+      IN kode_eksemplar_val INT,
+      IN kode_buku_val INT
+    )
+      BEGIN
+        INSERT INTO 
+          kumpulaneksemplar (kodeEksemplar,idBuku,statusPeminjaman)
+        SELECT 
+          *
+        FROM (SELECT kode_eksemplar_val,kode_buku_val,0) as temp
+        WHERE NOT EXISTS (
+          SELECT 
+            kode_buku_val 
+          FROM 
+            kumpulaneksemplar
+          WHERE 
+            kodeEksemplar = kode_eksemplar_val 
+          ) LIMIT 1;
+      END
+    ";
+    DB::connection()->getPdo()->exec($sql);
   }
 
   /**
@@ -41,6 +64,11 @@ class TagFavoritTiapAnggota extends Migration
    */
   public function down()
   {
-      //
+    // DB::unprepared(
+    //   "DROP PROCEDURE TagFavoritPerAnggota"
+    // );
+    DB::unprepared(
+      "DROP PROCEDURE tambahEksemplar"
+    );
   }
 }

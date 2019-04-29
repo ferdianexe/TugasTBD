@@ -10,8 +10,9 @@
   <br>
     
   <div class="container">
-  <!-- onsubmit="proses(event)" -->
-  <form  method="GET" action="" id="tambahEksemplar">
+  <!-- onsubmit="proses(event)" --> 
+  <form  method="POST" action="{{route('tambahEksemplarForm')}}" id="tambahEksemplar">
+    @csrf
   <div class="form-group row">
     <div class="col-sm-2">
     </div>
@@ -120,7 +121,6 @@
     function hapus(){
       document.getElementById('tambahEksemplar').submit();
       document.getElementById('myModal').className = "modal hide";
-      window.location.href="/";
     }
 
     function batalHapus(){
@@ -137,7 +137,6 @@
     function tambah(){
       document.getElementById('tambahEksemplar').submit();
       document.getElementById('myModalTambahEksemplar').className = "modal hide";
-      window.location.href="/";
     }
 
     function batalTambah(){

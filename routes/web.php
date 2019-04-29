@@ -34,3 +34,4 @@ Route::post('/tambahpenerbit',"PenerbitController@insertPenerbit")->middleware('
 Route::post('/tambahBuku',"BukuController@tambahBuku")->middleware('auth')->name("tambahbukuform");
 Route::get('/tambahBuku', "BukuController@loadNamaPenerbitdanPengarang")->middleware('auth')->name("tambahBuku");
 Route::get('/anggota', 'ShowUserController@showAllUser')->middleware('auth')->name("seluruhanggota");
+Route::post('/tambaheksemplar',"EksemplarController@tambahEksemplar")->middleware('auth')->name("tambahEksemplarForm");

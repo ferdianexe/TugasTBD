@@ -19,4 +19,13 @@ class EksemplarController extends Controller
      $kumpulanBuku = DB::select($sql);
      return view ('tambahEksemplar',compact('kumpulanBuku'));
   }
+
+  public function tambahEksemplar(Request $request){
+    $idBuku = $request->input('namaBuku');
+    $kodeEksemplar = $request->input('kodeEksemplar');
+    DB::select("CALL tambahEksemplar('$kodeEksemplar','$idBuku')");
+    $sql = "CALL ShowAllBukuOnlyIdAndJudul()";
+    $kumpulanBuku = DB::select($sql);
+    return view ('tambahEksemplar',compact('kumpulanBuku'));
+  }
 }
