@@ -15,7 +15,7 @@ class CreateStoredProcedureBukuTerfavorite extends Migration
     {
         $sql = "CREATE PROCEDURE ShowBukuTerfavorite()
         BEGIN
-           (SELECT 
+           SELECT 
                 kumpulanbuku.nama, count(temp.idPeminjaman) as jumlahPeminjaman
             FROM
                 kumpulanbuku
@@ -26,7 +26,8 @@ class CreateStoredProcedureBukuTerfavorite extends Migration
                       INNER JOIN kumpulaneksemplar ON kumpulanpeminjaman.kodeEksemplar = kumpulaneksemplar.kodeEksemplar) AS temp
                 ON kumpulanbuku.idBuku = temp.idBuku
             GROUP BY
-                kumpulanbuku.nama)->orderBy( 'jumlahPeminjaman','DESC')->get();
+                kumpulanbuku.nama
+            ORDER BY jumlahPeminjaman DESC;
         END";
 
         DB::connection()->getPdo()->exec($sql);
