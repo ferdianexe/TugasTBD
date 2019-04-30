@@ -14,7 +14,7 @@ class PengarangSeeder extends Seeder
   {
     $faker = Faker::create();
     for($i = 0 ; $i < 100 ;$i++){
-      $namaPengarang = $faker->name;
+      $namaPengarang = addslashes($faker->name);
       DB::select("CALL insertPengarang('$namaPengarang')");
     }
   }

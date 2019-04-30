@@ -16,7 +16,7 @@ class TambahBuku extends Migration
       DB::statement("ALTER TABLE KumpulanKatadanBuku ADD kemunculankata INT NOT NULL DEFAULT 1 AFTER idBuku");
       $sql = "CREATE PROCEDURE TambahBuku
       (
-        IN judul_param varchar(50),
+        IN judul_param varchar(255),
         IN tebal_param INT,
         IN tahun_param INT,
         IN harga_param decimal(15,2),
@@ -28,9 +28,9 @@ class TambahBuku extends Migration
         DECLARE id_param INT;
         DECLARE start_val INT;
         DECLARE end_val INT ;
-        DECLARE judul_val varchar(50);
-        DECLARE cur_kata varchar(50);
-        CREATE TABLE pecahanKata(kata varchar(50),id INT);
+        DECLARE judul_val varchar(255);
+        DECLARE cur_kata varchar(255);
+        CREATE TABLE pecahanKata(kata varchar(255),id INT);
         INSERT INTO KumpulanBuku(nama,tebalBuku,tahunTerbit,hargaBuku,idPenerbit,idPengarang)
         VALUES (judul_param,tebal_param,tahun_param,harga_param,penerbit_param,pengarang_param);
         
@@ -78,7 +78,7 @@ class TambahBuku extends Migration
        BEGIN
         DECLARE totalbuku_val INT ;
         DECLARE is_finished INT;
-        DECLARE cur_kata_val varchar(50) ;
+        DECLARE cur_kata_val varchar(255) ;
         DECLARE hasil_kata_val FLOAT ;
         DECLARE kata_cursor CURSOR FOR SELECT kata,hasilPerhitungan FROM temp;
         DECLARE CONTINUE HANDLER FOR NOT FOUND SET is_finished =  1;

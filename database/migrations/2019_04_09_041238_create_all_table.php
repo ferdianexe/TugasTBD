@@ -34,7 +34,7 @@ class CreateAllTable extends Migration
     DB::statement(
       'CREATE TABLE KumpulanBuku
           (
-            nama varchar(50),
+            nama varchar(255),
             idBuku int NOT NULL AUTO_INCREMENT,
             tebalBuku int,
             tahunTerbit int,

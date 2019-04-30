@@ -14,7 +14,7 @@ class PenerbitSeeder extends Seeder
   {
     $faker = Faker::create();
     for($i = 0 ; $i < 100 ;$i++){
-      $namaPenerbit = $faker->name;
+      $namaPenerbit = addslashes($faker->name);
       DB::select("CALL insertPenerbit('$namaPenerbit')");
     }
   }

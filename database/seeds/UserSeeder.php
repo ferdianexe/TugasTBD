@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
           'statusAktif' => '1',
           'tglLahir' => '2019-04-09',
           'tglGabung' => '2019-04-30',
-          'username' => $faker->userName,
+          'username' => Str::random(10),
           'password' => bcrypt('secret'),
           'alamat' => $faker->streetAddress,
           'hakStatus' => 0,

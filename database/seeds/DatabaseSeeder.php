@@ -11,11 +11,11 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
-    $this->call(
+    $this->call([
         UserSeeder::class,
         PengarangSeeder::class,
         PenerbitSeeder::class,
         SemuaSeeder::class
-    );
+    ]);
   }
 }

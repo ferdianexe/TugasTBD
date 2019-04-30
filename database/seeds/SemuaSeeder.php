@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class SemuaSeeder extends Seeder
 {
   /**
@@ -39,8 +40,8 @@ class SemuaSeeder extends Seeder
       "Komedi",
       "Fiksi" 
     ];
-    for($i = 0 ; $i<500 ; $i++){
-        $judul = addslashes($faker->words($faker->numberBetween(1, 6),TRUE)) ;
+    for($i = 0 ; $i<250 ; $i++){
+        $judul = addslashes($faker->name) ;
         $genre1 = $faker->numberBetween(1, 3);
         $genre2 = $faker->numberBetween(4, 6);
         $genre3 = $faker->numberBetween(7, 11);
@@ -51,6 +52,24 @@ class SemuaSeeder extends Seeder
         $namaPenerbit = $faker->numberBetween(1,99);
         $namaPengarang = $faker->numberBetween(1,99);
         DB::select("CALL TambahBuku ('$judul','$tebalBuku','$tahun','$price','$namaPenerbit','$namaPengarang','$category')");
+    }
+    for($i = 0 ; $i<250 ; $i++){
+        $idBuku = ($i+1);
+        $manyEks = $faker->numberBetween(1, 6);
+        $startNumber = (7*$i);
+        for($j = 0 ; $j< $manyEks;$j++){
+          $curNumber = $startNumber + $j;
+          DB::select("CALL tambahEksemplar('$curNumber','$idBuku')");
+      }
+    }
+
+    for($i = 0 ; $i<1000 ; $i++){
+      $dateNow = Carbon::create($faker->numberBetween(2018,2019),$faker->numberBetween(1,12),$faker->numberBetween(1,28));
+      $formatedDateNow = $dateNow->format('Y-m-d');
+      $datejatuhTempo = $dateNow->addDays(14);
+      $idUser = $faker->numberBetween(2,100);
+      $kodeEks = $faker->numberBetween(1,249) * 7;
+      DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
     }
 
   }
