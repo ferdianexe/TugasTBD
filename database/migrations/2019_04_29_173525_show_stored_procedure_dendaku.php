@@ -14,18 +14,35 @@ class ShowStoredProcedureDendaku extends Migration
     public function up()
     {
         $sql = "CREATE PROCEDURE ShowDendaKu (
-            IN idUser int
+            IN inputIdUser int,
+            IN tglNow date
         )
         BEGIN
+
+            CREATE TABLE eksemplarDanTelat(
+                kodeEksemplar int,
+                telatBalikin int
+            ); 
+
+            insert into eksemplarDanTelat (kodeEksemplar,telatBalikin)
+                select kodeEksemplar, datediff(tglNow,tglJatuhTempo)+1
+                from kumpulanpeminjaman
+                where idUser = inputIdUser;
+
             -- info yang akan diberikan
             -- (namaBuku, tglMinjam, tglJatuhTempo, totalDenda)
             SELECT
-                tanggalMeminjam,tglJatuhTempo
+                kumpulanbuku.nama, tanggalMeminjam, tglJatuhTempo, nominalDenda
             FROM 
                 kumpulanpeminjaman 
-                inner join users on kumpulanpeminjaman.idUser = users.id
+                inner join kumpulaneksemplar on kumpulaneksemplar.kodeEksemplar = kumpulanpeminjaman.kodeEksemplar
+                inner join kumpulanbuku on kumpulanbuku.idBuku = kumpulaneksemplar.idBuku
+                inner join eksemplarDanTelat on eksemplarDanTelat.kodeEksemplar = kumpulanpeminjaman.kodeEksemplar
+                left outer join aturandenda on aturandenda.hariKe = eksemplarDanTelat.telatBalikin
             WHERE
-                users.id = idUser;
+                kumpulanpeminjaman.idUser = inputIdUser and telatBalikin > 0 and hasReturned = 1;
+            
+            DROP TABLE eksemplarDanTelat;
         END";
         DB::connection()->getPdo()->exec($sql);
     }

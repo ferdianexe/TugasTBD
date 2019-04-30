@@ -25,10 +25,14 @@
             <tbody>
             @foreach($result as $res)
                 <tr>
-                <td>Nama Buku</td>
-                <td>{{$res['tanggalMeminjam']}}</td>
-                <td>{{$res['tglJatuhTempo']}}</td>
-                <td>Total Denda</td>
+                    <td>{{$res['nama']}}</td>
+                    <td>{{$res['tanggalMeminjam']}}</td>
+                    <td>{{$res['tglJatuhTempo']}}</td>
+                    @if ($res['nominalDenda'] != NULL)
+                        <td>{{$res['nominalDenda']}}</td>
+                    @else
+                        <td>Too late, call our staff</td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>

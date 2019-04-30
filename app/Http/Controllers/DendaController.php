@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDO;
 use Auth;
+use Carbon\Carbon;
 
 class DendaController extends BaseController
 {
@@ -55,7 +56,9 @@ class DendaController extends BaseController
     protected function showDendaKu(Request $request)
     {
         $idUser = Auth::user()->id;
-        $sql = "CALL ShowDendaKu ('$idUser')";
+        $tglNow = Carbon::now();
+
+        $sql = "CALL ShowDendaKu ('$idUser','$tglNow')";
         $PDO = DB::connection()->getPdo();
         $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         $QUERY = $PDO->prepare($sql);
