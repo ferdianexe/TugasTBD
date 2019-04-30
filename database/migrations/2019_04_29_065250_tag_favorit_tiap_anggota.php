@@ -29,11 +29,11 @@ class TagFavoritTiapAnggota extends Migration
 
       INSERT INTO kategoriFavorit
       SELECT 
-        kumpulanBukudankumpulanKategori.idKategori
+        KumpulanBukudanKumpulanKategori.idKategori
       FROM 
         KumpulanPeminjaman
-      INNER JOIN kumpulanEksemplar on kumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
-      INNER JOIN kumpulanBukudankumpulanKategori on kumpulanBukudankumpulanKategori.idBuku = kumpulanEksemplar.idBuku
+      INNER JOIN KumpulanEksemplar on KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
+      INNER JOIN KumpulanBukudanKumpulanKategori on KumpulanBukudanKumpulanKategori.idBuku = KumpulanEksemplar.idBuku
       WHERE 
         KumpulanPeminjaman.idUser = id_val ;
       SELECT * 
@@ -59,7 +59,7 @@ class TagFavoritTiapAnggota extends Migration
     )
       BEGIN
         INSERT INTO 
-          kumpulaneksemplar (kodeEksemplar,idBuku,statusPeminjaman)
+          Kumpulaneksemplar (kodeEksemplar,idBuku,statusPeminjaman)
         SELECT 
           *
         FROM (SELECT kode_eksemplar_val,kode_buku_val,0) as temp
@@ -67,7 +67,7 @@ class TagFavoritTiapAnggota extends Migration
           SELECT 
             kode_buku_val 
           FROM 
-            kumpulaneksemplar
+            Kumpulaneksemplar
           WHERE 
             kodeEksemplar = kode_eksemplar_val 
           ) LIMIT 1;

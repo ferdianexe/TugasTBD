@@ -16,7 +16,7 @@ class AlterPeminjamanTable extends Migration
     {
       DB::statement(
         "ALTER TABLE 
-          kumpulanpeminjaman 
+          KumpulanPeminjaman 
           ADD tanggalMeminjam TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL AFTER fkDenda"
         );
     }
@@ -30,7 +30,7 @@ class AlterPeminjamanTable extends Migration
     {
       DB::statement(
         'ALTER TABLE 
-          `kumpulanpeminjaman`
+          `KumpulanPeminjaman`
          DROP 
           `tanggalMeminjam`'
       );

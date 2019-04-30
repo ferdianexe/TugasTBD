@@ -21,18 +21,18 @@ class CreateStoredProcedureShowPeminjaman extends Migration
             SELECT 
             users.id as idUser,users.name AS namaUser,tglJatuhTempo,kumpulanBuku.nama,kumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
             FROM 
-                kumpulanPeminjaman
-            INNER JOIN kumpulanEksemplar ON kumpulanEksemplar.kodeEksemplar = kumpulanPeminjaman.kodeEksemplar
+                KumpulanPeminjaman
+            INNER JOIN kumpulanEksemplar ON kumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
             INNER JOIN kumpulanBuku ON KumpulanBuku.idBuku = kumpulanEksemplar.idBuku
-            INNER JOIN users ON users.id = kumpulanPeminjaman.idUser;
+            INNER JOIN users ON users.id = KumpulanPeminjaman.idUser;
             ELSE
             SELECT 
             users.name AS namaUser,tglJatuhTempo,kumpulanBuku.nama,kumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
             FROM 
-                kumpulanPeminjaman
-            INNER JOIN kumpulanEksemplar ON kumpulanEksemplar.kodeEksemplar = kumpulanPeminjaman.kodeEksemplar
+                KumpulanPeminjaman
+            INNER JOIN kumpulanEksemplar ON kumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
             INNER JOIN kumpulanBuku ON KumpulanBuku.idBuku = kumpulanEksemplar.idBuku
-            INNER JOIN users ON users.id = kumpulanPeminjaman.idUser
+            INNER JOIN users ON users.id = KumpulanPeminjaman.idUser
             WHERE users.id = all_param;
             END IF;
         END";

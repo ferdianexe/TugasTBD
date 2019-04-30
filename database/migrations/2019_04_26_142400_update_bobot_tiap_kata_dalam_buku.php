@@ -14,13 +14,13 @@ class UpdateBobotTiapKataDalamBuku extends Migration
      */
     public function up()
     {
-      DB::statement("ALTER TABLE kumpulankatadanbuku ADD BobotTiapKataDalamBuku FLOAT NOT NULL DEFAULT 0 AFTER idBuku");
+      DB::statement("ALTER TABLE KumpulanKatadanBuku ADD BobotTiapKataDalamBuku FLOAT NOT NULL DEFAULT 0 AFTER idBuku");
 
       $sql = "CREATE PROCEDURE updateBobot()
         BEGIN
-            UPDATE kumpulankatadanbuku
-            INNER JOIN kumpulankata ON kumpulankata.kata = kumpulankatadanbuku.kata
-            SET kumpulankatadanbuku.BobotTiapKataDalamBuku = (1+LOG(2,kumpulankatadanbuku.kemunculankata))*kumpulankata.nilaiKata;
+            UPDATE KumpulanKatadanBuku
+            INNER JOIN kumpulankata ON kumpulankata.kata = KumpulanKatadanBuku.kata
+            SET KumpulanKatadanBuku.BobotTiapKataDalamBuku = (1+LOG(2,KumpulanKatadanBuku.kemunculankata))*kumpulankata.nilaiKata;
         END";
        DB::connection()->getPdo()->exec($sql);
 
@@ -48,14 +48,14 @@ class UpdateBobotTiapKataDalamBuku extends Migration
               SELECT SUBSTRING(kategori_val,(end_val+1),300) INTO kategori_val ; -- update string kategorinya
             END IF;
             SELECT idKategori INTO kategoriid_val 
-            FROM kumpulankategori
+            FROM KumpulanKategori
             WHERE kategori = curcat_val
             LIMIT 1; -- cari idkategori berdasarkan kategorinya ambil papling atas saja
             SELECT count(idKategori) INTO status_val
-            FROM kumpulankategori
+            FROM KumpulanKategori
             WHERE kategori = curcat_val;
             IF status_val != 0 THEN -- tambah kalo dia emang ada (buat existnya manual)
-              INSERT INTO kumpulanbukudankumpulankategori(idBuku,idKategori)
+              INSERT INTO KumpulanBukudanKumpulanKategori(idBuku,idKategori)
               SELECT id_param,kategoriid_val;
             END IF ;
             -- masukan data tersebut jika emang exist
@@ -73,7 +73,7 @@ class UpdateBobotTiapKataDalamBuku extends Migration
      */
     public function down()
     {
-      DB::statement("ALTER TABLE kumpulankatadanbuku DROP BobotTiapKataDalamBuku");
+      DB::statement("ALTER TABLE KumpulanKatadanBuku DROP BobotTiapKataDalamBuku");
       DB::unprepared("DROP PROCEDURE updateBobot");
       DB::unprepared("DROP PROCEDURE masukanKategoriKeBuku");
     }

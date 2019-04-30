@@ -17,7 +17,7 @@ class CreateShowUserDetailProcedure extends Migration
       $sql = "CREATE PROCEDURE detailUser (IN id_param int)
       BEGIN
           SELECT name,tglLahir,tglGabung, alamat,email,username
-          FROM Users
+          FROM users
           WHERE id = id_param
           LIMIT 1 ;
       END";

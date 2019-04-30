@@ -16,17 +16,17 @@ class CreateStoredProcedureBukuTerfavorite extends Migration
         $sql = "CREATE PROCEDURE ShowBukuTerfavorite()
         BEGIN
            SELECT 
-                kumpulanbuku.nama, count(temp.idPeminjaman) as jumlahPeminjaman
+                KumpulanBuku.nama, count(temp.idPeminjaman) as jumlahPeminjaman
             FROM
-                kumpulanbuku
+                KumpulanBuku
                 INNER JOIN 
-                ( SELECT kumpulanpeminjaman.idPeminjaman, kumpulaneksemplar.idBuku
+                ( SELECT KumpulanPeminjaman.idPeminjaman, KumpulanEksemplar.idBuku
                   FROM
-                      kumpulanpeminjaman 
-                      INNER JOIN kumpulaneksemplar ON kumpulanpeminjaman.kodeEksemplar = kumpulaneksemplar.kodeEksemplar) AS temp
-                ON kumpulanbuku.idBuku = temp.idBuku
+                      KumpulanPeminjaman 
+                      INNER JOIN KumpulanEksemplar ON KumpulanPeminjaman.kodeEksemplar = KumpulanEksemplar.kodeEksemplar) AS temp
+                ON KumpulanBuku.idBuku = temp.idBuku
             GROUP BY
-                kumpulanbuku.nama
+                KumpulanBuku.nama
             ORDER BY jumlahPeminjaman DESC;
         END";
 

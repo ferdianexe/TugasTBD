@@ -84,13 +84,13 @@ class CreateStoredprocedureSearchWithVSM extends Migration
         FROM 
         (
           SELECT 
-            KumpulanKataDanBuku.kata,
-            KumpulanKataDanBuku.idBuku,
+            KumpulanKatadanBuku.kata,
+            KumpulanKatadanBuku.idBuku,
             bobottiapkatadalambuku*bobottiapkatadalambuku as bobot
           FROM 
-            KumpulanKataDanBuku
+            KumpulanKatadanBuku
           INNER JOIN 
-            bukuTerpilih ON bukuTerpilih.idBuku = KumpulanKataDanBuku.idBuku
+            bukuTerpilih ON bukuTerpilih.idBuku = KumpulanKatadanBuku.idBuku
         ) as tableBobot
         GROUP BY 
           idBuku;
@@ -109,14 +109,14 @@ class CreateStoredprocedureSearchWithVSM extends Migration
         FROM
           (
             SELECT 
-              KumpulanKataDanBuku.idBuku,
-              KumpulanKataDanBuku.bobottiapkatadalambuku*vectorquery.bobot as totalBobot
+              KumpulanKatadanBuku.idBuku,
+              KumpulanKatadanBuku.bobottiapkatadalambuku*vectorquery.bobot as totalBobot
             FROM 
               bukuTerpilih
             INNER JOIN 
-              KumpulanKataDanBuku ON KumpulanKataDanBuku.idBuku = bukuterpilih.idBuku
+              KumpulanKatadanBuku ON KumpulanKatadanBuku.idBuku = bukuterpilih.idBuku
             INNER JOIN 
-              vectorquery ON kumpulankatadanbuku.kata = vectorquery.kataQuery
+              vectorquery ON KumpulanKatadanBuku.kata = vectorquery.kataQuery
           ) as thasil
         GROUP BY 
           thasil.idBuku;
