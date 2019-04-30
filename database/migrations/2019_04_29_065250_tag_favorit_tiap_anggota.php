@@ -27,7 +27,6 @@ class TagFavoritTiapAnggota extends Migration
       WHERE 
         idUser = id_val ;
 
-
       INSERT INTO kategoriFavorit
       SELECT 
         kumpulanBukudankumpulanKategori.idKategori

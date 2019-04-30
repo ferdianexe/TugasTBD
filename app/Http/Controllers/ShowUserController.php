@@ -23,4 +23,10 @@ class ShowUserController extends BaseController
 
         return View('tampilanAnggota', compact('result'));
     }
+
+    public function showUserDetail($id){
+        $user = DB::select("CALL detailUser('$id')");
+        $tagFavorit = DB::select("CALL TagFavoritPerAnggota('$id')");
+        return View('UserDetail', compact('user','tagFavorit'));
+    }
 }

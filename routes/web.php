@@ -18,7 +18,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/TampilanDataPeminjaman', 'DataPeminjamanController@index')->middleware('auth')->name("pinjamanBuku");
-
+Route::get('/user/{id}', 'ShowUserController@showUserDetail')->name('detailUser');
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
 Route::get('/tambaheksemplar','EksemplarController@index')->middleware('auth')->name("tambahEksemplar");
 Route::get('/pemesanan', function(){
