@@ -19,19 +19,19 @@ class CreateStoredProcedureShowPeminjaman extends Migration
         BEGIN
             IF all_param = 0 THEN
             SELECT 
-            users.id as idUser,users.name AS namaUser,tglJatuhTempo,kumpulanBuku.nama,kumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
+            users.id as idUser,users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
             FROM 
                 KumpulanPeminjaman
-            INNER JOIN kumpulanEksemplar ON kumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
-            INNER JOIN kumpulanBuku ON KumpulanBuku.idBuku = kumpulanEksemplar.idBuku
+            INNER JOIN KumpulanEksemplar ON KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
+            INNER JOIN KumpulanBuku ON KumpulanBuku.idBuku = KumpulanEksemplar.idBuku
             INNER JOIN users ON users.id = KumpulanPeminjaman.idUser;
             ELSE
             SELECT 
-            users.name AS namaUser,tglJatuhTempo,kumpulanBuku.nama,kumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
+            users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
             FROM 
                 KumpulanPeminjaman
-            INNER JOIN kumpulanEksemplar ON kumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
-            INNER JOIN kumpulanBuku ON KumpulanBuku.idBuku = kumpulanEksemplar.idBuku
+            INNER JOIN KumpulanEksemplar ON KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
+            INNER JOIN KumpulanBuku ON KumpulanBuku.idBuku = KumpulanEksemplar.idBuku
             INNER JOIN users ON users.id = KumpulanPeminjaman.idUser
             WHERE users.id = all_param;
             END IF;
