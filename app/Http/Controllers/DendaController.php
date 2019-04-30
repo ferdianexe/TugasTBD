@@ -56,9 +56,9 @@ class DendaController extends BaseController
     protected function showDendaKu(Request $request)
     {
         $idUser = Auth::user()->id;
-        $tglNow = Carbon::now();
+        // $tglNow = Carbon::now();
 
-        $sql = "CALL ShowDendaKu ('$idUser','$tglNow')";
+        $sql = "CALL ShowDendaKu ('$idUser')";
         $PDO = DB::connection()->getPdo();
         $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
         $QUERY = $PDO->prepare($sql);
