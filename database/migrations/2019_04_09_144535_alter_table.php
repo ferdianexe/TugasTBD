@@ -15,8 +15,8 @@ class AlterTable extends Migration
     public function up()
     {
           DB::statement(
-            'ALTER TABLE kumpulankatadanbuku 
-                ADD CONSTRAINT fkBukuKumpulanBuku FOREIGN KEY (idBuku) REFERENCES kumpulanbuku(idBuku),
+            'ALTER TABLE KumpulanKatadanBuku 
+                ADD CONSTRAINT fkBukuKumpulanBuku FOREIGN KEY (idBuku) REFERENCES KumpulanBuku(idBuku),
                 ADD CONSTRAINT fkKataBukuKumpulanBuku FOREIGN KEY (kata) REFERENCES KumpulanKata(kata)
             '
           );

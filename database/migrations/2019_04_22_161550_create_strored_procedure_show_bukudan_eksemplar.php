@@ -16,26 +16,26 @@ class CreateStroredProcedureShowBukudanEksemplar extends Migration
     {
         $sql = "CREATE PROCEDURE ShowBukudanEksemplar (IN id_param int)
         BEGIN
-            SELECT kumpulaneksemplar.kodeEksemplar,statusPeminjaman
-            FROM kumpulaneksemplar 
+            SELECT KumpulanEksemplar.kodeEksemplar,statusPeminjaman
+            FROM KumpulanEksemplar 
             WHERE idBuku = id_param ;
         END";
         DB::connection()->getPdo()->exec($sql);
 
         $sql = "CREATE PROCEDURE ShowBukuById (IN id_param int)
         BEGIN
-            SELECT kumpulanbuku.nama,kumpulanbuku.idBuku,kumpulanbuku.tebalBuku,kumpulanbuku.tahunTerbit,kumpulanbuku.hargaBuku,kumpulanpenerbit.namaPenerbit,kumpulanpengarang.namaPengarang
-            FROM kumpulanbuku
-            INNER JOIN kumpulanpenerbit ON kumpulanbuku.idPenerbit = kumpulanpenerbit.idPenerbit
-            INNER JOIN kumpulanpengarang ON kumpulanbuku.idPengarang = kumpulanpengarang.idPengarang
-            WHERE kumpulanbuku.idBuku = id_param ;
+            SELECT KumpulanBuku.nama,KumpulanBuku.idBuku,KumpulanBuku.tebalBuku,KumpulanBuku.tahunTerbit,KumpulanBuku.hargaBuku,kumpulanpenerbit.namaPenerbit,kumpulanpengarang.namaPengarang
+            FROM KumpulanBuku
+            INNER JOIN kumpulanpenerbit ON KumpulanBuku.idPenerbit = kumpulanpenerbit.idPenerbit
+            INNER JOIN kumpulanpengarang ON KumpulanBuku.idPengarang = kumpulanpengarang.idPengarang
+            WHERE KumpulanBuku.idBuku = id_param ;
         END";
         DB::connection()->getPdo()->exec($sql);
 
         $sql = "CREATE PROCEDURE ShowAllBukuOnlyIdAndJudul ()
         BEGIN
             SELECT nama,idBuku
-            FROM kumpulanbuku;
+            FROM KumpulanBuku;
         END";
         DB::connection()->getPdo()->exec($sql);
     }
@@ -54,7 +54,7 @@ class CreateStroredProcedureShowBukudanEksemplar extends Migration
             "DROP PROCEDURE ShowBukuById"
         );
         DB::unprepared(
-            "ShowAllBukuOnlyIdAndJudul"
+            "DROP PROCEDURE ShowAllBukuOnlyIdAndJudul"
         );
     }
 }

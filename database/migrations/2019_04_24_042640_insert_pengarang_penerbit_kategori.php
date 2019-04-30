@@ -18,7 +18,7 @@ class InsertPengarangPenerbitKategori extends Migration
             IN nama_pengarang varchar(50)
         )
         BEGIN
-            INSERT INTO kumpulanpengarang (namaPengarang) VALUES (nama_pengarang);
+            INSERT INTO KumpulanPengarang (namaPengarang) VALUES (nama_pengarang);
         END";
         DB::connection()->getPdo()->exec($sql);
 
@@ -27,7 +27,7 @@ class InsertPengarangPenerbitKategori extends Migration
             IN nama_penerbit varchar(50)
         )
         BEGIN
-            INSERT INTO kumpulanpenerbit (namaPenerbit) VALUES (nama_penerbit);
+            INSERT INTO KumpulanPenerbit (namaPenerbit) VALUES (nama_penerbit);
         END";
         DB::connection()->getPdo()->exec($sql);
 
@@ -36,7 +36,7 @@ class InsertPengarangPenerbitKategori extends Migration
             IN nama_kategori varchar(50)
         )
         BEGIN
-            INSERT INTO kumpulankategori (Kategori) VALUES (LOWER(nama_kategori));
+            INSERT INTO KumpulanKategori (Kategori) VALUES (LOWER(nama_kategori));
         END";
         DB::connection()->getPdo()->exec($sql);
     }
