@@ -18,29 +18,36 @@ class ShowStoredProcedureDendaku extends Migration
             IN tglNow date
         )
         BEGIN
-
+            -- DECLARE totalDenda decimal(15,2);
             CREATE TABLE eksemplarDanTelat(
+                namaBuku varchar(50),
                 kodeEksemplar int,
+                tanggalMeminjam date,
+                tglJatuhTempo date,
+                hargaBuku decimal(15,2),
+                hasReturned int,
                 telatBalikin int
             ); 
 
-            insert into eksemplarDanTelat (kodeEksemplar,telatBalikin)
-                select kodeEksemplar, datediff(tglNow,tglJatuhTempo)+1
-                from kumpulanpeminjaman
-                where idUser = inputIdUser;
+            insert into eksemplarDanTelat (namaBuku,kodeEksemplar,tanggalMeminjam,tglJatuhTempo,hargaBuku,hasReturned,telatBalikin)
+                select 
+                    kumpulanbuku.nama, kumpulanpeminjaman.kodeEksemplar, kumpulanpeminjaman.tanggalMeminjam, kumpulanpeminjaman.tglJatuhTempo, 
+                    kumpulanbuku.hargaBuku, kumpulanpeminjaman.hasReturned, datediff(tglNow,kumpulanpeminjaman.tglJatuhTempo)+1
+                from 
+                    kumpulanpeminjaman
+                    inner join kumpulaneksemplar on kumpulaneksemplar.kodeEksemplar = kumpulanpeminjaman.kodeEksemplar
+                    inner join kumpulanbuku on kumpulanbuku.idBuku = kumpulaneksemplar.idBuku
+                where kumpulanpeminjaman.idUser = inputIdUser;
 
-            -- info yang akan diberikan
-            -- (namaBuku, tglMinjam, tglJatuhTempo, totalDenda)
-            SELECT
-                kumpulanbuku.nama, tanggalMeminjam, tglJatuhTempo, nominalDenda
-            FROM 
-                kumpulanpeminjaman 
-                inner join kumpulaneksemplar on kumpulaneksemplar.kodeEksemplar = kumpulanpeminjaman.kodeEksemplar
-                inner join kumpulanbuku on kumpulanbuku.idBuku = kumpulaneksemplar.idBuku
-                inner join eksemplarDanTelat on eksemplarDanTelat.kodeEksemplar = kumpulanpeminjaman.kodeEksemplar
+            -- OUTPUT
+            SELECT 
+                namaBuku, tanggalMeminjam, tglJatuhTempo, 
+                IF(telatBalikin>14, hargaBuku , nominalDenda ) as totalDenda
+            FROM
+                eksemplarDanTelat 
                 left outer join aturandenda on aturandenda.hariKe = eksemplarDanTelat.telatBalikin
             WHERE
-                kumpulanpeminjaman.idUser = inputIdUser and telatBalikin > 0 and hasReturned = 1;
+                hasReturned = 1;
             
             DROP TABLE eksemplarDanTelat;
         END";
