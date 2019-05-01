@@ -55,6 +55,7 @@
           </tr>
           </thead>
           <tbody>
+          <?php $tempSumDenda = 0; ?>
           @foreach ($kumpulanPeminjaman as $index=>$peminjaman)
           <tr>
             <td>{{$index+1}} </td>
@@ -67,7 +68,18 @@
             @if($isAdmin)
             <td>{{$peminjaman['namaUser']}}</td>
             @endif
+            <td>
+              @if ($peminjaman['totalDenda'] == NULL and !$isAdmin)
+                <form action="{{ route('kembalikanBuku') }}">
+                  <input type="number" name="kodeEksemplar" value="{{$peminjaman['kodeEksemplar']}}" hidden>
+                  <input type="timestamp" name="tglMeminjam" value="{{$peminjaman['tanggalMeminjam']}}" hidden>
+                  <input type="date" name="tglJatuhTempo" value="{{$peminjaman['tglJatuhTempo']}}" hidden>
+                  <input type="submit" value="Kembalikan">
+                </form>
+              @endif
+            </td>
           </tr>
+          <?php $tempSumDenda = $tempSumDenda + $peminjaman['totalDenda']; ?>
           @endforeach
           <!-- <tr>
               
@@ -86,7 +98,7 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-2"></div>
       <div class="col-sm-2"><a>Total Denda : </a></div>
-      <div class="col-sm-1"><a id="totalDenda" name="denda">0</a></div>
+      <div class="col-sm-1"><a id="totalDenda" name="denda">{{$tempSumDenda}}</a></div>
       <div class="col-sm-1"></div>
   </div>
 

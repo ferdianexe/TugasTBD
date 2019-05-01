@@ -41,3 +41,4 @@ Route::get('/showAturanDenda', 'DendaController@showAllAturan')->middleware('aut
 Route::get('/tambahAturanDenda', 'DendaController@tambahAturanDenda')->middleware('auth')->name("tambahAturanDenda");
 Route::get('/updateAturanDenda', 'DendaController@updateAturanDenda')->middleware('auth')->name("updateAturanDenda");
 Route::get('/showDendaKu', 'DendaController@showDendaKu')->middleware('auth')->name("showDendaKu");
+Route::get('/kembalikanBuku', 'DendaController@kembalikanBuku')->middleware('auth')->name("kembalikanBuku");

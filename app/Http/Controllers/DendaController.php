@@ -67,4 +67,21 @@ class DendaController extends BaseController
 
         return View('showDendaKu', compact('result'));
     }
+
+    protected function kembalikanBuku(Request $request)
+    {
+        $idUser = Auth::user()->id;
+        $tglNow = Carbon::now();
+        $kodeEksemplar = $request->get('kodeEksemplar');
+        $tglPeminjaman = $request->get('tglMeminjam'); 
+        $tglJatuhTempo = $request->get('tglJatuhTempo');
+
+        $sql = "CALL kembalikanBuku ('$idUser','$kodeEksemplar','$tglPeminjaman','$tglJatuhTempo','$tglNow')";
+        $PDO = DB::connection()->getPdo();
+        $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+        $QUERY = $PDO->prepare($sql);
+        $QUERY->execute();
+
+        return redirect()->route('pinjamanBuku');
+    }
 }
