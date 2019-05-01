@@ -38,6 +38,16 @@ class CreateStroredProcedureShowBukudanEksemplar extends Migration
             FROM KumpulanBuku;
         END";
         DB::connection()->getPdo()->exec($sql);
+
+        $sql = "CREATE PROCEDURE ShowAllBukuOnlyIdAndJudulWithLimit (
+            IN limit_param INT
+        )
+        BEGIN
+            SELECT nama,idBuku
+            FROM KumpulanBuku
+            LIMIT limit_param;
+        END";
+        DB::connection()->getPdo()->exec($sql);
     }
 
     /**
@@ -48,13 +58,16 @@ class CreateStroredProcedureShowBukudanEksemplar extends Migration
     public function down()
     {
         DB::unprepared(
-            "DROP PROCEDURE ShowBukudanEksemplar"
-          );
-        DB::unprepared(
-            "DROP PROCEDURE ShowBukuById"
+            "DROP PROCEDURE IF EXISTS ShowBukudanEksemplar"
         );
         DB::unprepared(
-            "DROP PROCEDURE ShowAllBukuOnlyIdAndJudul"
+            "DROP PROCEDURE IF EXISTS ShowBukuById"
+        );
+        DB::unprepared(
+            "DROP PROCEDURE IF EXISTS ShowAllBukuOnlyIdAndJudul"
+        );
+        DB::unprepared(
+            "DROP PROCEDURE IF EXISTS ShowAllBukuOnlyIdAndJudulWithLimit"
         );
     }
 }
