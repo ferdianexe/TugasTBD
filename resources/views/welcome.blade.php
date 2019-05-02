@@ -55,17 +55,20 @@
 
   <div class="row">
       @if($isAdmin)
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <a type="button" href= "{{ route('searchBook') }}" class="btn btn-primary active">Tampilkan Lebih Banyak</a>
         </div>
         <div class="col-sm-2">
           <a type="button" href="{{ route('tambahBuku') }}" class="btn btn-primary active">Tambah Buku</a>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <a type="button" href="{{ route('tambahEksemplar') }}" class="btn btn-primary active">Tambah Eksemplar</a>
         </div>
         <div class="col-sm-2">
           <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Laporan</a>
+        </div>
+        <div class="col-sm-2">
+          <a type="button" href="{{ route('showAturanDenda') }}"class="btn btn-primary active">Aturan Denda</a>
         </div>
       @else
         <div class="col-sm-3"></div>
@@ -75,7 +78,9 @@
         <div class="col-sm-3">
           <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>
         </div>
-        <div class="col-sm-3"></div>
+        <div class="col-sm-3">
+          <a type="button" href="{{ route('showDendaKu') }}"class="btn btn-primary active">Dendaku</a>
+        </div>
       @endif
     </div>
 
