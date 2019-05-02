@@ -38,6 +38,7 @@
                         Pinjamanku
                     @endif
                 @endif
+                {{ Request::is('user/*') ? 'Profile User' : '' }}
             </h4>
             </div>
             <div class="top-right links">

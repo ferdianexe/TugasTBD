@@ -41,3 +41,5 @@ Route::get('/tambahAturanDenda', 'DendaController@tambahAturanDenda')->middlewar
 Route::get('/updateAturanDenda', 'DendaController@updateAturanDenda')->middleware('auth')->name("updateAturanDenda");
 Route::get('/showDendaKu', 'DendaController@showDendaKu')->middleware('auth')->name("showDendaKu");
 Route::get('/kembalikanBuku', 'DendaController@kembalikanBuku')->middleware('auth')->name("kembalikanBuku");
+Route::get('/TampilanDataPeminjaman/tagfavorit', 'KategoriController@showKategoriFavorit')->middleware('auth')->name("tagTerfavorit");
+Route::get('/TampilanDataPeminjaman/bukufavorit', 'BukuController@bukuTerfavorit')->middleware('auth')->name("bukuTerfavorit");

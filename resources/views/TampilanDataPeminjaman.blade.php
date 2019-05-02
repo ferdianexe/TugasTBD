@@ -14,16 +14,16 @@
       @if($isAdmin)
         <div class="col-sm-1"></div>
         <div class="col-sm-2">
-          <a type="button" href="#" class="btn btn-primary active">Semua</a>
+          <a type="button" href="{{route('pinjamanBuku')}}" class="btn btn-primary active">Semua</a>
         </div>
         <div class="col-sm-2">
-          <a type="button" href="#" class="btn btn-primary active">On Rent</a>
+          <a type="button" href="{{route('tagTerfavorit')}}" class="btn btn-primary active">Tag Favorit</a>
         </div>
         <div class="col-sm-2">
         <a type="button" href="{{ route('pemesananBuku') }}" class="btn btn-primary active">Request</a>
         </div>
         <div class="col-sm-3">
-          <a type="button" href="#"class="btn btn-primary active">Overdue</a>
+        <a type="button" href="{{route('bukuTerfavorit')}}"class="btn btn-primary active">Buku Favorit</a>
         </div>
         <div class="col-sm-2">
           <a type="button" href="{{route('seluruhanggota')}}"class="btn btn-primary active">Daftar Anggota</a>
@@ -61,7 +61,13 @@
             <td>{{$index+1}} </td>
             <td>{{$peminjaman['nama']}}</td>
             <td>{{$peminjaman['kodeEksemplar']}}</td>
-            <td>Sedang dipinjam</td>
+            <td>
+              @if($peminjaman['hasReturned'])
+                Dikembalikan
+              @else
+                Sedang dipinjam
+              @endif
+            </td>
             <td>{{$peminjaman['tanggalMeminjam']}}</td>
             <td>{{$peminjaman['tglJatuhTempo']}}</td>
             <td>{{$peminjaman['totalDenda']}} </td>

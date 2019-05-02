@@ -93,6 +93,45 @@
     </div>
   </div>
   <br>
+  <h3>List Peminjaman</h3>
+  <div class="container">
+        <table class="table table-condensed">
+          <thead>
+          <tr>
+            <th>    </th>
+            <th>Judul Buku</th>
+            <th>Exemplar</th>
+            <th>Status</th>
+            <th>Tanggal Peminjaman</th>
+            <th>Tanggal Pengembalian</th>
+            <th>Denda</th>
+          </tr>
+          </thead>
+          <tbody>
+         
+          @foreach ($kumpulanPeminjaman as $index=>$peminjaman)
+          <tr>
+            <td>{{$index+1}} </td>
+            <td>{{$peminjaman->nama}}</td>
+            <td>{{$peminjaman->kodeEksemplar}}</td>
+            <td>
+              @if($peminjaman->hasReturned)
+                Dikembalikan
+              @else
+                Belum Dikembalikan
+              @endif
+            </td>
+            <td>{{$peminjaman->tanggalMeminjam}}</td>
+            <td>{{$peminjaman->tglJatuhTempo}}</td>
+            <td>{{$peminjaman->totalDenda}} </td>
+            <td>
+            </td>
+          </tr>
+          @endforeach
+          </tbody>
+        </table>
+        <hr>
+      </div>
   <div class="form-group row">
     <div class="col-sm-5">
     </div>
@@ -102,6 +141,5 @@
   </div>
   <br><br>
   </div>
-  
 @endsection
 
