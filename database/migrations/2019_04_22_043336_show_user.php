@@ -37,15 +37,12 @@ class ShowUser extends Migration
 
                 CREATE TABLE userDanPinjamanTerakhir(
                     idUser int,
-                    terakhirMeminjam timestamp
+                    terakhirMeminjam timestamp,
+                    hasReturned int
                 );
                 CREATE TABLE userDanPemesananTerakhir(
                     idUser int,
                     terakhirMemesan timestamp
-                );
-                CREATE TABLE userDanStatusSudahDikembalikan(
-                    idUser int,
-                    hasReturned int
                 );
                 CREATE TABLE tempHasil(
                     idUser int,
@@ -65,8 +62,8 @@ class ShowUser extends Migration
                         LEAVE get_all;
                     END IF;
 
-                    insert into userDanPinjamanTerakhir (idUser,terakhirMeminjam)
-                        select idUser, tanggalMeminjam
+                    insert into userDanPinjamanTerakhir (idUser,terakhirMeminjam,hasReturned)
+                        select idUser, tanggalMeminjam, hasReturned
                         from kumpulanpeminjaman
                         where idUser = tempIdUser
                         order by tanggalMeminjam desc
@@ -79,13 +76,6 @@ class ShowUser extends Migration
                         order by idPemesanan desc
                         LIMIT 1;
 
-                    insert into userDanStatusSudahDikembalikan (idUser,hasReturned)
-                        select idUser, hasReturned
-                        from kumpulanpeminjaman
-                        where idUser = tempIdUser
-                        order by tglJatuhTempo desc
-                        LIMIT 1;
-
                 END LOOP get_all;
                 -- END FETCHING
 
@@ -94,7 +84,6 @@ class ShowUser extends Migration
             insert into tempHasil (idUser,terakhirMeminjam,terakhirMemesan,hasReturned)
                     select userDanPinjamanTerakhir.idUser,terakhirMeminjam,terakhirMemesan, hasReturned
                     from userDanPinjamanTerakhir
-                        inner join userDanStatusSudahDikembalikan on userDanStatusSudahDikembalikan.idUser = userDanPinjamanTerakhir.idUser
                         left outer join userDanPemesananTerakhir on userDanPemesananTerakhir.idUser = userDanPinjamanTerakhir.idUser;
 
             SELECT 
@@ -104,7 +93,6 @@ class ShowUser extends Migration
 
             DROP table userDanPinjamanTerakhir;
             DROP table userDanPemesananTerakhir;
-            DROP table userDanStatusSudahDikembalikan;
             DROP table tempHasil;
             -- End Cursor
             CLOSE masukanUserDanTglTerakhir;
