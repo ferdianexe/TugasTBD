@@ -47,7 +47,7 @@
                 <td>{{$res['terakhirMemesan']}}</td>
               @endif
 
-              @if($res['hasReturned']==NULL or $res['hasReturned']==1)
+              @if($res['hasReturned']==NULL or $res['hasReturned']== 1)
                 <td>Tidak</td>
               @else
                 <td>Ya</td>
