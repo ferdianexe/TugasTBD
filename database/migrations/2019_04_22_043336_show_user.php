@@ -14,11 +14,11 @@ class ShowUser extends Migration
     public function up()
     {
         DB::statement(
-            'ALTER TABLE kumpulanpeminjaman 
+            'ALTER TABLE KumpulanPeminjaman 
                 ADD hasReturned INT NOT NULL DEFAULT 0 AFTER fkDenda'
         );
         DB::statement(
-            'ALTER TABLE kumpulanpemesanan 
+            'ALTER TABLE KumpulanPemesanan 
                 ADD tanggalMemesan DATE NULL DEFAULT NULL AFTER idUser'
         );
 

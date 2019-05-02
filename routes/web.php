@@ -18,11 +18,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/register', 'Auth\RegisterController@createUser')->name('registerUser');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/TampilanDataPeminjaman', 'DataPeminjamanController@index')->middleware('auth')->name("pinjamanBuku");
-
+Route::get('/user/{id}', 'ShowUserController@showUserDetail')->name('detailUser');
 Route::get('/hasilCariBuku', 'SearchBookController@testParsingData')->name('searchBook');
-Route::get('/tambaheksemplar', function(){
-    return view('tambahEksemplar');
-})->middleware('auth')->name("tambahEksemplar");
+Route::get('/tambaheksemplar','EksemplarController@index')->middleware('auth')->name("tambahEksemplar");
 Route::get('/pemesanan', function(){
     return view('TampilanDataPemesanan');
 })->middleware('auth')->name("pemesananBuku");
@@ -37,6 +35,7 @@ Route::post('/tambahBuku',"BukuController@tambahBuku")->middleware('auth')->name
 Route::get('/tambahBuku', "BukuController@loadNamaPenerbitdanPengarang")->middleware('auth')->name("tambahBuku");
 Route::get('/anggota', 'ShowUserController@showAllUser')->middleware('auth')->name("seluruhanggota");
 
+Route::post('/tambaheksemplar',"EksemplarController@tambahEksemplar")->middleware('auth')->name("tambahEksemplarForm");
 Route::get('/showAturanDenda', 'DendaController@showAllAturan')->middleware('auth')->name("showAturanDenda");
 Route::get('/tambahAturanDenda', 'DendaController@tambahAturanDenda')->middleware('auth')->name("tambahAturanDenda");
 Route::get('/updateAturanDenda', 'DendaController@updateAturanDenda')->middleware('auth')->name("updateAturanDenda");

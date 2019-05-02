@@ -29,7 +29,7 @@ class HomeController extends Controller
         if(Auth::user()->hakStatus==1){
           $isAdmin = TRUE;  
         }
-        $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudul()");
+        $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudulWithLimit('12')");
         return view('welcome',compact('isAdmin','kumpulanBuku'));
     }
 }

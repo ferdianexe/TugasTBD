@@ -10,8 +10,9 @@
   <br>
     
   <div class="container">
-  <!-- onsubmit="proses(event)" -->
-  <form  method="GET" action="" id="tambahEksemplar">
+  <!-- onsubmit="proses(event)" --> 
+  <form  method="POST" action="{{route('tambahEksemplarForm')}}" id="tambahEksemplar">
+    @csrf
   <div class="form-group row">
     <div class="col-sm-2">
     </div>
@@ -27,17 +28,12 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Judul Buku</label>
     <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="Masukkan Judul Buku">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Kategori</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="Masukkan Kategori Buku">
+      <select id="namaBuku" type="text" data-live-search="true" class="selectpicker form-control{{ $errors->has('namaBuku') ? ' is-invalid' : '' }}" name="namaBuku" required>
+        <option value="" selected disabled>Judul Buku</option>
+        @foreach ($kumpulanBuku as $buku)
+              <option value='{{$buku->idBuku}}' data-tokens='{{$buku->nama}}'>{{$buku->nama}}</option>
+        @endforeach
+      </select>
     </div>
     <div class="col-sm-2">
     </div>
@@ -47,47 +43,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nomor Eksemplar</label>
     <div class="col-sm-6">
-      <input type="number" class="form-control" min="1">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Harga Buku</label>
-    <div class="col-sm-6">
-      <input type="number" class="form-control" min="1">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Tebal Buku</label>
-    <div class="col-sm-6">
-      <input type="number" class="form-control" min="1">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Tahun Terbit</label>
-    <div class="col-sm-6">
-      <input type="number" class="form-control" min="1" placeholder="Masukkan Tahun Terbit Buku">
-    </div>
-    <div class="col-sm-2">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-sm-2">
-    </div>
-    <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nama Penerbit</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" placeholder="Masukkan Nama Penerbit Buku">
+      <input type="number" class="form-control" name="kodeEksemplar" min="1">
     </div>
     <div class="col-sm-2">
     </div>
@@ -165,7 +121,6 @@
     function hapus(){
       document.getElementById('tambahEksemplar').submit();
       document.getElementById('myModal').className = "modal hide";
-      window.location.href="/";
     }
 
     function batalHapus(){
@@ -182,7 +137,6 @@
     function tambah(){
       document.getElementById('tambahEksemplar').submit();
       document.getElementById('myModalTambahEksemplar').className = "modal hide";
-      window.location.href="/";
     }
 
     function batalTambah(){

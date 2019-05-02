@@ -66,7 +66,7 @@
             <td>{{$peminjaman['tglJatuhTempo']}}</td>
             <td>{{$peminjaman['totalDenda']}} </td>
             @if($isAdmin)
-            <td>{{$peminjaman['namaUser']}}</td>
+            <td> <a  href="{{ route('detailUser',$peminjaman['idUser']) }}">{{$peminjaman['namaUser']}}</a></td>
             @endif
             <td>
               @if ($peminjaman['totalDenda'] == NULL and !$isAdmin)
