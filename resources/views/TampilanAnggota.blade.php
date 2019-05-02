@@ -29,12 +29,10 @@
             <tr>
               <td>{{$res['id']}}</td>
               <td>{{$res['name']}}</td>
-              @if($res['statusAktif']==1){
+              @if($res['statusAktif']==1)
                 <td>Aktif</td>
-              }
-              @else{
+              @else
                 <td>Tidak Aktif</td>
-              }
               @endif
 
               @if($res['terakhirMeminjam']==NULL)
@@ -49,7 +47,7 @@
                 <td>{{$res['terakhirMemesan']}}</td>
               @endif
 
-              @if($res['hasReturned']==0)
+              @if($res['hasReturned']==NULL or $res['hasReturned']== 1)
                 <td>Tidak</td>
               @else
                 <td>Ya</td>

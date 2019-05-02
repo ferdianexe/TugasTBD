@@ -25,11 +25,11 @@ class ShowUser extends Migration
         $sql = "CREATE PROCEDURE ShowUser ()
         BEGIN
             DECLARE tempIdUser INT;
-            DECLARE tempTglMeminjam INT;
-            DECLARE tempTglMemesan INT;
-            DECLARE tempHasReturned INT;
             DECLARE v_finished int;
-                
+            DECLARE terakhirMeminjam timestamp;
+            DECLARE terakhirMemesan timestamp;
+            DECLARE tempHasReturned int;
+            
                 -- Cursor
                 DECLARE masukanUserDanTglTerakhir CURSOR FOR 
                 SELECT id From users;
@@ -38,16 +38,10 @@ class ShowUser extends Migration
                 DECLARE CONTINUE HANDLER 
                         FOR NOT FOUND SET v_finished = 1;
 
-                CREATE TABLE userDanPinjamanTerakhir(
+                CREATE TABLE tempHasil(
                     idUser int,
-                    terakhirMeminjam date
-                );
-                CREATE TABLE userDanPemesananTerakhir(
-                    idUser int,
-                    terakhirMemesan date
-                );
-                CREATE TABLE userDanStatusSudahDikembalikan(
-                    idUser int,
+                    terakhirMeminjam timestamp,
+                    terakhirMemesan timestamp,
                     hasReturned int
                 );
                 
@@ -62,43 +56,44 @@ class ShowUser extends Migration
                         LEAVE get_all;
                     END IF;
 
-                    insert into userDanPinjamanTerakhir (idUser,terakhirMeminjam)
-                        select idUser, tanggalMeminjam
+                    SET terakhirMeminjam = (
+                        select tanggalMeminjam
                         from kumpulanpeminjaman
                         where idUser = tempIdUser
                         order by tanggalMeminjam desc
-                        LIMIT 1;
+                        LIMIT 1
+                    );
                     
-                    insert into userDanPemesananTerakhir (idUser,terakhirMemesan)
-                        select idUser, tanggalMemesan
+                    SET terakhirMemesan = (
+                        select tanggalMemesan
                         from kumpulanpemesanan
                         where idUser = tempIdUser
                         order by idPemesanan desc
-                        LIMIT 1;
+                        LIMIT 1
+                    );
 
-                    insert into userDanStatusSudahDikembalikan (idUser,hasReturned)
-                        select idUser, hasReturned
+                    SET tempHasReturned = (
+                        select hasReturned
                         from kumpulanpeminjaman
                         where idUser = tempIdUser
-                        order by tglJatuhTempo desc
-                        LIMIT 1;
+                        order by hasReturned asc
+                        LIMIT 1
+                    );
+
+                    insert into tempHasil (idUser,terakhirMeminjam,terakhirMemesan,hasReturned)
+                        select tempIdUser, terakhirMeminjam, terakhirMemesan, tempHasReturned;
 
                 END LOOP get_all;
                 -- END FETCHING
 
                 -- Harusnya matiin kursor disini
 
-            -- info yang akan diberikan
-            SELECT
-                id, name, statusAktif, terakhirMeminjam, terakhirMemesan, hasReturned
-            FROM
-                users
-                inner join userDanPinjamanTerakhir on users.id = userDanPinjamanTerakhir.idUser
-                inner join userDanPemesananTerakhir on users.id = userDanPemesananTerakhir.idUser
-                inner join userDanStatusSudahDikembalikan on users.id = userDanStatusSudahDikembalikan.idUser;
-            DROP table userDanPinjamanTerakhir;
-            DROP table userDanPemesananTerakhir;
-            DROP table userDanStatusSudahDikembalikan;
+            SELECT 
+                users.id, users.name, statusAktif, terakhirMeminjam, terakhirMemesan, hasReturned
+            FROM users
+                left outer join tempHasil on users.id = tempHasil.idUser;
+
+            DROP table tempHasil;
             -- End Cursor
             CLOSE masukanUserDanTglTerakhir;
         END";
