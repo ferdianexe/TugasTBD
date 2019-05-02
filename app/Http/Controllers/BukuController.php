@@ -33,4 +33,13 @@ class BukuController extends Controller
         $kumpulanPengarang = DB::select("CALL showAllPengarang()");
         return view('tambahBuku',compact('kumpulanPenerbit','kumpulanPengarang'));;
     }
+
+    public function bukuTerfavorit(){
+        $kumpulanBuku = DB::select("CALL ShowBukuTerfavorite()");
+        $isAdmin = FALSE;
+        if(Auth::user()->hakStatus==1){
+         $isAdmin = TRUE;  
+        }
+        return view('TampilanBukuFavorite',compact('kumpulanBuku','isAdmin'));;
+    }
 }

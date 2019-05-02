@@ -19,7 +19,7 @@ class CreateStoredProcedureShowPeminjaman extends Migration
         BEGIN
             IF all_param = 0 THEN
             SELECT 
-            users.id as idUser,users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
+            users.id as idUser,users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam,hasReturned
             FROM 
                 KumpulanPeminjaman
             INNER JOIN KumpulanEksemplar ON KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
@@ -27,7 +27,7 @@ class CreateStoredProcedureShowPeminjaman extends Migration
             INNER JOIN users ON users.id = KumpulanPeminjaman.idUser;
             ELSE
             SELECT 
-            users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam 
+            users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam,hasReturned
             FROM 
                 KumpulanPeminjaman
             INNER JOIN KumpulanEksemplar ON KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
