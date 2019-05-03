@@ -39,7 +39,7 @@
       </h5>
 
       <div class="container">
-        <table class="table table-condensed">
+        <table class="table table-condensed" id="table-peminjaman">
           <thead>
           <tr>
             <th>    </th>
@@ -58,40 +58,46 @@
           <?php $tempSumDenda = 0; ?>
           @foreach ($kumpulanPeminjaman as $index=>$peminjaman)
           <tr>
-            <td>{{$index+1}} </td>
-            <td>{{$peminjaman['nama']}}</td>
-            <td>{{$peminjaman['kodeEksemplar']}}</td>
+            <td>{{($index+1)+($page*10)}} </td>
+            <td>{{$peminjaman->nama}}</td>
+            <td>{{$peminjaman->kodeEksemplar}}</td>
             <td>
-              @if($peminjaman['hasReturned'])
+              @if($peminjaman->hasReturned)
                 Dikembalikan
               @else
                 Sedang dipinjam
               @endif
             </td>
-            <td>{{$peminjaman['tanggalMeminjam']}}</td>
-            <td>{{$peminjaman['tglJatuhTempo']}}</td>
-            <td>{{$peminjaman['totalDenda']}} </td>
+            <td>{{$peminjaman->tanggalMeminjam}}</td>
+            <td>{{$peminjaman->tglJatuhTempo}}</td>
+            <td>{{$peminjaman->totalDenda}} </td>
             @if($isAdmin)
-            <td> <a  href="{{ route('detailUser',$peminjaman['idUser']) }}">{{$peminjaman['namaUser']}}</a></td>
+            <td> <a  href="{{ route('detailUser',$peminjaman->idUser) }}">{{$peminjaman->namaUser}}</a></td>
             @endif
             <td>
-              @if ($peminjaman['totalDenda'] == NULL and !$isAdmin)
+              @if ($peminjaman->totalDenda == NULL and !$isAdmin)
                 <form action="{{ route('kembalikanBuku') }}">
-                  <input type="number" name="kodeEksemplar" value="{{$peminjaman['kodeEksemplar']}}" hidden>
-                  <input type="timestamp" name="tglMeminjam" value="{{$peminjaman['tanggalMeminjam']}}" hidden>
-                  <input type="date" name="tglJatuhTempo" value="{{$peminjaman['tglJatuhTempo']}}" hidden>
+                  <input type="number" name="kodeEksemplar" value="{{$peminjaman->kodeEksemplar}}" hidden>
+                  <input type="timestamp" name="tglMeminjam" value="{{$peminjaman->tanggalMeminjam}}" hidden>
+                  <input type="date" name="tglJatuhTempo" value="{{$peminjaman->tglJatuhTempo}}" hidden>
                   <input type="submit" value="Kembalikan">
                 </form>
               @endif
             </td>
           </tr>
-          <?php $tempSumDenda = $tempSumDenda + $peminjaman['totalDenda']; ?>
+          <?php $tempSumDenda = $tempSumDenda + $peminjaman->totalDenda; ?>
           @endforeach
-          <!-- <tr>
-              
-          </tr> -->
           </tbody>
         </table>
+          <ul class="pagination">
+              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman">1</a></li> 
+            @foreach($previousPage as $prePage)
+              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman?page={{$prePage}}">{{$prePage}}</a></li> 
+            @endforeach  
+            @foreach($paginationPage as $pagPage)
+              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman?page={{$pagPage}}">{{$pagPage}}</a></li> 
+            @endforeach 
+          </ul>
         <hr>
       </div>
   </div>
@@ -109,7 +115,6 @@
   </div>
 
   <br>
-
   <div class="jumbotron" class="haflBackground">
       <div class="container for-about">
           <h1>Info</h1>
