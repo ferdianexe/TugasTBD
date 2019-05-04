@@ -11,7 +11,6 @@
     
   <div class="container">
   <!-- onsubmit="proses(event)" -->
-  <form  method="GET" action="/hasilCariBuku" id="detailBuku">
   <div class="form-group row">
     <div class="col-sm-2">
     </div>
@@ -52,11 +51,23 @@
       @foreach ($kumpulanBukudanEksemplar as $index=>$eksemplar)
         <tr>
           <td>{{$eksemplar->kodeEksemplar}}</td>
+          <td>
           @if($eksemplar->statusPeminjaman == 0)
-            <td>Status : Dipinjam</td>
+            Status : Tersedia
             @else
-            <td>Status : Tersedia</td>
+            Status : Dipinjam
             @endif
+          </td>
+          <td>
+          @if ($eksemplar->statusPeminjaman == 0 AND !$isAdmin)
+                <form method="POST" action="{{ route('tambahPeminjaman') }}">
+                  @csrf
+                  <input type="number" name="kodeEksemplar" value="{{$eksemplar->kodeEksemplar}}" hidden>
+                  <input type="number" name="kodeBuku" value="{{$id}}" hidden>
+                  <input type="submit" value="Pinjam">
+                </form>
+            @endif
+          </td>
         </tr>
       @endforeach
       </table>
@@ -123,7 +134,6 @@
     </div>
   </div>
   <br><br>
-</form>
   </div>
 </div>
 @endsection

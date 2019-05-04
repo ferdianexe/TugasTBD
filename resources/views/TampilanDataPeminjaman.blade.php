@@ -92,10 +92,10 @@
           <ul class="pagination">
               <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman">1</a></li> 
             @foreach($previousPage as $prePage)
-              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman?page={{$prePage}}">{{$prePage}}</a></li> 
+              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman?page={{$prePage-1}}">{{$prePage}}</a></li> 
             @endforeach  
             @foreach($paginationPage as $pagPage)
-              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman?page={{$pagPage}}">{{$pagPage}}</a></li> 
+              <li class="page-item"><a class="page-link" href="/TampilanDataPeminjaman?page={{$pagPage-1}}">{{$pagPage}}</a></li> 
             @endforeach 
           </ul>
         <hr>

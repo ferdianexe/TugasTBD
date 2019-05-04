@@ -19,7 +19,10 @@ class BukuDanEksemplarController extends Controller
         $buku = DB::select("CALL ShowBukuById($id)");
     
         $kumpulanBukudanEksemplar = DB::select("CALL ShowBukudanEksemplar ($id)");
-
-        return view('TampilanDetailBuku',compact('kumpulanBukudanEksemplar','buku'));
+        $isAdmin = FALSE;
+        if(Auth::user()->hakStatus==1){
+          $isAdmin = TRUE;  
+        }
+        return view('TampilanDetailBuku',compact('kumpulanBukudanEksemplar','buku','isAdmin','id'));
     }
 }
