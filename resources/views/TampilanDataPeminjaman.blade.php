@@ -47,6 +47,7 @@
             <th>Exemplar</th>
             <th>Status</th>
             <th>Tanggal Peminjaman</th>
+            <th>Tanggal Jatuh Tempo</th>
             <th>Tanggal Pengembalian</th>
             <th>Denda</th>
             @if($isAdmin)
@@ -70,12 +71,13 @@
             </td>
             <td>{{$peminjaman->tanggalMeminjam}}</td>
             <td>{{$peminjaman->tglJatuhTempo}}</td>
+            <td>{{$peminjaman->tanggalDibalikan}}</td>
             <td>{{$peminjaman->totalDenda}} </td>
             @if($isAdmin)
             <td> <a  href="{{ route('detailUser',$peminjaman->idUser) }}">{{$peminjaman->namaUser}}</a></td>
             @endif
             <td>
-              @if ($peminjaman->totalDenda == NULL and !$isAdmin)
+              @if ($peminjaman->hasReturned == 0 and !$isAdmin)
                 <form action="{{ route('kembalikanBuku') }}">
                   <input type="number" name="kodeEksemplar" value="{{$peminjaman->kodeEksemplar}}" hidden>
                   <input type="timestamp" name="tglMeminjam" value="{{$peminjaman->tanggalMeminjam}}" hidden>

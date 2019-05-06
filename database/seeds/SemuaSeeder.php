@@ -64,13 +64,21 @@ class SemuaSeeder extends Seeder
     }
 
     for($i = 0 ; $i<1000 ; $i++){
-      $dateNow = Carbon::create($faker->numberBetween(2018,2019),$faker->numberBetween(1,12),$faker->numberBetween(1,28));
+      $dateNow = Carbon::create(2018,$faker->numberBetween(1,12),$faker->numberBetween(1,28));
       $formatedDateNow = $dateNow->format('Y-m-d');
       $datejatuhTempo = $dateNow->addDays(14);
       $idUser = $faker->numberBetween(2,100);
       $kodeEks = $faker->numberBetween(1,249) * 7;
-      DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
-    }
 
+      $randomPengembalian = $faker->numberBetween(7,30);
+      $randomTglPengembalian = $dateNow->addDays($randomPengembalian);
+      DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
+      DB::select("CALL kembalikanBuku('$idUser','$kodeEks','$dateNow','$datejatuhTempo','$randomTglPengembalian')");
+    }
+            // IN inputIdUser int,
+            // IN inputKodeEksemplar int,
+            // IN tglPeminjaman timestamp,
+            // IN tglJatuhTempo date,
+            // IN tglDikembalikan timestamp
   }
 }

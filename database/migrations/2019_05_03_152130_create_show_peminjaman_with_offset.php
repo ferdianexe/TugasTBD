@@ -22,22 +22,24 @@ class CreateShowPeminjamanWithOffset extends Migration
             SET offset_val = page_param*10;
             IF all_param = 0 THEN
             SELECT 
-            users.id as idUser,users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam,hasReturned
+            users.id as idUser,users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam,tanggalDibalikan,hasReturned
             FROM 
                 KumpulanPeminjaman
             INNER JOIN KumpulanEksemplar ON KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
             INNER JOIN KumpulanBuku ON KumpulanBuku.idBuku = KumpulanEksemplar.idBuku
             INNER JOIN users ON users.id = KumpulanPeminjaman.idUser
+            ORDER BY tanggalMeminjam desc
             LIMIT offset_val,10;
             ELSE
             SELECT 
-            users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam,hasReturned
+            users.name AS namaUser,tglJatuhTempo,KumpulanBuku.nama,KumpulanEksemplar.kodeEksemplar,totalDenda,tanggalMeminjam,tanggalDibalikan,hasReturned
             FROM 
                 KumpulanPeminjaman
             INNER JOIN KumpulanEksemplar ON KumpulanEksemplar.kodeEksemplar = KumpulanPeminjaman.kodeEksemplar
             INNER JOIN KumpulanBuku ON KumpulanBuku.idBuku = KumpulanEksemplar.idBuku
             INNER JOIN users ON users.id = KumpulanPeminjaman.idUser
             WHERE users.id = all_param
+            ORDER BY tanggalMeminjam desc
             LIMIT offset_val,10;
             END IF;
         END";
