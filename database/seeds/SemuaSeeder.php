@@ -73,7 +73,7 @@ class SemuaSeeder extends Seeder
       $randomPengembalian = $faker->numberBetween(7,30);
       $randomTglPengembalian = $dateNow->addDays($randomPengembalian);
       DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
-      DB::select("CALL kembalikanBuku('$idUser','$kodeEks','$dateNow','$datejatuhTempo','$randomTglPengembalian')");
+      DB::select("CALL kembalikanBuku('$idUser','$kodeEks','$formatedDateNow','$datejatuhTempo','$randomTglPengembalian')");
     }
             // IN inputIdUser int,
             // IN inputKodeEksemplar int,
