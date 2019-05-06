@@ -45,11 +45,11 @@ class SpKembalikanBuku extends Migration
             -- UPDATE RECORD
             IF telatBrpHari>0 and telatBrpHari<=10 THEN
                 UPDATE kumpulanpeminjaman
-                SET hasReturned = 1 , totalDenda = dendanya, fkDenda = telatBrpHari
+                SET hasReturned = 1 , totalDenda = dendanya, fkDenda = telatBrpHari, tanggalDibalikan = tglDikembalikan
                 WHERE idUser = inputIdUser and kodeEksemplar = inputKodeEksemplar and tanggalMeminjam = tglPeminjaman and hasReturned = 0;
             ELSE
                 UPDATE kumpulanpeminjaman
-                SET hasReturned = 1 , totalDenda = dendanya
+                SET hasReturned = 1 , totalDenda = dendanya, tanggalDibalikan = tglDikembalikan
                 WHERE idUser = inputIdUser and kodeEksemplar = inputKodeEksemplar and tanggalMeminjam = tglPeminjaman and hasReturned = 0;
             END IF;
 
