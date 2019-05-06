@@ -19,6 +19,12 @@ class AlterPeminjamanTable extends Migration
           KumpulanPeminjaman 
           ADD tanggalMeminjam TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL AFTER fkDenda"
         );
+
+        DB::statement(
+          'ALTER TABLE kumpulanpeminjaman 
+              ADD tanggalDibalikan TIMESTAMP NULL DEFAULT NULL AFTER tanggalMeminjam
+          '
+        );
     }
 
     /**
@@ -33,6 +39,12 @@ class AlterPeminjamanTable extends Migration
           `KumpulanPeminjaman`
          DROP 
           `tanggalMeminjam`'
+      );
+
+      DB::statement(
+        'ALTER TABLE kumpulanpeminjaman 
+            DROP tanggalDibalikan
+        '
       );
     }
 }

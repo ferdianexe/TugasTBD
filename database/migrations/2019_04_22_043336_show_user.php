@@ -40,8 +40,8 @@ class ShowUser extends Migration
 
                 CREATE TABLE tempHasil(
                     idUser int,
-                    terakhirMeminjam timestamp,
-                    terakhirMemesan timestamp,
+                    terakhirMeminjam timestamp NULL DEFAULT NULL,
+                    terakhirMemesan timestamp NULL DEFAULT NULL,
                     hasReturned int
                 );
                 
@@ -68,7 +68,7 @@ class ShowUser extends Migration
                         select tanggalMemesan
                         from kumpulanpemesanan
                         where idUser = tempIdUser
-                        order by idPemesanan desc
+                        order by tanggalMemesan desc
                         LIMIT 1
                     );
 
@@ -89,7 +89,7 @@ class ShowUser extends Migration
                 -- Harusnya matiin kursor disini
 
             SELECT 
-                users.id, users.name, statusAktif, terakhirMeminjam, terakhirMemesan, hasReturned
+                users.id, users.name, statusAktif, tempHasil.terakhirMeminjam, tempHasil.terakhirMemesan, tempHasil.hasReturned
             FROM users
                 left outer join tempHasil on users.id = tempHasil.idUser;
 

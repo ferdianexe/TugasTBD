@@ -64,12 +64,25 @@ class SemuaSeeder extends Seeder
     }
 
     for($i = 0 ; $i<1000 ; $i++){
-      $dateNow = Carbon::create($faker->numberBetween(2018,2019),$faker->numberBetween(1,12),$faker->numberBetween(1,28));
+      $dateNow = Carbon::create(2018,$faker->numberBetween(1,12),$faker->numberBetween(1,28));
       $formatedDateNow = $dateNow->format('Y-m-d');
-      $datejatuhTempo = $dateNow->addDays(14);
+      $datejatuhTempo = $dateNow->addDays(14)->format('Y-m-d');
       $idUser = $faker->numberBetween(2,100);
       $kodeEks = $faker->numberBetween(1,249) * 7;
-      DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
+
+      $dateNow->subDays(14);
+      $randomPengembalian = $faker->numberBetween(10,30);
+      $randomTglPengembalian = $dateNow->addDays($randomPengembalian)->format('Y-m-d');
+
+      $randomHasReturned = $faker->numberBetween(0,1);
+      if($randomHasReturned == 1){
+        DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
+        DB::select("CALL kembalikanBuku('$idUser','$kodeEks','$formatedDateNow','$datejatuhTempo','$randomTglPengembalian')");
+      }
+      else{
+        DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',0)");
+      }
+        
     }
 
   }
