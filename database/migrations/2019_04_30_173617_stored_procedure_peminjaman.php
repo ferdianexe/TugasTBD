@@ -23,6 +23,7 @@ class StoredProcedurePeminjaman extends Migration
         BEGIN
             INSERT INTO KumpulanPeminjaman(idUser,tglJatuhTempo,kodeEksemplar,totalDenda,fkDenda,tanggalMeminjam,hasReturned)
             VALUES (iduser_param,tglJatuhTempo_param,kodeEksemplar_param,NULL,NULL,tanggalMeminjam_param,statusPengembalian_param);
+            UPDATE KumpulanEksemplar SET statusPeminjaman = 1 WHERE kumpulaneksemplar.kodeEksemplar = kodeEksemplar_param;
         END
         ";
         DB::connection()->getPdo()->exec($sql);

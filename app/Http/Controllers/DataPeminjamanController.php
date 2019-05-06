@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Datatables;
+use Carbon\Carbon;
 class DataPeminjamanController extends Controller
 {
   
@@ -34,7 +35,7 @@ class DataPeminjamanController extends Controller
     }
     
     $kumpulanPeminjaman = DB::select($sql); //cuman mau dapet totalbanyaknya buat dapet row
-    $counter = ceil((count($kumpulanPeminjaman)*1.0)/10)-1;
+    $counter = ceil((count($kumpulanPeminjaman)*1.0)/10);
     $paginationPage = array(); //pagination tombol2 setelah page sekarang yang sedia
     $previousPage = array(); // pagination tombol2 page sebelum page yang sekarang
     $startVal = (int)($page/10); //mendapatkan nilai kelipatan sebagai pengali awal (page per 10 untuk sekarang)
@@ -52,5 +53,15 @@ class DataPeminjamanController extends Controller
       }
     $kumpulanPeminjaman = DB::select($sql2); //query sebenarnya yang mmenggunakan offset
     return view('TampilanDataPeminjaman',compact('isAdmin','kumpulanPeminjaman','paginationPage','page','previousPage'));
+  }
+
+  public function tambahPeminjaman(Request $request){
+    $idUser = Auth::user()->id;
+    $kodeEksemplar = $request->input('kodeEksemplar');
+    $tglNow = Carbon::now()->format('Y-m-d');
+    $tglJatuhTempo = Carbon::now()->addDays(7)->format('Y-m-d');
+    $sql = "CALL tambahPeminjaman('$idUser','$tglJatuhTempo','$kodeEksemplar','$tglNow','0')";
+    DB::select($sql);
+    return redirect()->route('TampilanDetailBuku',['id' => $request->input('kodeBuku')]);
   }
 }
