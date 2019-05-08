@@ -57,11 +57,22 @@
                   <tbody>
                   @foreach ($kumpulanBuku as $key=>$buku)
                     <tr>
-                      <td>{{++$key}}</td>
+                      <td>{{($key+1)+($page*12)}}</td>
                       <td><a href="{{ url('TampilanDetailBuku/'.$buku->idBuku)}}">{{$buku->nama}}</a></td>
                     </tr>
                   @endforeach
                   </tbody>
+
+                  </table>
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="/hasilCariBuku">1</a></li> 
+                      @foreach($previousPage as $prePage)
+                        <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$prePage-1}}">{{$prePage}}</a></li> 
+                      @endforeach  
+                      @foreach($paginationPage as $pagPage)
+                        <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$pagPage-1}}">{{$pagPage}}</a></li> 
+                      @endforeach 
+                    </ul>
               </table>
           </div>
 
