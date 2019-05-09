@@ -80,42 +80,7 @@
 
   </div>
 
-  <div class="col-sm-3" style="background-color:orange;opacity:0.9">
-      <H3>Keranjang BukuKu</H3>
-      <div class="row" height="50%">
-          <div class="container-fluid" style="background-color:white;opacity:1">
-              <table class="table">
-                  <thead>
-                      <tr>
-                          <th>Nama Buku</th>
-                          <th>Status</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <td>Test</td>
-                          <td>ready</td>
-                      </tr>
-                      <tr>
-                          <td>Test2</td>
-                          <td>ready</td>
-                      </tr>
-                  </tbody>
-              </table>
-          </div>
-
-          <button type="button" class="btn btn-primary active" width="90%" style="margin-left:60%">Pinjam Buku</button>
-      </div><br><br>
-
-      <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-8">
-            <button type="button" class="btn btn-primary active" width="90%">Pinjamanku</button>
-        </div>
-        <div class="col-sm-3"></div>
-      </div>
-    </div>
-  </div>
+  
 </div>
 
 @endsection
