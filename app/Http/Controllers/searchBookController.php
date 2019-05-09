@@ -8,6 +8,8 @@ class SearchBookController extends Controller
     public function testParsingData(Request $request){
         $searchStatus = $request->has('search');
         $page=0;
+        $paginationPage = array(); 
+        $previousPage = array();
         if($request->has('page')){
             $page = $request->input('page');
           }
@@ -16,14 +18,12 @@ class SearchBookController extends Controller
             $search = $request->get('search');
             $filter = $request->get('filter');
             $kumpulanBuku = DB::select("CALL VSMsearch('$search')");
-            return view('hasilCariBuku', compact('search','filter','kumpulanBuku'));
+            return view('hasilCariBuku', compact('search','filter','kumpulanBuku','paginationPage','page','previousPage'));
         }
         else
         {
             $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudul()");
             $counter = ceil((count($kumpulanBuku)*1.0)/12);
-            $paginationPage = array(); 
-            $previousPage = array();
             $startVal = (int)($page/10);
             $continousPagination = ($page%10);
             for($i = 1 ; $i<10;$i++){
