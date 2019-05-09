@@ -40,12 +40,15 @@ class CreateStroredProcedureShowBukudanEksemplar extends Migration
         DB::connection()->getPdo()->exec($sql);
 
         $sql = "CREATE PROCEDURE ShowAllBukuOnlyIdAndJudulWithLimit (
-            IN limit_param INT
+            IN page_param INT
         )
         BEGIN
-            SELECT nama,idBuku
-            FROM KumpulanBuku
-            LIMIT limit_param;
+        DECLARE offset_val INT ;
+        SET offset_val = page_param*12;
+                SELECT nama,idBuku
+                FROM KumpulanBuku
+                LIMIT offset_val,12;
+        
         END";
         DB::connection()->getPdo()->exec($sql);
     }
