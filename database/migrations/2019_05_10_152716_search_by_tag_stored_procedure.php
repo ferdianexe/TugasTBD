@@ -22,7 +22,7 @@ class SearchByTagStoredProcedure extends Migration
         DECLARE offset_val INT ;
         SET offset_val = page_param*12;
         IF page_param = -1 THEN
-          SELECT idBuku,KumpulanBuku.nama
+          SELECT tableHasil.idBuku,KumpulanBuku.nama
           FROM(
             SELECT idBuku
             FROM KumpulanBukuDanKumpulanKategori
@@ -30,7 +30,7 @@ class SearchByTagStoredProcedure extends Migration
           ) as tableHasil
           INNER JOIN KumpulanBuku on KumpulanBuku.idBuku = tableHasil.idBuku;
         ELSE
-        SELECT idBuku,KumpulanBuku.nama
+        SELECT tableHasil.idBuku,KumpulanBuku.nama
           FROM(
             SELECT idBuku
             FROM KumpulanBukuDanKumpulanKategori
