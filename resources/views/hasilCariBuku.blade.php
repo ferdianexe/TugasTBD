@@ -61,13 +61,22 @@
 
                   </table>
                     <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="/hasilCariBuku">1</a></li> 
-                      @foreach($previousPage as $prePage)
-                        <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$prePage-1}}">{{$prePage}}</a></li> 
-                      @endforeach  
-                      @foreach($paginationPage as $pagPage)
-                        <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$pagPage-1}}">{{$pagPage}}</a></li> 
-                      @endforeach 
+                        <li class="page-item"><a class="page-link" href="/hasilCariBuku">1</a></li>
+                      @if(!empty($filter))
+                        @foreach($previousPage as $prePage)
+                          <li class="page-item"><a class="page-link" href="/hasilCariBuku?filter={{$filter}}&page={{$prePage-1}}">{{$prePage}}</a></li> 
+                        @endforeach  
+                        @foreach($paginationPage as $pagPage)
+                          <li class="page-item"><a class="page-link" href="/hasilCariBuku?filter={{$filter}}&page={{$pagPage-1}}">{{$pagPage}}</a></li> 
+                        @endforeach 
+                      @else
+                        @foreach($previousPage as $prePage)
+                          <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$prePage-1}}">{{$prePage}}</a></li> 
+                        @endforeach  
+                        @foreach($paginationPage as $pagPage)
+                          <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$pagPage-1}}">{{$pagPage}}</a></li> 
+                        @endforeach 
+                      @endif
                     </ul>
               </table>
           </div>
