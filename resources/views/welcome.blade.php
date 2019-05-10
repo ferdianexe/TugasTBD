@@ -73,7 +73,7 @@
       @else
         <div class="col-sm-3"></div>
         <div class="col-sm-3">
-          <button type="button" class="btn btn-primary active">Tampilkan Lebih Banyak</button>
+        <a type="button" href= "{{ route('searchBook') }}" class="btn btn-primary active">Tampilkan Lebih Banyak</a>
         </div>
         <div class="col-sm-3">
           <a type="button" href="{{ route('pinjamanBuku') }}"class="btn btn-primary active">Pinjamanku</a>
