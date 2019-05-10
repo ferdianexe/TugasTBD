@@ -10,6 +10,7 @@ class SearchBookController extends Controller
         $page=0;
         $paginationPage = array(); 
         $previousPage = array();
+        $kumpulanKategori = DB::select("CALL ShowAllCategory");
         if($request->has('page')){
             $page = $request->input('page');
           }
@@ -18,7 +19,7 @@ class SearchBookController extends Controller
             $search = $request->get('search');
             $filter = $request->get('filter');
             $kumpulanBuku = DB::select("CALL VSMsearch('$search')");
-            return view('hasilCariBuku', compact('search','filter','kumpulanBuku','paginationPage','page','previousPage'));
+            return view('hasilCariBuku', compact('search','filter','kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori'));
         }
         else
         {
@@ -38,8 +39,7 @@ class SearchBookController extends Controller
                   array_push ($paginationPage, $counter);
                 }
             $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudulWithLimit('$page')"); //query sebenarnya yang mmenggunakan offset
-           
-            return view('hasilCariBuku', compact('kumpulanBuku','paginationPage','page','previousPage'));
+            return view('hasilCariBuku', compact('kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori'));
         }
         
     }
