@@ -16,6 +16,7 @@ class SearchBookController extends Controller
           }
         if($searchStatus == true)
         {
+            //if
             $search = $request->get('search');
             $filter = $request->get('filter');
             $kumpulanBuku = DB::select("CALL VSMsearch('$search')");
