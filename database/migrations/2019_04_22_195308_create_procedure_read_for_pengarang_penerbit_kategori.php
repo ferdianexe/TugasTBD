@@ -29,7 +29,7 @@ class CreateProcedureReadForPengarangPenerbitKategori extends Migration
 
         $sql = "CREATE PROCEDURE ShowAllCategory ()
         BEGIN
-            SELECT kategori
+            SELECT idKategori,kategori
             FROM KumpulanKategori;
         END";
         DB::connection()->getPdo()->exec($sql);
