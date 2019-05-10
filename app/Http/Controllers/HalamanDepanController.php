@@ -26,9 +26,10 @@ class HalamanDepanController extends Controller
     {
         $isAdmin = FALSE;
         if(Auth::user()->hakStatus==1){
-          $isAdmin = TRUE;  
+          $isAdmin = TRUE;
         }
         $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudulWithLimit('12')");
-        return view('welcome',compact('isAdmin','kumpulanBuku'));
+        $kumpulanKategori = DB::select("CALL ShowAllCategory");
+        return view('welcome',compact('isAdmin','kumpulanBuku','kumpulanKategori'));
     }
 }
