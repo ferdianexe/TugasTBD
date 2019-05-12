@@ -111,6 +111,7 @@ class TambahBuku extends Migration
 
         drop table temp;
         -- Setiap udah berubah idfnya maka semua bobot akan berubah juga
+        CLOSE kata_cursor;
         CALL updateBobot();
        END";
         DB::connection()->getPdo()->exec($sql);

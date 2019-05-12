@@ -76,7 +76,7 @@ class SemuaSeeder extends Seeder
 
       $randomHasReturned = $faker->numberBetween(0,1);
       if($randomHasReturned == 1){
-        DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',1)");
+        DB::select("CALL tambahPeminjaman('$idUser','$datejatuhTempo','$kodeEks','$formatedDateNow',0)");
         DB::select("CALL kembalikanBuku('$idUser','$kodeEks','$formatedDateNow','$datejatuhTempo','$randomTglPengembalian')");
       }
       else{
