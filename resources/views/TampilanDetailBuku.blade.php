@@ -129,7 +129,7 @@
   <div class="form-group row">
     <div class="col-sm-5">
     </div>
-    <button class="btn btn-primary col-sm-2" type="submit">Back</button>
+    <a class="btn btn-primary col-sm-2" href="{{ URL::previous() }}">Back</a>
     <div class="col-sm-5">
     </div>
   </div>

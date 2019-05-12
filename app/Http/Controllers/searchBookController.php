@@ -13,7 +13,8 @@ class SearchBookController extends Controller
         $kumpulanKategori = DB::select("CALL ShowAllCategory");
         if($request->has('page')){
             $page = $request->input('page');
-          }
+        }
+        $filter = NULL;
         if($searchStatus)
         {
             if($request->has('filter')){
