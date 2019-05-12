@@ -44,3 +44,5 @@ Route::get('/kembalikanBuku', 'DendaController@kembalikanBuku')->middleware('aut
 Route::get('/TampilanDataPeminjaman/tagfavorit', 'KategoriController@showKategoriFavorit')->middleware('auth')->name("tagTerfavorit");
 Route::get('/TampilanDataPeminjaman/bukufavorit', 'BukuController@bukuTerfavorit')->middleware('auth')->name("bukuTerfavorit");
 Route::post('/tambahPinjaman',"DataPeminjamanController@tambahPeminjaman")->middleware('auth')->name("tambahPeminjaman");
+
+Route::get('/buatRekomendasi', 'RekomendasiController@buatRekomendasi')->middleware('auth')->name("rekomendasi");
