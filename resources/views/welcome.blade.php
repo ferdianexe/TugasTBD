@@ -37,6 +37,13 @@
         <h2>Kumpulan Buku Buku Baru</h2>
         
         <div class="card-columns">
+        @foreach ($kumpulanBukuRekomendasi as $buku)
+             <a href="{{ url('TampilanDetailBuku/'.$buku->idBuku)}}" class="card bg-recommend">
+                <div class="card-body text-center">
+                    <p class="card-text">{{$buku->nama}}</p>
+                </div>
+            </a>
+            @endforeach
             @foreach ($kumpulanBuku as $buku)
              <a href="{{ url('TampilanDetailBuku/'.$buku->idBuku)}}" class="card bg-light">
                 <div class="card-body text-center">
