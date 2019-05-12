@@ -19,14 +19,17 @@
         <div class="col-sm-2">
           <a type="button" href="{{route('tagTerfavorit')}}" class="btn btn-primary active">Tag Favorit</a>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-1">
         <a type="button" href="{{ route('pemesananBuku') }}" class="btn btn-primary active">Request</a>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-2">
         <a type="button" href="{{route('bukuTerfavorit')}}"class="btn btn-primary active">Buku Favorit</a>
         </div>
         <div class="col-sm-2">
           <a type="button" href="{{route('seluruhanggota')}}"class="btn btn-primary active">Daftar Anggota</a>
+        </div>
+        <div class="col-sm-2">
+          <a type="button" href="{{route('rekomendasi')}}"class="btn btn-primary active">Buat Rekomendasi</a>
         </div>
       @endif
     </div>
@@ -111,8 +114,12 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-2"></div>
       <div class="col-sm-2"></div>
-      <div class="col-sm-2"><a>Total Denda : </a></div>
-      <div class="col-sm-1"><a id="totalDenda" name="denda">{{$tempSumDenda}}</a></div>
+      @if(!$isAdmin)
+        <div class="col-sm-2"><a>Total Denda : </a></div>
+        <div class="col-sm-1">
+          <a id="totalDenda" name="denda">{{$tempSumDenda}}</a>
+        </div>
+      @endif
       <div class="col-sm-1"></div>
   </div>
 
