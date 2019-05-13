@@ -88,20 +88,20 @@
                       @if(!empty($filter))
                         @foreach($previousPage as $prePage)
                           @if ($loop->last)
-                            <li class="page-item"><a class="page-link" href="/hasilCariBuku?filter={{$filter}}&page={{$prePage-1}}">PREV</a></li> 
+                            <li class="page-item"><a class="btn btn-primary active" href="/hasilCariBuku?filter={{$filter}}&page={{$prePage-1}}">PREV</a></li>
                           @endif
                         @endforeach
                         @if ($page == 1)
-                          <li class="page-item"><a class="page-link" href="/hasilCariBuku">PREV</a></li>
+                          <li class="page-item"><a class="btn btn-primary active" href="/hasilCariBuku">PREV</a></li>
                         @endif   
                       @else
                         @foreach($previousPage as $prePage)
                           @if ($loop->last)
-                            <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$prePage-1}}">PREV</a></li> 
+                            <li class="page-item"><a class="btn btn-primary active" href="/hasilCariBuku?page={{$prePage-1}}">PREV</a></li> 
                           @endif
                         @endforeach 
                         @if ($page == 1)
-                          <li class="page-item"><a class="page-link" href="/hasilCariBuku">PREV</a></li>
+                          <li class="page-item"><a class="btn btn-primary active" href="/hasilCariBuku">PREV</a></li>
                         @endif 
                       @endif
                     </ul>
@@ -112,13 +112,13 @@
                       @if(!empty($filter))
                         @foreach($paginationPage as $pagPage)
                           @if ($loop->iteration == 2)
-                            <li class="page-item"><a class="page-link" href="/hasilCariBuku?filter={{$filter}}&page={{$pagPage-1}}">NEXT</a></li> 
+                            <li class="page-item"><a class="btn btn-primary active" href="/hasilCariBuku?filter={{$filter}}&page={{$pagPage-1}}">NEXT</a></li> 
                           @endif
                         @endforeach 
                       @else
                         @foreach($paginationPage as $pagPage)
                           @if ($loop->iteration == 2)
-                            <li class="page-item"><a class="page-link" href="/hasilCariBuku?page={{$pagPage-1}}">NEXT</a></li> 
+                            <li class="page-item"><a class="btn btn-primary active" href="/hasilCariBuku?page={{$pagPage-1}}">NEXT</a></li> 
                           @endif
                         @endforeach 
                       @endif
