@@ -17,15 +17,24 @@ class EksemplarController extends Controller
   {
      $sql = "CALL ShowAllBukuOnlyIdAndJudul()";
      $kumpulanBuku = DB::select($sql);
-     return view ('tambahEksemplar',compact('kumpulanBuku'));
+     $success = FALSE;
+     $error = FALSE;
+     return view ('tambahEksemplar',compact('kumpulanBuku','success','error'));
   }
 
   public function tambahEksemplar(Request $request){
-    $idBuku = $request->input('namaBuku');
-    $kodeEksemplar = $request->input('kodeEksemplar');
-    DB::select("CALL tambahEksemplar('$kodeEksemplar','$idBuku')");
+    $success = FALSE;
+    $error = FALSE;
+    if($request->has('namaBuku') && $request->has('kodeEksemplar')){
+      $idBuku = $request->input('namaBuku');
+      $kodeEksemplar = $request->input('kodeEksemplar');
+      DB::select("CALL tambahEksemplar('$kodeEksemplar','$idBuku')");
+      $success = TRUE ;
+    }else{
+      $error = TRUE;
+    }
     $sql = "CALL ShowAllBukuOnlyIdAndJudul()";
     $kumpulanBuku = DB::select($sql);
-    return view ('tambahEksemplar',compact('kumpulanBuku'));
+    return view ('tambahEksemplar',compact('kumpulanBuku','success','error'));
   }
 }
