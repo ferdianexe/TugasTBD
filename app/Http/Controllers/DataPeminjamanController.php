@@ -48,11 +48,15 @@ class DataPeminjamanController extends Controller
       if(($startVal*10)+$continousPagination+$i>=$counter) continue; // masukan selama masih tersedia didalam counter
         array_push ($paginationPage,(($startVal*10)+$continousPagination+$i));
       }
-      if($page != $counter){ //jika page = counter tidak perlu dimasukan karena ujung page selalu di print
+      if($page == 0){ // kalo dia page awal
+        if($counter != 1){ // masukin kalo pagenya lebih dari 1
+           array_push ($paginationPage, $counter);  
+        }
+      }else if($page <= $counter){ // masukin selama page yang tersedia masih lebih besar dari pagenya
         array_push ($paginationPage, $counter);
       }
     $kumpulanPeminjaman = DB::select($sql2); //query sebenarnya yang mmenggunakan offset
-    return view('TampilanDataPeminjaman',compact('isAdmin','kumpulanPeminjaman','paginationPage','page','previousPage'));
+    return view('TampilanDataPeminjaman',compact('counter','isAdmin','kumpulanPeminjaman','paginationPage','page','previousPage'));
   }
 
   public function tambahPeminjaman(Request $request){
