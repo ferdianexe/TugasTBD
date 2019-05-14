@@ -18,8 +18,15 @@
     </div>
     <div class="col-sm-1"></div>
     <h5 class="col-sm-7">
-    <!-- Tambah Eksemplar -->
+    Tambah Eksemplar
     </h5>
+    <h6 class="col-sm-7">
+      @if($success)
+        Penambahan Buku Berhasil
+      @elseif($error)
+        Terjadi kesalahan Input
+      @endif
+    </h6>
     <div class="col-sm-2">
     </div>
   </div>
@@ -43,7 +50,7 @@
     </div>
     <label for="staticEmail" class="col-sm-2 col-form-label tulisanKekiri">Nomor Eksemplar</label>
     <div class="col-sm-6">
-      <input type="number" class="form-control" name="kodeEksemplar" min="1">
+      <input type="number" class="form-control" id="inputKodeEksemplar" name="kodeEksemplar" min="1">
     </div>
     <div class="col-sm-2">
     </div>
@@ -100,7 +107,7 @@
         
         <!-- Modal body -->
         <div class="modal-body">
-          <a>Tambah Eksemplar dengan judul "..."?</a>
+          <a id="modal-text"></a>
         </div>
         
         <!-- Modal footer -->
@@ -131,16 +138,30 @@
 
     function proses2(e) {
       e.preventDefault();
-      document.getElementById('myModalTambahEksemplar').className = "modal show";
+      let domInputBuku = document.getElementById('namaBuku');
+      if(domInputBuku.selectedIndex==0){
+        alert("Pilih nama buku !");
+      }else{
+        let selectedInput = domInputBuku.options[domInputBuku.selectedIndex].text;
+        document.getElementById('modal-text').innerHTML = "Tambah Eksemplar dengan judul " + selectedInput;
+        document.getElementById('myModalTambahEksemplar').className = "modal show";
+
+      }
     }
 
     function tambah(){
-      document.getElementById('tambahEksemplar').submit();
-      document.getElementById('myModalTambahEksemplar').className = "modal hide";
+      let inputKodeEksemplar = document.getElementById('inputKodeEksemplar').value;
+      let inputNamaBuku = document.getElementById('namaBuku').value;
+      if(inputKodeEksemplar && inputNamaBuku ){
+        document.getElementById('myModalTambahEksemplar').className = "modal hide";
+        document.getElementById('tambahEksemplar').submit();
+      }else{
+        alert("Masukan semua input form dengan benar !");
+        document.getElementById('myModalTambahEksemplar').className = "modal hide";
+      }
     }
 
     function batalTambah(){
-      // query here;
       document.getElementById('myModalTambahEksemplar').className = "modal hide";
     }
   </script>
