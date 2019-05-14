@@ -35,7 +35,9 @@
     <br>
     <div class="container">
         <h2>Kumpulan Buku Buku</h2>
-        <h6>*Buku - buku yang diberi marka kuning adalah rekomendasi</h6> 
+        @if(!$isAdmin)
+        <h6>*Buku - buku yang diberi marka kuning adalah rekomendasi</h6>
+        @endif
         <div class="card-columns">
         @foreach ($kumpulanBukuRekomendasi as $buku)
              <a href="{{ url('TampilanDetailBuku/'.$buku->idBuku)}}" class="card bg-recommend">
