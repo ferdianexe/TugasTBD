@@ -22,35 +22,45 @@ class DendaController extends BaseController
         $QUERY = $PDO->prepare($sql);
         $QUERY->execute();
         $result=$QUERY->fetchAll();
-
-        return View('showAturanDenda', compact('result'));
+        $error = FALSE;
+        return View('showAturanDenda', compact('result','error'));
     }
 
     protected function tambahAturanDenda(Request $request)
     {
-        $hariKe = $request->input('hariKe');
-        $nominalDenda = $request->input('nominalDenda');
+        if($request->has('hariKe')&&$request->has('nominalDenda')){
+            if($request->input('hariKe') != '' &&$request->input('nominalDenda') ){
+                $hariKe = $request->input('hariKe');
+                $nominalDenda = $request->input('nominalDenda');
+        
+                $sql = "CALL CreateAturanDenda ('$hariKe','$nominalDenda')";
+                $PDO = DB::connection()->getPdo();
+                // $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
+                $QUERY = $PDO->prepare($sql);
+                $QUERY->execute();
+                return redirect()->route('showAturanDenda');
+            }
+        }
 
-        $sql = "CALL CreateAturanDenda ('$hariKe','$nominalDenda')";
-        $PDO = DB::connection()->getPdo();
-        // $PDO->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);
-        $QUERY = $PDO->prepare($sql);
-        $QUERY->execute();
-
-        return redirect()->route('showAturanDenda');
+        return redirect()->route('showAturanDenda')->with('error','Error Input');
     }
 
     protected function updateAturanDenda(Request $request)
     {
-        $hariKe = $request->input('hariKe');
-        $nominalDenda = $request->input('nominalDenda');
-
-        $sql = "CALL UpdateAturanDenda ('$hariKe','$nominalDenda')";
-        $PDO = DB::connection()->getPdo();
-        $QUERY = $PDO->prepare($sql);
-        $QUERY->execute();
-
-        return redirect()->route('showAturanDenda');
+        if($request->has('hariKe')&&$request->has('nominalDenda')){
+            if($request->input('hariKe') != '' &&$request->input('nominalDenda') ){
+                $hariKe = $request->input('hariKe');
+                $nominalDenda = $request->input('nominalDenda');
+        
+                $sql = "CALL UpdateAturanDenda ('$hariKe','$nominalDenda')";
+                $PDO = DB::connection()->getPdo();
+                $QUERY = $PDO->prepare($sql);
+                $QUERY->execute();
+        
+                return redirect()->route('showAturanDenda');
+            }
+        }
+        return redirect()->route('showAturanDenda')->with('error','Error Input');
     }
 
     protected function showDendaKu(Request $request)
