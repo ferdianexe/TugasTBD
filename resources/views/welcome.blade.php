@@ -34,7 +34,7 @@
     </div>
     <br>
     <div class="container">
-        <h2>Kumpulan Buku Buku Baru</h2>
+        <h2>Kumpulan Buku Buku</h2>
         
         <div class="card-columns">
         @foreach ($kumpulanBukuRekomendasi as $buku)
