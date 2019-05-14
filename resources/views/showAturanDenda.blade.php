@@ -31,7 +31,11 @@
             </form> 
         </div>
     </div>
-
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <br>
 
     <div class="container">
