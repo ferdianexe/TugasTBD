@@ -34,7 +34,7 @@
                       @if ($filter == NULL)
                         <option class="hint" selected value="0" disabled="disabled">(Genre)</option>
                       @else
-                        <option class="hint" selected value="0" disabled="disabled">{{$namaKategori[0]->Kategori}}</option>
+                        <option class="hint" selected value="0" disabled="disabled">Hasil Filter: {{$namaKategori[0]->Kategori}}</option>
                       @endif
 
                       @foreach($kumpulanKategori as $kategori)
