@@ -68,7 +68,7 @@ class SearchBookController extends Controller
                   array_push ($paginationPage, $counter);
                 }
             $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudulWithLimit('$page')"); //query sebenarnya yang mmenggunakan offset
-            return view('hasilCariBuku', compact('kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori'));
+            return view('hasilCariBuku', compact('kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori','filter'));
         }
         
     }
