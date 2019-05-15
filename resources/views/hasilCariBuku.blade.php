@@ -31,7 +31,12 @@
                 <div class="col-sm-4">
                   <div class="form-group ">
                     <select id="inputState " data-live-search="true" class="selectpicker form-control" name="filter">
-                      <option class="hint" selected value="0" disabled="disabled">(Genre)</option>
+                      @if ($filter == NULL)
+                        <option class="hint" selected value="0" disabled="disabled">(Genre)</option>
+                      @else
+                        <option class="hint" selected value="0" disabled="disabled">{{$namaKategori[0]->Kategori}}</option>
+                      @endif
+
                       @foreach($kumpulanKategori as $kategori)
                         <option value="{{$kategori->idKategori}}" data-tokens='{{$kategori->kategori}}'>{{$kategori->kategori}} </option>
                       @endforeach
