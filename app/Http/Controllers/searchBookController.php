@@ -19,6 +19,7 @@ class SearchBookController extends Controller
         {
             if($request->has('filter')){
                 $filter = $request->get('filter');
+                $namaKategori = DB::select("CALL giveCategoryName('$filter')");
                 $kumpulanBuku = DB::select("CALL searchByFilter('$filter',-1)");
                 $counter = ceil((count($kumpulanBuku)*1.0)/12);
                 $startVal = (int)($page/10);
@@ -39,7 +40,7 @@ class SearchBookController extends Controller
                   array_push ($paginationPage, $counter);
                 }
                 $kumpulanBuku = DB::select("CALL searchByFilter('$filter','$page')");
-                return view('hasilCariBuku', compact('search','filter','kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori','filter'));
+                return view('hasilCariBuku', compact('search','filter','kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori','filter','namaKategori'));
             }
             $search = $request->get('search');
             $kumpulanBuku = DB::select("CALL VSMsearch('$search')");
@@ -67,7 +68,7 @@ class SearchBookController extends Controller
                   array_push ($paginationPage, $counter);
                 }
             $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudulWithLimit('$page')"); //query sebenarnya yang mmenggunakan offset
-            return view('hasilCariBuku', compact('kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori'));
+            return view('hasilCariBuku', compact('kumpulanBuku','paginationPage','page','previousPage','kumpulanKategori','filter'));
         }
         
     }
