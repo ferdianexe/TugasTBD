@@ -32,7 +32,7 @@ class SearchBookController extends Controller
                     array_push ($paginationPage,(($startVal*10)+$continousPagination+$i));
                 }
                 if($page == 0){ // kalo dia page awal
-                  if($counter != 1){ // masukin kalo pagenya lebih dari 1
+                  if($counter != 1 && $counter != 0){ // masukin kalo pagenya lebih dari 1
                      array_push ($paginationPage, $counter);  
                   }
                 }else if($page <= $counter){ // masukin selama page yang tersedia masih lebih besar dari pagenya
@@ -59,7 +59,11 @@ class SearchBookController extends Controller
                 if(($startVal*10)+$continousPagination+$i>=$counter) continue; // masukan selama masih tersedia didalam counter
                   array_push ($paginationPage,(($startVal*10)+$continousPagination+$i));
                 }
-                if($page != $counter){ //jika page = counter tidak perlu dimasukan karena ujung page selalu di print
+                if($page == 0){ // kalo dia page awal
+                  if($counter != 1 && $counter != 0){ // masukin kalo pagenya lebih dari 1
+                     array_push ($paginationPage, $counter);  
+                  }
+                }else if($page <= $counter){ // masukin selama page yang tersedia masih lebih besar dari pagenya
                   array_push ($paginationPage, $counter);
                 }
             $kumpulanBuku = DB::select("CALL ShowAllBukuOnlyIdAndJudulWithLimit('$page')"); //query sebenarnya yang mmenggunakan offset

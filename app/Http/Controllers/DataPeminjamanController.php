@@ -49,7 +49,7 @@ class DataPeminjamanController extends Controller
         array_push ($paginationPage,(($startVal*10)+$continousPagination+$i));
       }
       if($page == 0){ // kalo dia page awal
-        if($counter != 1){ // masukin kalo pagenya lebih dari 1
+        if($counter != 1 && $counter != 0){ // masukin kalo pagenya lebih dari 1
            array_push ($paginationPage, $counter);  
         }
       }else if($page <= $counter){ // masukin selama page yang tersedia masih lebih besar dari pagenya
