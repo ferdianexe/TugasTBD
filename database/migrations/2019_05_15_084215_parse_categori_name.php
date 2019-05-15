@@ -35,6 +35,6 @@ class ParseCategoriName extends Migration
      */
     public function down()
     {
-        DB::unprepared("DROP PROCEDURE giveCategoryName");
+        DB::unprepared("DROP PROCEDURE IF EXISTS giveCategoryName");
     }
 }
