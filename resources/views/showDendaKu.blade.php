@@ -19,6 +19,7 @@
                 <th>Nama Buku</th>
                 <th>Tanggal Meminjam</th>
                 <th>Tanggal Jatuh Tempo</th>
+                <th>Tanggal Dibalikan</th>
                 <th>Total Denda</th>
             </tr>
             </thead>
@@ -28,6 +29,7 @@
                     <td>{{$res['namaBuku']}}</td>
                     <td>{{$res['tanggalMeminjam']}}</td>
                     <td>{{$res['tglJatuhTempo']}}</td>
+                    <td>{{$res['tanggalDibalikan']}}</td>
                     <td>{{$res['totalDenda']}}</td>
                 </tr>
             @endforeach
