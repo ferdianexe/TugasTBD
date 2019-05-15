@@ -26,18 +26,20 @@
           
             <br>
 
-          <div class="row container-fluid">
-            <div class="row align-items-center justify-content-center" style= "width:100%;">
-              <div class="form-group ">
-                <select id="inputState " class="selectpicker form-control" name="filter">
-                  <option class="hint" data-live-search="true" selected value="0" disabled="disabled">(Genre)</option>
-                  @foreach($kumpulanKategori as $kategori)
-                  <option value="{{$kategori->idKategori}}" data-tokens='{{$kategori->kategori}}'>{{$kategori->kategori}} </option>
-                @endforeach
-                </select>
+            <div class="row container-fluid">
+              <div class="row align-items-center justify-content-center" style= "width:100%;">
+                <div class="col-sm-4">
+                  <div class="form-group ">
+                    <select id="inputState " data-live-search="true" class="selectpicker form-control" name="filter">
+                      <option class="hint" selected value="0" disabled="disabled">(Genre)</option>
+                      @foreach($kumpulanKategori as $kategori)
+                        <option value="{{$kategori->idKategori}}" data-tokens='{{$kategori->kategori}}'>{{$kategori->kategori}} </option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
           </form>
       </div>
       

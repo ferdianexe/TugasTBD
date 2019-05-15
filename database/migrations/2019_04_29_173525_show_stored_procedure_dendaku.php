@@ -19,7 +19,7 @@ class ShowStoredProcedureDendaku extends Migration
         BEGIN
 
             SELECT 
-                kumpulanbuku.nama as namaBuku, kumpulanpeminjaman.tanggalMeminjam, kumpulanpeminjaman.tglJatuhTempo, kumpulanpeminjaman.totalDenda
+                kumpulanbuku.nama as namaBuku, kumpulanpeminjaman.tanggalMeminjam, kumpulanpeminjaman.tglJatuhTempo, kumpulanpeminjaman.tanggalDibalikan,kumpulanpeminjaman.totalDenda
             FROM
                 kumpulanpeminjaman
                 inner join kumpulaneksemplar on kumpulaneksemplar.kodeEksemplar = kumpulanpeminjaman.kodeEksemplar
